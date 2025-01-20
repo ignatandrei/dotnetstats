@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Stats.ServiceDefaults\Stats.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\StatsInterfaces\StatsInterfaces.csproj" />
   </ItemGroup>
 
 </Project>
