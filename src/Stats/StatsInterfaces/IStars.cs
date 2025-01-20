@@ -1,5 +1,5 @@
 ﻿namespace StatsInterfaces;
-
+[ToNullObject]
 public interface IStars
 {
     public int Count { get; }

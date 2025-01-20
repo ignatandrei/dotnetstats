@@ -1,5 +1,6 @@
 ﻿namespace StatsInterfaces;
 
+[ToNullObject]
 public interface IProject
 {
     public string Name { get; }

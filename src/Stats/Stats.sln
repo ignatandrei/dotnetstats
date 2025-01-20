@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35617.110 d17.13
+VisualStudioVersion = 17.13.35617.110
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatsConsole", "StatsConsole\StatsConsole.csproj", "{C24B37E3-A480-34C0-9AFC-F98379E72352}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stats.AppHost", "Stats.AppHost\Stats.AppHost.csproj", "{92451466-F411-4975-B46C-7D6F11E43323}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stats.ServiceDefaults", "Stats.ServiceDefaults\Stats.ServiceDefaults.csproj", "{25F45AC5-FB1F-C231-7510-F979EDE0732B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatsInterfaces", "StatsInterfaces\StatsInterfaces.csproj", "{65022E86-C5FE-4465-9E41-BB0BC3E33498}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{25F45AC5-FB1F-C231-7510-F979EDE0732B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{25F45AC5-FB1F-C231-7510-F979EDE0732B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{25F45AC5-FB1F-C231-7510-F979EDE0732B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65022E86-C5FE-4465-9E41-BB0BC3E33498}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65022E86-C5FE-4465-9E41-BB0BC3E33498}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65022E86-C5FE-4465-9E41-BB0BC3E33498}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65022E86-C5FE-4465-9E41-BB0BC3E33498}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
