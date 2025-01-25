@@ -7,11 +7,28 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="rscg_Interface_to_null_object" Version="2025.120.1832" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
-    <PackageReference Include="rscg_Interface_to_null_object_common" Version="2025.120.1832" />
+    <PackageReference Include="rscg_Interface_to_null_object" Version="2025.125.2045" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+    <PackageReference Include="rscg_Interface_to_null_object_common" Version="2025.125.2045" />
   </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="System.Linq.Async" Version="6.0.1" />
+	</ItemGroup>
+
 	<PropertyGroup>
 		<EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
 		<CompilerGeneratedFilesOutputPath>$(BaseIntermediateOutputPath)\GX</CompilerGeneratedFilesOutputPath>
 	</PropertyGroup>
+	
+	<ItemGroup>
+		<CompilerVisibleProperty Include="I2NO_String" />
+		<CompilerVisibleProperty Include="I2NO_System_Collections_Generic_IAsyncEnumerable_Of_StatsInterfaces_IStars_EndOf" />
+	</ItemGroup>
+	<PropertyGroup>
+		<I2NO_System_Collections_Generic_IAsyncEnumerable_Of_StatsInterfaces_IStars_EndOf>return AsyncEnumerable.Empty_Of_StatsInterfaces.IStars_EndOf()</I2NO_System_Collections_Generic_IAsyncEnumerable_Of_StatsInterfaces_IStars_EndOf>
+		</PropertyGroup>
+	<PropertyGroup>
+		<I2NO_String>return ""</I2NO_String>	
+</PropertyGroup>
+
+	
 </Project>
