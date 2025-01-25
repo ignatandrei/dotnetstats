@@ -1,4 +1,7 @@
+using Microsoft.Extensions.DependencyInjection;
 using StatsInterfaces;
+using StatsInterfaces.Data;
+using System.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,11 +10,19 @@ builder.AddServiceDefaults();
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
-
+//string nullObject = "null";
 builder.Services.AddTransient<IStatsService,StatsService_null>();
-builder.Services.AddTransient<IStatsDefinitions,StatsDefinitions_null>();
 builder.Services.AddTransient<IProject, Project_null>();
 builder.Services.AddTransient<IStars, Stars_null>();
+builder.Services.AddTransient<IProjectsData, ProjectsData_null>();
+builder.Services.AddTransient<IStarsData, StarsData_null>();
+builder.Services.AddTransient<IStatsData, StatsData_null>();
+
+
+//builder.Services.AddTransient(sp =>
+//{
+//    return sp.GetRequiredKeyedService<IStatsData>(nullObject);
+//});
 
 var app = builder.Build();
 
@@ -22,21 +33,13 @@ app.MapDefaultEndpoints();
 {
     app.MapOpenApi();
 }
+
 var yearStars= DateTime.Now.Year;
-var statsService = app.Services.GetRequiredService<IStatsService>();
-await foreach(var item in statsService.GetProjectsAsync())
+
+var data= app.Services.GetRequiredService<IStatsData>();
+await foreach (var item in data.GetStarsData(yearStars) )
 {
-    Console.WriteLine(item.Name);
-    var stars = statsService.GetStarsAsync(item);
-    await foreach (var star in stars)
-    {
-        if(star.DateRecording.Year == yearStars)
-        {
-            Console.WriteLine(star.Count);
-            break;
-        }
-        
-    }
+    Console.WriteLine(item.Count);
 }
 //app.UseHttpsRedirection();
 

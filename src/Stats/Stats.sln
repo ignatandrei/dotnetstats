@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stats.ServiceDefaults", "St
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatsInterfaces", "StatsInterfaces\StatsInterfaces.csproj", "{65022E86-C5FE-4465-9E41-BB0BC3E33498}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatsObjects", "StatsObjects\StatsObjects.csproj", "{B933D182-EA64-41B3-8E34-E8CB7D17D54A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{65022E86-C5FE-4465-9E41-BB0BC3E33498}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65022E86-C5FE-4465-9E41-BB0BC3E33498}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65022E86-C5FE-4465-9E41-BB0BC3E33498}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B933D182-EA64-41B3-8E34-E8CB7D17D54A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B933D182-EA64-41B3-8E34-E8CB7D17D54A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B933D182-EA64-41B3-8E34-E8CB7D17D54A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B933D182-EA64-41B3-8E34-E8CB7D17D54A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
