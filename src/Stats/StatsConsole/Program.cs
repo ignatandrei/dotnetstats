@@ -14,8 +14,8 @@ builder.Services.AddTransient<IProjectsData, ProjectsData_null>();
 builder.Services.AddTransient<IStarsData, StarsData_null>();
 builder.Services.AddTransient<IStatsData, StatsData_null>();
 
-builder.Services.AddKeyedScoped<IStatsData, StatsData>(myKey);
-
+builder.Services.AddKeyedScoped<IStatsData, StatsData>(DotNetFoundation);
+builder.Services.AddKeyedScoped<IStatsService, StatsServiceDotNetFoundation>(DotNetFoundation);
 var app = builder.Build();
 
 app.MapDefaultEndpoints();
@@ -27,6 +27,9 @@ app.MapDefaultEndpoints();
     app.UseOpenAPISwaggerUI();
 
 }
+Original = app.Services;
+var s = app.Services.GetRequiredKeyedService<IStatsData>(DotNetFoundation);
+
 app.MapApis();
 var yearStars= DateTime.Now.Year;
 
@@ -48,6 +51,6 @@ app.Run();
 
 public partial class Program
 {
-    public const string myKey = KeyedServiceProviderFactory.PrefixKey + "Production";
-
+    public const string DotNetFoundation = KeyedServiceProviderFactory.PrefixKey + "DotNetFoundation";
+    public static IServiceProvider? Original;
 }

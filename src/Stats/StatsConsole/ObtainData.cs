@@ -4,10 +4,12 @@ public class ObtainDataProd: IApi
 {
     public virtual void Register(IEndpointRouteBuilder builder)
     {
-        var grp = builder.MapGroup($"/api/{Program.myKey}/ObtainData");
-
-        grp.MapGet("/stars", ([FromKeyedServices(Program.myKey)] IStatsData data,  int yearStars) =>
+        var grp = builder.MapGroup($"/api/{Program.DotNetFoundation}/ObtainData");
+        //does not work with [FromKeyedServices(Program.DotNetFoundation)]
+        //Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope
+        grp.MapGet("/stars", (int yearStars) =>
         {
+            var data= Program.Original!.GetRequiredKeyedService<IStatsData>(Program.DotNetFoundation);
             return TypedResults.Ok(data.GetStarsData(yearStars));
         });
 

@@ -1,11 +1,7 @@
 ﻿namespace KeyToKey;
 public static class Extensions
 {
-    public static ConfigureHostBuilder KeyToKey(this ConfigureHostBuilder configureHostBuilder)
-    {
-        configureHostBuilder.UseServiceProviderFactory(new KeyedServiceProviderFactory());
-        return configureHostBuilder;
-    }
+        
     public static WebApplicationBuilder KeyToKey(this WebApplicationBuilder builder)
     {
         builder.Host.UseServiceProviderFactory(new KeyedServiceProviderFactory());
@@ -14,7 +10,7 @@ public static class Extensions
 
 }
 
-public class KeyedServiceProviderFactory : DefaultServiceProviderFactory, IServiceProviderFactory<IServiceCollection>
+public class KeyedServiceProviderFactory :  IServiceProviderFactory<IServiceCollection>
 {
     public const string PrefixKey = "StandAlone_";
     private DefaultServiceProviderFactory _defaultServiceProviderFactory;
@@ -22,12 +18,12 @@ public class KeyedServiceProviderFactory : DefaultServiceProviderFactory, IServi
     {
         _defaultServiceProviderFactory = new DefaultServiceProviderFactory();
     }
-    public new IServiceCollection CreateBuilder(IServiceCollection services)
+    public IServiceCollection CreateBuilder(IServiceCollection services)
     {
         return _defaultServiceProviderFactory.CreateBuilder(services);
     }
 
-    public new IServiceProvider CreateServiceProvider(IServiceCollection containerBuilder)
+    public IServiceProvider CreateServiceProvider(IServiceCollection containerBuilder)
     {
         var noKeys = containerBuilder
             .Where(it => it != null)
@@ -41,7 +37,7 @@ public class KeyedServiceProviderFactory : DefaultServiceProviderFactory, IServi
         //}
 
         //var defaultSP = sc.BuildServiceProvider();
-        var defaultSP = base.CreateServiceProvider(containerBuilder);
+        var defaultSP = _defaultServiceProviderFactory.CreateServiceProvider(containerBuilder);
 
         var keyedServices = containerBuilder
             .Where(it => it != null)
@@ -116,7 +112,7 @@ public class KeyedServiceProviderFactory : DefaultServiceProviderFactory, IServi
 
 
 }
-public class ServiceProviderAll : IKeyedServiceProvider
+public class ServiceProviderAll :IServiceProvider, IKeyedServiceProvider
 {
     public ServiceProviderAll(IServiceProvider defaultSP, Dictionary<string, IServiceProvider> all)
     {
@@ -124,13 +120,14 @@ public class ServiceProviderAll : IKeyedServiceProvider
         All = all;
     }
 
-    public IServiceProvider DefaultSP { get; }
-    public Dictionary<string, IServiceProvider> All { get; }
+    private IServiceProvider DefaultSP { get; }
+    private Dictionary<string, IServiceProvider> All { get; }
     public object? GetKeyedService(Type serviceType, object? serviceKey)
     {
-        if (All.ContainsKey(serviceKey?.ToString() ?? ""))
+        var key = serviceKey?.ToString() ?? "";
+        if (All.ContainsKey(key))
         {
-            return All[serviceKey?.ToString() ?? ""].GetService(serviceType);
+            return All[key].GetService(serviceType);
         }
         return null;
     }

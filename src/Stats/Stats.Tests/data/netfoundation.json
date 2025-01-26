@@ -1,0 +1,805 @@
+{
+  "@odata.context": "https://dotnetfoundation.org/api/projects/$metadata#projects(Title,GitHubIssuesUrl,SourceCodeUrl,UrlName,Summary,SiteUrl)",
+  "value": [
+    {
+      "UrlName": "salesforce-toolkits-for-.net",
+      "SiteUrl": "https://github.com/developerforce/Force.com-Toolkit-for-NET",
+      "SourceCodeUrl": "",
+      "Title": "Salesforce Toolkits for .NET",
+      "Summary": "The Salesforce Toolkits for .NET provide an easy way for .NET developers to interact with the Force.com & Chatter REST APIs using native libraries.",
+      "GitHubIssuesUrl": "https://github.com/developerforce/Force.com-Toolkit-for-NET"
+    },
+    {
+      "UrlName": "resx-resource-manager",
+      "SiteUrl": "https://github.com/dotnet/ResXResourceManager",
+      "SourceCodeUrl": "",
+      "Title": "ResX Resource Manager",
+      "Summary": "The most popular tool to manage localization of all kind of applications with resx-based resources; one of the highest rated extensions on the Visual Studio Marketplace.",
+      "GitHubIssuesUrl": null
+    },
+    {
+      "UrlName": ".net-aspire-community-toolkit",
+      "SiteUrl": "https://github.com/CommunityToolkit/Aspire",
+      "SourceCodeUrl": "https://github.com/CommunityToolkit/Aspire",
+      "Title": ".NET Aspire Community Toolkit",
+      "Summary": "The .NET Aspire Community Toolkit is a collection of integrations and extensions for developing with .NET Aspire, extending the core functionality provided by .NET Aspire.",
+      "GitHubIssuesUrl": "https://github.com/CommunityToolkit/Aspire/issues"
+    },
+    {
+      "UrlName": "android-support-for-xamarin.android",
+      "SiteUrl": "https://dotnet.microsoft.com/apps/xamarin",
+      "SourceCodeUrl": "https://github.com/xamarin/AndroidSupportComponents",
+      "Title": "Android Support for Xamarin.Android",
+      "Summary": "Android Support for Xamarin.Android are Xamarin.Android bindings for the Google Android Support Libraries",
+      "GitHubIssuesUrl": ""
+    },
+    {
+      "UrlName": "clangsharp",
+      "SiteUrl": "https://github.com/dotnet/clangsharp",
+      "SourceCodeUrl": "",
+      "Title": "ClangSharp",
+      "Summary": "ClangSharp provides Clang bindings written in C#. It is self-hosted and auto-generates itself by parsing the Clang C header files using ClangSharpPInvokeGenerator.",
+      "GitHubIssuesUrl": "https://github.com/dotnet/clangsharp"
+    },
+    {
+      "UrlName": "samples",
+      "SiteUrl": "https://docs.microsoft.com/en-us/dotnet/",
+      "SourceCodeUrl": "https://github.com/dotnet/samples",
+      "Title": ".NET Samples",
+      "Summary": "This repo contains all the sample code that is part of any topic under the .NET documentation. There are several different projects that are organized in sub-folders. These sub-folders are organized similarly to the organization of the docs for .NET. Some of the articles will have more than one sample associated with them.",
+      "GitHubIssuesUrl": null
+    },
+    {
+      "UrlName": "corewf",
+      "SiteUrl": "https://github.com/UiPath/CoreWF",
+      "SourceCodeUrl": "",
+      "Title": "CoreWF",
+      "Summary": "CoreWF is a port of the Windows Workflow Foundation (WF) runtime to .NET Core and .NET Standard.",
+      "GitHubIssuesUrl": "https://github.com/UiPath/CoreWF"
+    },
+    {
+      "UrlName": "windows-forms",
+      "SiteUrl": "https://github.com/dotnet/winforms",
+      "SourceCodeUrl": "",
+      "Title": "Windows Forms",
+      "Summary": "Windows Forms (WinForms) is a UI framework for building Windows desktop applications. It is a .NET wrapper over Windows user interface libraries, such as User32 and GDI+. It also offers controls and other functionality that is unique to Windows Forms.",
+      "GitHubIssuesUrl": "https://github.com/dotnet/winforms"
+    },
+    {
+      "UrlName": "microsoft-azure-webjobs-sdk",
+      "SiteUrl": "https://github.com/Azure/azure-webjobs-sdk",
+      "SourceCodeUrl": "",
+      "Title": "Microsoft Azure WebJobs SDK",
+      "Summary": "The Azure WebJobs SDK is a framework that simplifies the task of writing background processing code that runs in Azure WebJobs. It includes a declarative binding and trigger system that works with Azure Storage Blobs, Queues and Tables as well as Service Bus. The binding system makes it incredibly easy to write code that reads or writes Azure Storage objects. The trigger system automatically invokes a function in your code whenever any new data is received in a queue or blob. The SDK also provides an integrated Dashboard experience in the Azure management portal, with rich monitoring and diagnostics information for your WebJob runs.",
+      "GitHubIssuesUrl": "https://github.com/Azure/azure-webjobs-sdk"
+    },
+    {
+      "UrlName": "xamarin.auth",
+      "SiteUrl": "https://github.com/xamarin/Xamarin.Auth",
+      "SourceCodeUrl": "https://github.com/xamarin/Xamarin.Auth",
+      "Title": "Xamarin.Auth",
+      "Summary": "Xamarin.Auth is a cross-platform API for authenticating users and storing their accounts.",
+      "GitHubIssuesUrl": null
+    },
+    {
+      "UrlName": "kudu",
+      "SiteUrl": "https://github.com/projectkudu/kudu",
+      "SourceCodeUrl": "",
+      "Title": "Kudu",
+      "Summary": "Kudu is the engine behind GitHub deployments, WebJobs, and various other features in Azure Web Sites. It can also run outside of Azure.",
+      "GitHubIssuesUrl": "https://github.com/projectkudu/kudu"
+    },
+    {
+      "UrlName": "polly",
+      "SiteUrl": "http://www.thepollyproject.org/",
+      "SourceCodeUrl": "",
+      "Title": "Polly",
+      "Summary": "Polly is a .NET resilience and transient-fault-handling library that allows developers to express policies such as Retry, Circuit Breaker, Timeout, Bulkhead Isolation, and Fallback in a fluent and thread-safe manner. From version 6.0.1, Polly targets .NET Standard 1.1 and 2.0+.",
+      "GitHubIssuesUrl": "https://github.com/App-vNext/Polly"
+    },
+    {
+      "UrlName": "mahapps.metro",
+      "SiteUrl": "https://mahapps.com/",
+      "SourceCodeUrl": "",
+      "Title": "MahApps.Metro",
+      "Summary": "MahApps.Metro is a framework that allows developers to cobble together a better UI for their own WPF applications with minimal effort, supporting .NET Framework and .NET Core.",
+      "GitHubIssuesUrl": "https://github.com/MahApps/MahApps.Metro"
+    },
+    {
+      "UrlName": "fido2-.net-library",
+      "SiteUrl": "https://fido2-net-lib.passwordless.dev/",
+      "SourceCodeUrl": "",
+      "Title": "FIDO2 .NET Library",
+      "Summary": "FIDO2 .NET Library enables passwordless sign in for the .net ecosystem. It's a developer friendly and well tested .NET FIDO2 Server / WebAuthn relying party library for attestation and assertion of FIDO2 / WebAuthn credentials, in order to increase the adoption of the technology, ultimately defeating phishing attacks.",
+      "GitHubIssuesUrl": "https://github.com/passwordless-lib/fido2-net-lib"
+    },
+    {
+      "UrlName": "mimekit",
+      "SiteUrl": "https://github.com/jstedfast/MimeKit",
+      "SourceCodeUrl": "",
+      "Title": "MimeKit",
+      "Summary": "MimeKit is a C# MIME creation and parser library with support for S/MIME, PGP, DKIM, TNEF, and Unix mbox spools.",
+      "GitHubIssuesUrl": "https://github.com/jstedfast/MimeKit"
+    },
+    {
+      "UrlName": "benchmarkdotnet",
+      "SiteUrl": "https://benchmarkdotnet.org/",
+      "SourceCodeUrl": "",
+      "Title": "BenchmarkDotNet",
+      "Summary": "BenchmarkDotNet is a powerful .NET library for benchmarking.",
+      "GitHubIssuesUrl": "https://github.com/dotnet/BenchmarkDotNet"
+    },
+    {
+      "UrlName": "xunit",
+      "SiteUrl": "https://xunit.net/",
+      "SourceCodeUrl": "https://github.com/xunit/xunit",
+      "Title": "xUnit.net",
+      "Summary": "xUnit.net is a free, open source, community-focused unit testing tool for the .NET Framework. Written by the original inventor of NUnit v2, xUnit.net is the latest technology for unit testing C#, F#, VB.NET and other .NET languages.",
+      "GitHubIssuesUrl": ""
+    },
+    {
+      "UrlName": "terrafx",
+      "SiteUrl": "https://github.com/terrafx",
+      "SourceCodeUrl": "",
+      "Title": "TerraFX",
+      "Summary": "A framework for developing multimedia-based applications.",
+      "GitHubIssuesUrl": "https://github.com/terrafx"
+    },
+    {
+      "UrlName": "windows-presentation-foundation-(wpf)",
+      "SiteUrl": "https://github.com/dotnet/wpf",
+      "SourceCodeUrl": "",
+      "Title": "Windows Presentation Foundation (WPF)",
+      "Summary": "Windows Presentation Foundation (WPF) is a UI framework for building Windows desktop applications. WPF supports a broad set of application development features, including an application model, resources, controls, graphics, layout, data binding and documents. WPF uses the Extensible Application Markup Language (XAML) to provide a declarative model for application programming.",
+      "GitHubIssuesUrl": "https://github.com/dotnet/wpf"
+    },
+    {
+      "UrlName": "verify",
+      "SiteUrl": "https://github.com/VerifyTests/Verify",
+      "SourceCodeUrl": "",
+      "Title": "Verify",
+      "Summary": "Verify is a snapshot tool that simplifies the assertion of complex data models and documents.",
+      "GitHubIssuesUrl": "https://github.com/VerifyTests/Verify"
+    },
+    {
+      "UrlName": "dotnet-spark",
+      "SiteUrl": "https://github.com/dotnet/spark",
+      "SourceCodeUrl": "",
+      "Title": ".NET for Apache Spark",
+      "Summary": ".NET for Apache Spark provides high performance APIs for using Apache Spark from C# and F#. With these .NET APIs, you can access the most popular Dataframe and SparkSQL aspects of Apache Spark, for working with structured data, and Spark Structured Streaming, for working with streaming data.",
+      "GitHubIssuesUrl": null
+    },
+    {
+      "UrlName": "corewcf",
+      "SiteUrl": "https://github.com/CoreWCF/CoreWCF",
+      "SourceCodeUrl": "",
+      "Title": "CoreWCF",
+      "Summary": "CoreWCF is a port of Windows Communication Framework (WCF) to .NET Core. The goal of this project is to enable existing WCF projects to move to .NET Core.",
+      "GitHubIssuesUrl": "https://github.com/CoreWCF/CoreWCF"
+    },
+    {
+      "UrlName": "nerdbank.streams",
+      "SiteUrl": "https://github.com/AArnott/Nerdbank.Streams",
+      "SourceCodeUrl": "",
+      "Title": "Nerdbank.Streams",
+      "Summary": "Specialized .NET Streams, pipes, and extensions for full duplex in-proc communication, web sockets, and multiplexing.",
+      "GitHubIssuesUrl": null
+    },
+    {
+      "UrlName": "azure-sdk-for-.net",
+      "SiteUrl": "https://azure.microsoft.com/en-us/develop/net/",
+      "SourceCodeUrl": "",
+      "Title": "Microsoft Azure SDK for .NET",
+      "Summary": "The Azure SDK for .NET allows you to build .NET applications that take advantage of scalable cloud computing resources.",
+      "GitHubIssuesUrl": "https://github.com/Azure/azure-sdk-for-net"
+    },
+    {
+      "UrlName": "automapper",
+      "SiteUrl": "https://automapper.org/",
+      "SourceCodeUrl": "",
+      "Title": "AutoMapper",
+      "Summary": "AutoMapper is a convention-based, object-to-object mapper. It replaces that boring object value copying code that's both tedious to write and test.\n\nWith straightforward conventions, AutoMapper removes hundreds or thousands of lines of code, enforcing a policy on your DTO design and making it simple to test your mappings.",
+      "GitHubIssuesUrl": "https://github.com/automapper/automapper"
+    },
+    {
+      "UrlName": "dotnet-compiler-platform",
+      "SiteUrl": "https://github.com/dotnet/roslyn/wiki/Roslyn%20Overview",
+      "SourceCodeUrl": "https://github.com/dotnet/roslyn",
+      "Title": ".NET Compiler Platform (\"Roslyn\")",
+      "Summary": "The .NET Compiler Platform (\"Roslyn\") provides open-source C# and Visual Basic compilers with rich code analysis APIs. You can build code analysis tools with the same APIs that Microsoft is using to implement Visual Studio!",
+      "GitHubIssuesUrl": "https://github.com/dotnet/docs https://github.com/dotnet/roslyn-api-docs"
+    },
+    {
+      "UrlName": "std.uritemplate",
+      "SiteUrl": "https://github.com/std-uritemplate/std-uritemplate",
+      "SourceCodeUrl": "https://github.com/std-uritemplate/std-uritemplate",
+      "Title": "std.uritemplate",
+      "Summary": "A complete and maintained cross-language implementation of the Uri Template specification RFC 6570 Level 4",
+      "GitHubIssuesUrl": "https://github.com/std-uritemplate/std-uritemplate/issues"
+    },
+    {
+      "UrlName": "steeltoe",
+      "SiteUrl": "https://steeltoe.io/",
+      "SourceCodeUrl": "",
+      "Title": "Steeltoe",
+      "Summary": "Steeltoe is an application framework that provides libraries for .NET Framework and .NET Core developers in order to build cloud-native applications and microservices.",
+      "GitHubIssuesUrl": "https://github.com/SteeltoeOSS"
+    },
+    {
+      "UrlName": "json.net",
+      "SiteUrl": "https://www.newtonsoft.com/json",
+      "SourceCodeUrl": "",
+      "Title": "Json.NET",
+      "Summary": "Json.NET is a popular high-performance JSON framework for .NET.",
+      "GitHubIssuesUrl": "https://github.com/JamesNK/Newtonsoft.Json"
+    },
+    {
+      "UrlName": "roslynator",
+      "SiteUrl": "https://josefpihrt.github.io/docs/roslynator",
+      "SourceCodeUrl": "https://github.com/dotnet/roslynator",
+      "Title": "Roslynator",
+      "Summary": "Roslynator is a set of code analysis tools for C#, powered by Roslyn.",
+      "GitHubIssuesUrl": "https://github.com/dotnet/roslynator/issues"
+    },
+    {
+      "UrlName": "dnn-platform",
+      "SiteUrl": "https://dnncommunity.org/",
+      "SourceCodeUrl": "",
+      "Title": "DNN Platform",
+      "Summary": "DNN\u00ae ( formerly DotNetNuke\u00ae ) is the leading open-source web content management platform (CMS) in the Microsoft ecosystem.",
+      "GitHubIssuesUrl": "https://github.com/dnnsoftware/Dnn.Platform"
+    },
+    {
+      "UrlName": "python.net",
+      "SiteUrl": "https://pythonnet.github.io/",
+      "SourceCodeUrl": "",
+      "Title": "Python.NET",
+      "Summary": "Python.NET is a package that gives Python programmers nearly seamless integration with the .NET 4.0+ Common Language Runtime (CLR) on Windows and Mono runtime on Linux and OSX. Python for .NET provides a powerful application scripting tool for .NET developers. Using this package you can script .NET applications or build entire applications in Python, using .NET services and components written in any language that targets the CLR (C#, VB.NET, F#, C++/CLI).",
+      "GitHubIssuesUrl": "https://github.com/pythonnet/pythonnet"
+    },
+    {
+      "UrlName": "datagrid-extensions",
+      "SiteUrl": "https://github.com/dotnet/DataGridExtensions",
+      "SourceCodeUrl": "",
+      "Title": "DataGrid Extensions",
+      "Summary": "This package contains useful extensions for the WPF DataGrid (System.Windows.Controls.DataGrid).",
+      "GitHubIssuesUrl": "https://github.com/dotnet/DataGridExtensions"
+    },
+    {
+      "UrlName": "sourcelink",
+      "SiteUrl": "https://github.com/dotnet/sourcelink",
+      "SourceCodeUrl": "",
+      "Title": "SourceLink",
+      "Summary": "Source Link is a language- and source-control agnostic system for providing first-class source debugging experiences for binaries. The goal of the project is to enable anyone building NuGet libraries to provide source debugging for their users with almost no effort. Microsoft libraries, such as .NET Core and Roslyn have enabled Source Link. ",
+      "GitHubIssuesUrl": "https://github.com/dotnet/sourcelink"
+    },
+    {
+      "UrlName": "asp.net-api-versioning",
+      "SiteUrl": "https://github.com/dotnet/aspnet-api-versioning",
+      "SourceCodeUrl": "https://github.com/dotnet/aspnet-api-versioning",
+      "Title": "ASP.NET API Versioning",
+      "Summary": "The \"Asp\" project, more formally known as ASP.NET API Versioning, gives you a powerful, but easy-to-use method for adding API versioning semantics to your new and existing REST services built with ASP.NET. The API versioning extensions\ndefine simple metadata attributes and conventions that you use to describe which API versions are implemented by your services. You don't need to learn any new routing concepts or change the way you implement your services in ASP.NET today.",
+      "GitHubIssuesUrl": null
+    },
+    {
+      "UrlName": "asp.net-ajax-control-toolkit",
+      "SiteUrl": "https://www.devexpress.com/Products/AJAX-Control-Toolkit/",
+      "SourceCodeUrl": "",
+      "Title": "ASP.NET Ajax Control Toolkit",
+      "Summary": "ASP.NET Ajax Control Toolkit contains a rich set of controls that you can use to build highly responsive and interactive Ajax-enabled Web applications. The Ajax Control Toolkit contains more than 40 controls, including the AutoComplete, CollapsiblePanel, ColorPicker, MaskedEdit, Calendar, Accordion, HTML Editor Extender, and Watermark controls. Using the Ajax Control Toolkit, you can build Ajax-enabled ASP.NET Web Forms applications by dragging-and-dropping Toolkit controls from the Visual Studio Toolbox onto an ASP.NET Web Forms page. DevExpress is now maintaining the ASP.NET AJAX Control Toolkit.",
+      "GitHubIssuesUrl": "https://github.com/DevExpress/AjaxControlToolkit/"
+    },
+    {
+      "UrlName": "nuget-trends",
+      "SiteUrl": "https://nugettrends.com/",
+      "SourceCodeUrl": "",
+      "Title": "NuGet Trends",
+      "Summary": "NuGet Trends holds historical data of NuGet packages download numbers. It's a useful tool for package maintainers to see the download rate of their packages and also for people interested in packages popularity over time. The database has the complete nuget.org catalog which include target framework information. That means that there's a lot more features we can add, like TFM adoption overtime, dependency graphs etc.",
+      "GitHubIssuesUrl": "https://github.com/dotnet/nuget-trends"
+    },
+    {
+      "UrlName": "community-datasync-toolkit",
+      "SiteUrl": "https://github.com/CommunityToolkit/Datasync",
+      "SourceCodeUrl": "",
+      "Title": "Community Datasync Toolkit",
+      "Summary": "The Community Datasync Toolkit is a cross platform client-server toolkit for providing offline storage for cloud-based SQL and NoSQL data.  The server component seamlessly integrates with ASP.NET Core and Entity Framework Core and the client component supports all modern client platforms, including Avalonia UI, MAUI, Project Uno, WinUI, and WPF.  The Community Datasync Toolkit is a part of the Community Toolkit.",
+      "GitHubIssuesUrl": "https://github.com/CommunityToolkit/Datasync/issues"
+    },
+    {
+      "UrlName": "wcf",
+      "SiteUrl": "https://github.com/dotnet/wcf",
+      "SourceCodeUrl": "",
+      "Title": "WCF",
+      "Summary": "WCF includes a collection of client-oriented libraries from the Windows Communication Foundation that enable WCF applications built on .NET Core to communicate with WCF services.",
+      "GitHubIssuesUrl": "https://github.com/dotnet/wcf"
+    },
+    {
+      "UrlName": "odata-connected-service",
+      "SiteUrl": "https://github.com/OData/ODataConnectedService",
+      "SourceCodeUrl": "",
+      "Title": "OData Connected Service",
+      "Summary": "OData Connected Service is Microsoft visual studio extension which allows users to generate proxy classes from the OData Metadata.",
+      "GitHubIssuesUrl": "https://github.com/OData/ODataConnectedService"
+    },
+    {
+      "UrlName": "messagepack-csharp",
+      "SiteUrl": "https://github.com/MessagePack-CSharp/MessagePack-CSharp",
+      "SourceCodeUrl": "https://github.com/MessagePack-CSharp/MessagePack-CSharp",
+      "Title": "MessagePack-CSharp",
+      "Summary": "A MessagePack serialization library for .NET",
+      "GitHubIssuesUrl": "https://github.com/MessagePack-CSharp/MessagePack-CSharp/issues"
+    },
+    {
+      "UrlName": ".net-micro-framework",
+      "SiteUrl": "https://netmf.github.io/",
+      "SourceCodeUrl": "https://github.com/NETMF/netmf-interpreter",
+      "Title": ".NET Micro Framework",
+      "Summary": "The Microsoft\u00ae .NET Micro Framework is an open source platform that enables you to write managed code C# applications using Visual Studio for resource constrained embedded devices.",
+      "GitHubIssuesUrl": ""
+    },
+    {
+      "UrlName": "dotnet-maui",
+      "SiteUrl": "https://docs.microsoft.com/dotnet/maui/",
+      "SourceCodeUrl": "https://github.com/dotnet/maui",
+      "Title": ".NET MAUI",
+      "Summary": ".NET Multi-platform App UI (.NET MAUI) lets you build native apps using a .NET cross-platform UI toolkit that targets the mobile and desktop form factors on Android, iOS, macOS, Windows, and Tizen.",
+      "GitHubIssuesUrl": "https://github.com/dotnet/maui"
+    },
+    {
+      "UrlName": "xamarin.forms",
+      "SiteUrl": "https://dotnet.microsoft.com/apps/xamarin/xamarin-forms",
+      "SourceCodeUrl": "https://github.com/xamarin/Xamarin.Forms",
+      "Title": "Xamarin.Forms",
+      "Summary": "Xamarin.Forms provides a way to quickly build native apps for iOS, Android, Windows and macOS, completely in C#.",
+      "GitHubIssuesUrl": ""
+    },
+    {
+      "UrlName": "asp.net-signalr",
+      "SiteUrl": "https://dotnet.microsoft.com/en-us/apps/aspnet/signalr",
+      "SourceCodeUrl": "",
+      "Title": "ASP.NET SignalR",
+      "Summary": "ASP.NET SignalR is a library for ASP.NET developers that makes it incredibly simple to add real-time web functionality to your applications.\n\nWhat is \"real-time web\" functionality? It's the ability to have your server-side code push content to the connected clients as it happens, in real-time. You may have heard of WebSockets, a new HTML5 API that enables bi-directional communication between the browser and server.\n\nSignalR will use WebSockets under the covers when it's available, and gracefully fallback to other techniques and technologies when it isn't, while your application code stays the same. SignalR also provides a very simple, high-level API for doing server to client RPC (call JavaScript functions in your clients' browsers from server-side .NET code) in your ASP.NET application, as well as adding useful hooks for connection management, e.g. connect/disconnect events, grouping connections, authorization.",
+      "GitHubIssuesUrl": "https://github.com/SignalR/SignalR"
+    },
+    {
+      "UrlName": "chemistry-add-in-for-word",
+      "SiteUrl": "https://www.chem4word.co.uk/",
+      "SourceCodeUrl": "",
+      "Title": "Chemistry Add-in for Word",
+      "Summary": "Chem4Word enables you to create chemical structures directly in Microsoft Word. Not only can you draw your own structures, but you can import structures from PubChem and Opsin as well as from your own files. With the latest version, inside the editor form, you can export or import your structures as CML or MDL Molfile format. This will allow you to copy your edited structures to other documents or share them with other users or applications.",
+      "GitHubIssuesUrl": "https://github.com/Chem4Word/Version2"
+    },
+    {
+      "UrlName": "ml.net",
+      "SiteUrl": "https://dotnet.microsoft.com/apps/machinelearning-ai/ml-dotnet",
+      "SourceCodeUrl": "",
+      "Title": "ML.NET",
+      "Summary": "ML.NET is a cross-platform open-source machine learning framework which makes machine learning accessible to .NET developers.\n\nML.NET allows .NET developers to develop their own models and infuse custom ML into their applications without prior expertise in developing or tuning machine learning models, all in .NET.",
+      "GitHubIssuesUrl": "https://github.com/dotnet/machinelearning"
+    },
+    {
+      "UrlName": "asp.net-mvc-web-api-and-web-pages-(razor)",
+      "SiteUrl": "",
+      "SourceCodeUrl": "",
+      "Title": "ASP.NET MVC, Web API and Web Pages (Razor)",
+      "Summary": "ASP.NET is a free web framework for building great web sites and applications. The ASP.NET web stack includes ASP.NET MVC 4.0, 5.0, Web API 1.0, 2.0, and Web Pages, 2,0, 3.0 source code. These products are actively developed by the ASP.NET team in collaboration with a community of open source developers. Together we are dedicated to creating the best possible platform for web development.",
+      "GitHubIssuesUrl": ""
+    },
+    {
+      "UrlName": "kerberos.net",
+      "SiteUrl": "https://kerberos.dev/",
+      "SourceCodeUrl": "",
+      "Title": "Kerberos.NET",
+      "Summary": "A complete Kerberos library built entirely in managed code without (many) OS dependencies.",
+      "GitHubIssuesUrl": "https://github.com/dotnet/Kerberos.NET"
+    },
+    {
+      "UrlName": "coverlet",
+      "SiteUrl": "https://github.com/coverlet-coverage",
+      "SourceCodeUrl": "",
+      "Title": "Coverlet",
+      "Summary": "Coverlet is a cross platform code coverage framework for .NET, with support for line, branch and method coverage. It works with .NET Framework on Windows and .NET Core on all supported platforms.",
+      "GitHubIssuesUrl": "https://github.com/coverlet-coverage"
+    },
+    {
+      "UrlName": "stride",
+      "SiteUrl": "https://stride3d.net/",
+      "SourceCodeUrl": "",
+      "Title": "Stride",
+      "Summary": "Stride is an open-source C# game engine for realistic rendering and VR.\n\nThe engine is highly modular and aims at giving game makers more flexibility in their development. It can be used to create not only games but can also serve as a foundation for apps and tools.",
+      "GitHubIssuesUrl": "https://github.com/stride3d/stride"
+    },
+    {
+      "UrlName": "ant-design-blazor",
+      "SiteUrl": "https://antblazor.com/",
+      "SourceCodeUrl": "",
+      "Title": "Ant Design Blazor",
+      "Summary": "Ant Design Blazor is a set of enterprise-class UI components based on Ant Design and Blazor.\n\nFollowing the Ant Design specification, we developed this Blazor Components library that contains a set of high quality components and demos for building rich, interactive user interfaces.",
+      "GitHubIssuesUrl": "https://github.com/ant-design-blazor/ant-design-blazor"
+    },
+    {
+      "UrlName": "netbio",
+      "SiteUrl": "https://github.com/dotnetbio/bio",
+      "SourceCodeUrl": "https://github.com/dotnetbio/bio",
+      "Title": ".NET Bio",
+      "Summary": ".NET Bio is an open source library of common bioinformatics functions, intended to simplify the creation of life science applications.",
+      "GitHubIssuesUrl": "https://github.com/dotnetbio/bio"
+    },
+    {
+      "UrlName": "orleans",
+      "SiteUrl": "https://dotnet.github.io/orleans/",
+      "SourceCodeUrl": "",
+      "Title": "Orleans",
+      "Summary": "Orleans is a framework that provides a straight-forward approach to building distributed high-scale computing applications, without the need to learn and apply complex concurrency or other scaling patterns. It was created by Microsoft Research and designed for use in the cloud. Orleans has been used extensively running in Microsoft Azure by several Microsoft product groups, most notably by 343 Industries as a platform for all of Halo 4 and Halo 5 cloud services, as well as by a number of other projects and companies.",
+      "GitHubIssuesUrl": "https://github.com/dotnet/orleans"
+    },
+    {
+      "UrlName": "aspnet-boilerplate",
+      "SiteUrl": "https://aspnetboilerplate.com/",
+      "SourceCodeUrl": "",
+      "Title": "AspNet Boilerplate",
+      "Summary": "ASP.NET Boilerplate is a general purpose application framework specially designed for new modern web applications. It uses already familiar tools and implements best practices around them to provide you a SOLID development experience.",
+      "GitHubIssuesUrl": "https://github.com/aspnetboilerplate/aspnetboilerplate"
+    },
+    {
+      "UrlName": "json-everything",
+      "SiteUrl": "https://json-everything.net",
+      "SourceCodeUrl": "https://github.com/json-everything/json-everything",
+      "Title": "json-everything",
+      "Summary": "This project aims to ensure high-quality support for JSON-based technologies in .Net.  Supports JSON Schema, JSON Path, JSON Patch, and more.",
+      "GitHubIssuesUrl": "https://github.com/json-everything/json-everything/issues"
+    },
+    {
+      "UrlName": "neo-project",
+      "SiteUrl": "https://neo.org/",
+      "SourceCodeUrl": "",
+      "Title": "NEO Project",
+      "Summary": "The NEO Project is a modern distributed network for the Smart Economy.",
+      "GitHubIssuesUrl": "https://github.com/neo-project"
+    },
+    {
+      "UrlName": "watson-webserver",
+      "SiteUrl": "https://github.com/dotnet/watsonwebserver.git",
+      "SourceCodeUrl": "https://github.com/dotnet/watsonwebserver.git",
+      "Title": "Watson Webserver",
+      "Summary": " Watson is the fastest, easiest way to build scalable RESTful web servers and services in C#.",
+      "GitHubIssuesUrl": "https://github.com/dotnet/watsonwebserver/issues "
+    },
+    {
+      "UrlName": "worldwide-telescope",
+      "SiteUrl": "https://worldwidetelescope.org/",
+      "SourceCodeUrl": "https://github.com/worldwidetelescope",
+      "Title": "WorldWide Telescope",
+      "Summary": "WorldWide Telescope is a visualization environment that enables a computer to function as a virtual telescope \u2014 bringing together archival imagery from the world's best ground- and space-based telescopes for the exploration of the Universe. ",
+      "GitHubIssuesUrl": null
+    },
+    {
+      "UrlName": "nuget-package-explorer",
+      "SiteUrl": "https://github.com/NuGetPackageExplorer/NuGetPackageExplorer#readme",
+      "SourceCodeUrl": "",
+      "Title": "NuGet Package Explorer",
+      "Summary": "NuGet Package Explorer (NPE) is an application that makes it easy to create and explore NuGet packages. You can load a .nupkg or .snupkg file from disk or directly from a feed such as nuget.org.\n\n",
+      "GitHubIssuesUrl": "https://github.com/NuGetPackageExplorer/NuGetPackageExplorer"
+    },
+    {
+      "UrlName": "linq2db",
+      "SiteUrl": "https://github.com/linq2db/linq2db",
+      "SourceCodeUrl": "",
+      "Title": "linq2db",
+      "Summary": "linq2db - LINQ to DB is the fastest LINQ database access library offering a simple, light, fast, and type-safe layer between your POCO objects and your database.\n\nArchitecturally it is one step above micro-ORMs like Dapper, Massive, or PetaPoco, in that you work with LINQ expressions, not with magic strings, while maintaining a thin abstraction layer between your code and the database. Your queries are checked by the C# compiler and allow for easy refactoring.\n\nHowever, it's not as heavy as LINQ to SQL or Entity Framework. There is no change-tracking, so you have to manage that yourself, but on the positive side you get more control and faster access to your data.\n\nIn other words LINQ to DB is type-safe SQL..",
+      "GitHubIssuesUrl": "https://github.com/linq2db/linq2db"
+    },
+    {
+      "UrlName": "autofixture",
+      "SiteUrl": "https://github.com/AutoFixture/AutoFixture",
+      "SourceCodeUrl": "",
+      "Title": "AutoFixture",
+      "Summary": "AutoFixture is an open source library for .NET designed to minimize the 'Arrange' phase of your unit tests in order to maximize maintainability. Its primary goal is to allow developers to focus on what is being tested rather than how to setup the test scenario, by making it easier to create object graphs containing test data.",
+      "GitHubIssuesUrl": null
+    },
+    {
+      "UrlName": "c-language-standard",
+      "SiteUrl": "https://www.ecma-international.org/task-groups/tc49-tg2/",
+      "SourceCodeUrl": "",
+      "Title": "C# language standard",
+      "Summary": "TC49-TG2 writes the official C# standard. The scope is to standardize the syntax and semantics of a modern, component-based, general purpose, object oriented, and type-safe programming language called C# (pronounced C sharp).",
+      "GitHubIssuesUrl": "https://github.com/dotnet/csharpstandard"
+    },
+    {
+      "UrlName": "dlr-ironpython2-ironpython3",
+      "SiteUrl": "https://ironpython.net/",
+      "SourceCodeUrl": "",
+      "Title": "DLR/IronPython2/IronPython3",
+      "Summary": "DLR is a framework for implementing dynamic languages on top of the .NET Framework.",
+      "GitHubIssuesUrl": "https://github.com/IronLanguages/ironpython3"
+    },
+    {
+      "UrlName": "open-ria-services",
+      "SiteUrl": "https://github.com/OpenRiaServices/OpenRiaServices",
+      "SourceCodeUrl": "",
+      "Title": "Open RIA Services",
+      "Summary": "Open RIA Services is a framework for helping with the development of rich internet connected native \"n-tier\" applications. It is the evolved Open Source version of WCF RIA Services.",
+      "GitHubIssuesUrl": "https://github.com/OpenRiaServices/OpenRiaServices"
+    },
+    {
+      "UrlName": "peachpie-compiler-platform",
+      "SiteUrl": "https://www.peachpie.io/",
+      "SourceCodeUrl": "",
+      "Title": "Peachpie Compiler Platform",
+      "Summary": "Peachpie is a modern compiler and runtime of PHP for .NET and .NET Core, built on top of Roslyn. It aims to be fully compatible with the PHP language, including PHP 7.1 and any newly released versions.",
+      "GitHubIssuesUrl": "https://github.com/peachpiecompiler/peachpie"
+    },
+    {
+      "UrlName": "signservice",
+      "SiteUrl": "https://github.com/dotnet/signservice",
+      "SourceCodeUrl": "",
+      "Title": "SignService",
+      "Summary": "SignService aims to make it easier to integrate code signing into a CI process by providing a secured API for submitting artifacts to be signed by a code signing cert held on the server. It uses Azure AD and Azure Key Vault's HSM for security.",
+      "GitHubIssuesUrl": "https://github.com/dotnet/sign"
+    },
+    {
+      "UrlName": "open-live-writer",
+      "SiteUrl": "https://www.openlivewriter.com/",
+      "SourceCodeUrl": "",
+      "Title": "Open Live Writer",
+      "Summary": "Open Live Writer makes it easy to write, preview, and post to your blog.",
+      "GitHubIssuesUrl": "https://github.com/openlivewriter"
+    },
+    {
+      "UrlName": "pinvoke",
+      "SiteUrl": "https://github.com/dotnet/pinvoke",
+      "SourceCodeUrl": "",
+      "Title": "PInvoke",
+      "Summary": "A repo containing all P/Invoke code so you don't have to import it every time. Ready in consumable NuGet packages. Maintained and updated to support the latest Windows OS.",
+      "GitHubIssuesUrl": "https://github.com/dotnet/pinvoke"
+    },
+    {
+      "UrlName": "openmod",
+      "SiteUrl": "https://openmod.github.io/openmod-docs/",
+      "SourceCodeUrl": "https://github.com/openmod/openmod/",
+      "Title": "OpenMod",
+      "Summary": "OpenMod .NET Plugin Framework",
+      "GitHubIssuesUrl": "https://github.com/openmod/openmod/issues"
+    },
+    {
+      "UrlName": "docfx",
+      "SiteUrl": "https://dotnet.github.io/docfx/",
+      "SourceCodeUrl": "https://github.com/dotnet/DocFX/",
+      "Title": "DocFX",
+      "Summary": "DocFX is a cross-platform, flexible, and customizable static site generator capable of creating documentation pages from Markdown and YAML complete with different layouts, a TOC, and reference APIs created from various languages. This project has been used to create several websites including the original docs.microsoft.com.",
+      "GitHubIssuesUrl": null
+    },
+    {
+      "UrlName": "dotnext",
+      "SiteUrl": "https://dotnet.github.io/dotNext/",
+      "SourceCodeUrl": "https://github.com/dotnet/dotNext",
+      "Title": ".NEXT",
+      "Summary": ".NEXT is a family of libraries aimed to extend core .NET functionality with fast Reflection, synchronization primitives for asynchronous code, metaprogramming, async support and other extensions for Expression Trees, dynamic buffer types for efficient I/O, extensions for parsing and encoding data using System.IO.Pipelines, a framework for programming clusters using Raft consensus algorithm. Cluster programming framework includes fully-featured Raft implementation, persistent Write-Ahead Log, replication leader election, and tight integration with ASP.NET Core.",
+      "GitHubIssuesUrl": null
+    },
+    {
+      "UrlName": "miniexcel",
+      "SiteUrl": "https://github.com/mini-software/MiniExcel",
+      "SourceCodeUrl": "https://github.com/mini-software/MiniExcel",
+      "Title": "MiniExcel",
+      "Summary": "MiniExcel is simple and efficient to avoid OOM's .NET processing Excel tool.",
+      "GitHubIssuesUrl": "https://github.com/mini-software/MiniExcel/issues"
+    },
+    {
+      "UrlName": ".net-maui-community-toolkit",
+      "SiteUrl": "https://learn.microsoft.com/en-us/dotnet/communitytoolkit/maui/",
+      "SourceCodeUrl": "https://github.com/CommunityToolkit/Maui",
+      "Title": ".NET MAUI Community Toolkit",
+      "Summary": "The .NET MAUI Community Toolkit is a collection of reusable elements for application development with .NET MAUI, including animations, behaviors, converters, effects, and helpers. It simplifies and demonstrates common developer tasks when building iOS, Android, macOS and WinUI applications using .NET MAUI.",
+      "GitHubIssuesUrl": "https://github.com/CommunityToolkit/Maui/issues"
+    },
+    {
+      "UrlName": "elsa-workflows",
+      "SiteUrl": "https://github.com/elsa-workflows/elsa-core",
+      "SourceCodeUrl": "",
+      "Title": "Elsa Workflows",
+      "Summary": "Elsa Workflows is a set of workflows libraries that enable workflow execution in any .NET Standard application. Workflows can be defined using C# code or using JSON. A workflow designer is provided in the form of an HTML5 web component.",
+      "GitHubIssuesUrl": "https://github.com/elsa-workflows/elsa-core"
+    },
+    {
+      "UrlName": "akkadotnet",
+      "SiteUrl": "https://getakka.net/",
+      "SourceCodeUrl": "https://github.com/akkadotnet/akka.net",
+      "Title": "Akka.NET",
+      "Summary": "Akka.NET is a set of open-source libraries for designing scalable, resilient systems that span processor cores and networks. Akka allows you to focus on meeting business needs instead of writing low-level code to provide reliable behavior, fault tolerance, and high performance.",
+      "GitHubIssuesUrl": null
+    },
+    {
+      "UrlName": "owin-authentication-middleware-(katana-project)",
+      "SiteUrl": "https://learn.microsoft.com/en-us/aspnet/aspnet/overview/owin-and-katana/an-overview-of-project-katana",
+      "SourceCodeUrl": "",
+      "Title": "OWIN Authentication Middleware (Katana Project)",
+      "Summary": "Katana is a flexible set of components for building and hosting OWIN-based web applications on .NET Framework.\n\nThis repo is the home for the Katana host, server, and middleware source code and documentation. Official releases of Katana components (including prerelease versions) can be found on https://nuget.org.\n\nThese products are developed by the ASP.NET team at Microsoft in collaboration with a community of open source developers.",
+      "GitHubIssuesUrl": ""
+    },
+    {
+      "UrlName": "nunit-test-framework",
+      "SiteUrl": "https://nunit.org/",
+      "SourceCodeUrl": "",
+      "Title": "NUnit Test Framework",
+      "Summary": "NUnit is a unit testing framework for C#, F#, VB.NET and other .NET languages.",
+      "GitHubIssuesUrl": "https://github.com/nunit/nunit"
+    },
+    {
+      "UrlName": "asp.net-core",
+      "SiteUrl": "https://learn.microsoft.com/en-us/aspnet/core/?view=aspnetcore-7.0",
+      "SourceCodeUrl": "",
+      "Title": "ASP.NET Core",
+      "Summary": "ASP.NET Core is the next generation of ASP.NET that provides a familiar and modern framework for web and cloud scenarios. It includes the next versions of ASP.NET MVC, Web API, Web Pages and SignalR. It is a high-performance and modular design, and supports full side by side to make it seamless to migrate from on premise to the cloud. These products are actively developed by the ASP.NET team in collaboration with a community of open source developers. Together we are dedicated to creating the best possible platform for web development.",
+      "GitHubIssuesUrl": "https://github.com/aspnet/home"
+    },
+    {
+      "UrlName": "cake",
+      "SiteUrl": "https://cakebuild.net/",
+      "SourceCodeUrl": "",
+      "Title": "Cake",
+      "Summary": "Cake is a cross platform build automation system, built on top of Roslyn and the Mono Compiler, which uses C# as the scripting language.",
+      "GitHubIssuesUrl": "https://github.com/cake-build"
+    },
+    {
+      "UrlName": "restsharp",
+      "SiteUrl": "https://restsharp.dev/",
+      "SourceCodeUrl": "",
+      "Title": "RestSharp",
+      "Summary": "The main purpose of RestSharp is to make synchronous and asynchronous calls to remote resources over HTTP. As the name suggests, the main audience of RestSharp are developers who use REST APIs.",
+      "GitHubIssuesUrl": "https://github.com/restsharp/RestSharp"
+    },
+    {
+      "UrlName": "dotvvm-component-based-mvvm-framework-for-asp.net",
+      "SiteUrl": "https://www.dotvvm.com/",
+      "SourceCodeUrl": "",
+      "Title": "DotVVM, Component-based MVVM framework for ASP.NET",
+      "Summary": "DotVVM lets you build interactive web UIs with just C# and HTML using the MVVM approach.",
+      "GitHubIssuesUrl": "https://github.com/riganti/dotvvm"
+    },
+    {
+      "UrlName": "piranha-cms",
+      "SiteUrl": "https://piranhacms.org/",
+      "SourceCodeUrl": "",
+      "Title": "Piranha CMS",
+      "Summary": "Piranha CMS is a lightweight and unobtrusive CMS Library for .NET 6. It can be used to add CMS functionality to your existing application or to build a new website from scratch. Piranha CMS is built on a modern and future proof technology stack that ensures that both developers and content editors will get the best experience possible.",
+      "GitHubIssuesUrl": "https://github.com/PiranhaCMS/piranha.core"
+    },
+    {
+      "UrlName": "fluentvalidation",
+      "SiteUrl": "https://fluentvalidation.net/",
+      "SourceCodeUrl": "",
+      "Title": "FluentValidation",
+      "Summary": "FluentValidation is a popular .NET library for creating strongly-typed validation rules for objects using a fluent interface.",
+      "GitHubIssuesUrl": "https://github.com/fluentvalidation/fluentvalidation"
+    },
+    {
+      "UrlName": "esquio",
+      "SiteUrl": "https://github.com/xabaril/esquio",
+      "SourceCodeUrl": "",
+      "Title": "Esquio",
+      "Summary": "Esquio is a Feature Toggles (aka Feature Flags) and A/B testing framework for .NET Core.",
+      "GitHubIssuesUrl": "https://github.com/xabaril/esquio"
+    },
+    {
+      "UrlName": "react-native-for-windows",
+      "SiteUrl": "https://microsoft.github.io/react-native-windows/",
+      "SourceCodeUrl": "",
+      "Title": "React Native for Windows",
+      "Summary": "React Native for Windows is a framework developed by Facebook that enables you to build world-class application experiences on native platforms using a consistent developer experience based on JavaScript and React. The focus of React Native is on developer efficiency across all the platforms you care about - learn once, write anywhere.",
+      "GitHubIssuesUrl": "https://github.com/microsoft/react-native-windows"
+    },
+    {
+      "UrlName": "mailkit",
+      "SiteUrl": "https://github.com/jstedfast/MailKit",
+      "SourceCodeUrl": "",
+      "Title": "MailKit",
+      "Summary": "MailKit is a cross-platform .NET mail client library with support for IMAP, POP3, and SMTP.",
+      "GitHubIssuesUrl": "https://github.com/jstedfast/MailKit"
+    },
+    {
+      "UrlName": "dotnet-api-docs",
+      "SiteUrl": "https://docs.microsoft.com/dotnet/api/",
+      "SourceCodeUrl": "https://github.com/dotnet/dotnet-api-docs",
+      "Title": ".NET API Reference Docs",
+      "Summary": "This repo contains documentation for the .NET API Reference.\n\n",
+      "GitHubIssuesUrl": ""
+    },
+    {
+      "UrlName": "xamaringoogleplay",
+      "SiteUrl": "https://dotnet.microsoft.com/apps/xamarin",
+      "SourceCodeUrl": "https://github.com/xamarin/GooglePlayServicesComponents",
+      "Title": "Xamarin Component for Google Play Services Client Library",
+      "Summary": "Xamarin Component for Google Play Services Client Library are Xamarin.Android bindings for the Google Play Services Client Library",
+      "GitHubIssuesUrl": null
+    },
+    {
+      "UrlName": "xamarin-community-toolkit",
+      "SiteUrl": "https://github.com/xamarin/XamarinCommunityToolkit",
+      "SourceCodeUrl": "",
+      "Title": "Xamarin Community Toolkit",
+      "Summary": "The Xamarin Community Toolkit is a collection of Animations, Behaviors, Converters, and Effects and more for mobile development with Xamarin.Forms. It simplifies and demonstrates common developer tasks building iOS, Android, and UWP apps with Xamarin.Forms.",
+      "GitHubIssuesUrl": null
+    },
+    {
+      "UrlName": "nuget",
+      "SiteUrl": "https://www.nuget.org/",
+      "SourceCodeUrl": "",
+      "Title": "NuGet",
+      "Summary": "NuGet is the package manager for the Microsoft development platform including .NET. The NuGet client tools provide the ability to produce and consume packages. The NuGet Gallery (nuget.org) is the central package repository used by all package authors and consumers.",
+      "GitHubIssuesUrl": "https://github.com/nuget/home"
+    },
+    {
+      "UrlName": "orchard-core",
+      "SiteUrl": "https://www.orchardcore.net/",
+      "SourceCodeUrl": "",
+      "Title": "Orchard Core",
+      "Summary": "Orchard Core Orchard Core is an open-source modular and multi-tenant application framework built with ASP.NET Core, and a content management system (CMS) built on top of that application framework. All components in Orchard Core can be replaced or extended. Content is built from easily composable building blocks. Modules extend the system in a very decoupled fashion, where a commenting module for example can as easily apply to pages, blog posts, photos or products. A rich UI composition system completes the picture and ensures that you can get the exact presentation that you need for your content.",
+      "GitHubIssuesUrl": "https://github.com/OrchardCMS/OrchardCore"
+    },
+    {
+      "UrlName": "dotnet-console-games",
+      "SiteUrl": "https://github.com/dotnet/dotnet-console-games",
+      "SourceCodeUrl": "",
+      "Title": "dotnet-console-games",
+      "Summary": "Game examples implemented as .NET console applications primarily for providing education and inspiration. :)",
+      "GitHubIssuesUrl": null
+    },
+    {
+      "UrlName": "watsontcp",
+      "SiteUrl": "https://github.com/dotnet/watsontcp.git",
+      "SourceCodeUrl": "https://github.com/dotnet/watsontcp.git",
+      "Title": "WatsonTCP",
+      "Summary": "WatsonTcp is the easiest way to build TCP-based clients and servers in C#.",
+      "GitHubIssuesUrl": "https://github.com/dotnet/WatsonTcp/issues "
+    },
+    {
+      "UrlName": "msbuild",
+      "SiteUrl": "https://github.com/microsoft/msbuild",
+      "SourceCodeUrl": "",
+      "Title": "MSBuild",
+      "Summary": "The Microsoft Build Engine, also known as MSBuild, is a platform for building applications.",
+      "GitHubIssuesUrl": "https://github.com/microsoft/msbuild"
+    },
+    {
+      "UrlName": "entity-framework",
+      "SiteUrl": "https://github.com/dotnet/efcore",
+      "SourceCodeUrl": "",
+      "Title": "Entity Framework",
+      "Summary": "Entity Framework is the recommend data access technology for new applications in .NET.",
+      "GitHubIssuesUrl": "https://github.com/dotnet/efcore"
+    },
+    {
+      "UrlName": "conceptual-docs",
+      "SiteUrl": "",
+      "SourceCodeUrl": "",
+      "Title": ".NET Docs",
+      "Summary": "This repository contains the conceptual documentation for .NET. ",
+      "GitHubIssuesUrl": null
+    },
+    {
+      "UrlName": "mono",
+      "SiteUrl": "https://www.mono-project.com/",
+      "SourceCodeUrl": "",
+      "Title": "Mono",
+      "Summary": "Mono is a cross-platform and open source implementation of the .NET framework that was started independently in 2001. The technology was originally developed by Ximian, which was acquired by Novell, then at Novell, then at Xamarin and now Microsoft.",
+      "GitHubIssuesUrl": "https://github.com/mono/mono"
+    },
+    {
+      "UrlName": "flubucore",
+      "SiteUrl": "https://flubucore.dotnetcore.xyz/",
+      "SourceCodeUrl": "",
+      "Title": "FlubuCore",
+      "Summary": "FlubuCore - Fluent Builder Core\" is a cross platform build and deployment automation system. ",
+      "GitHubIssuesUrl": "https://github.com/dotnetcore/FlubuCore"
+    },
+    {
+      "UrlName": "cecil",
+      "SiteUrl": "https://github.com/jbevain/cecil",
+      "SourceCodeUrl": "",
+      "Title": "Cecil",
+      "Summary": "Cecil is a library to generate and inspect programs and libraries in the ECMA CIL form.",
+      "GitHubIssuesUrl": "https://github.com/jbevain/cecil"
+    }
+  ]
+}

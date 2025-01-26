@@ -59,10 +59,11 @@ For each file that you find in the diff, generate a commit message in the follow
         - follow the conventional commit spec at https://www.conventionalcommits.org/en/v1.0.0/#specification
         - do NOT confuse delete lines starting with '-' and add lines starting with '+'        
         - do NOT respond anything else than the commit message
+        - If you are NOT sure of the file, do not mention it in the commit message
         
  `
 let choice
-let message
+let message = "---------------------------------\n"
 let messageSummary
 do {
     // Generate a conventional commit message based on the staged changes diff
@@ -95,6 +96,7 @@ do {
         )
         if (res.error) throw res.error
         message += res.text + "\n"
+        message += "---------------------------------\n"
     }
 
     // since we've concatenated the chunks, let's compress it back into a single sentence again
@@ -140,7 +142,7 @@ do {
     nameFile=nameFile.replace(/\//g, "_");
     
     // Save message and message summary to file
-    fs.writeFileSync(nameFile+'.txt', `Summary: ${messageSummary}\n\n\nMessage: ${message}`);
+    fs.writeFileSync(nameFile+'.txt', `Summary:\n\n\n ${messageSummary}\n\n\n Message: \n\n\n ${message}`);
 
     cancel("User cancelled the commit");
     // Prompt user to accept, edit, or regenerate the commit message

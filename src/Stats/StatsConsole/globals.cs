@@ -7,3 +7,5 @@ global using StatsInterfaces.Data;
 global using StatsObjects;
 global using System.Diagnostics;
 global using OpenAPISwaggerUI;
+global using StatsLoadNetFoundation;
+
