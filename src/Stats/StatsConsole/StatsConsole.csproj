@@ -7,7 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.1" />
+	  <PackageReference Include="MinimalApis.Discovery" Version="1.0.7" />
+	  <PackageReference Include="OpenAPISwaggerUI" Version="9.2024.1215.2209" />
   </ItemGroup>
 
   <ItemGroup>
