@@ -1,10 +1,13 @@
+using KeyToKey;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using StatsInterfaces;
 using StatsInterfaces.Data;
+using StatsObjects;
 using System.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.KeyToKey();
 builder.AddServiceDefaults();
 
 // Add services to the container.
@@ -18,11 +21,8 @@ builder.Services.AddTransient<IProjectsData, ProjectsData_null>();
 builder.Services.AddTransient<IStarsData, StarsData_null>();
 builder.Services.AddTransient<IStatsData, StatsData_null>();
 
-
-//builder.Services.AddTransient(sp =>
-//{
-//    return sp.GetRequiredKeyedService<IStatsData>(nullObject);
-//});
+const string myKey = KeyedServiceProviderFactory.PrefixKey + "Production";
+builder.Services.AddKeyedScoped<IStatsData, StatsData>(myKey);
 
 var app = builder.Build();
 
@@ -37,34 +37,18 @@ app.MapDefaultEndpoints();
 var yearStars= DateTime.Now.Year;
 
 var data= app.Services.GetRequiredService<IStatsData>();
-await foreach (var item in data.GetStarsData(yearStars) )
+//https://okankaradag.com/en/net-6-0/streaming-json-response-with-iasyncenumerable-in-net-6-0-and-example-fetch-in-javascript
+app.MapGet("/stars", ([FromServices] IStatsData data, [FromRoute] int yearStars) =>
 {
-    Console.WriteLine(item.Count);
-}
-//app.UseHttpsRedirection();
+    return TypedResults.Ok(data.GetStarsData(yearStars));
 
-//var summaries = new[]
-//{
-//    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-//};
+});
 
-//app.MapGet("/weatherforecast", () =>
-//{
-//    var forecast =  Enumerable.Range(1, 5).Select(index =>
-//        new WeatherForecast
-//        (
-//            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-//            Random.Shared.Next(-20, 55),
-//            summaries[Random.Shared.Next(summaries.Length)]
-//        ))
-//        .ToArray();
-//    return forecast;
-//})
-//.WithName("GetWeatherForecast");
+app.MapGet("/starsProduction",  ([FromKeyedServices(myKey)] IStatsData data, [FromRoute] int yearStars) =>
+{
+    return TypedResults.Ok(data.GetStarsData(yearStars));
+
+});
 
 app.Run();
 
-//record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-//{
-//    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-//}

@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Stats.ServiceDefaults\Stats.ServiceDefaults.csproj" />
     <ProjectReference Include="..\StatsInterfaces\StatsInterfaces.csproj" />
+    <ProjectReference Include="..\StatsObjects\StatsObjects.csproj" />
   </ItemGroup>
 
 </Project>
