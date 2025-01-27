@@ -1,0 +1,1 @@
+dotnet ef dbcontext scaffold "Data Source=127.0.0.1;Initial Catalog=DotNetStats;UID=sa;PWD=P@ssw0rd;TrustServerCertificate=True" Microsoft.EntityFrameworkCore.SqlServer --no-onconfiguring --force

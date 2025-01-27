@@ -1,0 +1,19 @@
+Summary:
+
+
+ Here is a conventional commit message based on COMMIT_MESSAGES:
+
+`feat Improve database interactions`
+
+This one-line commit message follows the Conventional Commits spec, uses `feat` type indicating that it is a new feature, and is short and in imperative present tense.
+
+
+ Message: 
+
+
+ Based on the provided GIT_DIFF, here is a conventional commit message that summarizes the changes:
+
+`feat(Stats.Database/EntityType.t4): Generate EFCore entity type scaffold template`
+
+This commit message follows the Conventional Commits spec and provides a brief, imperative description of the change. The `feat` type indicates that this is a new feature being added to the codebase, and the file path and description provide enough information for someone to understand what was changed.
+---------------------------------

@@ -1,0 +1,19 @@
+Summary:
+
+
+ Implement database context generation  ⏳🚀
+
+
+ Message: 
+
+
+ feat(Stats.Database/DotNetStatsContext.cs) : Adds DbContext generation
+
+feat(StatsConsole/Program.cs) : Adds console app execution
+
+refactor(Stats.AppHost/Program.cs) : Refactors App Host
+
+
+
+
+---------------------------------

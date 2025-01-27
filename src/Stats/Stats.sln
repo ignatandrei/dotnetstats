@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatsLoadNetFoundation", "S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stats.Tests", "Stats.Tests\Stats.Tests.csproj", "{9B5E6D48-10AA-40A8-B145-5405BFC45669}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stats.Database", "Stats.Database\Stats.Database.csproj", "{A5101C7F-9835-45F9-99A7-973DCE794F32}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{9B5E6D48-10AA-40A8-B145-5405BFC45669}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B5E6D48-10AA-40A8-B145-5405BFC45669}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9B5E6D48-10AA-40A8-B145-5405BFC45669}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5101C7F-9835-45F9-99A7-973DCE794F32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5101C7F-9835-45F9-99A7-973DCE794F32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5101C7F-9835-45F9-99A7-973DCE794F32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5101C7F-9835-45F9-99A7-973DCE794F32}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

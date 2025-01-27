@@ -1,4 +1,5 @@
 
+
 var builder = WebApplication.CreateBuilder(args);
 builder.KeyToKey();
 builder.AddServiceDefaults();
@@ -13,9 +14,18 @@ builder.Services.AddTransient<IStars, Stars_null>();
 builder.Services.AddTransient<IProjectsData, ProjectsData_null>();
 builder.Services.AddTransient<IStarsData, StarsData_null>();
 builder.Services.AddTransient<IStatsData, StatsData_null>();
+var con = builder.Configuration.GetConnectionString("DotNetStats");
+
+builder.Services
+    .AddDbContext<DotNetStatsContext>(
+                opt => opt.UseSqlServer(con)
+    );
+
 
 builder.Services.AddKeyedScoped<IStatsData, StatsData>(DotNetFoundation);
 builder.Services.AddKeyedScoped<IStatsService, StatsServiceDotNetFoundation>(DotNetFoundation);
+builder.Services.AddKeyedScoped<IProjectsData, ProjectsDataDB>(DotNetFoundation);
+
 var app = builder.Build();
 
 app.MapDefaultEndpoints();
