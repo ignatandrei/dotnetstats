@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatsInterfaces", "StatsInt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatsObjects", "StatsObjects\StatsObjects.csproj", "{B933D182-EA64-41B3-8E34-E8CB7D17D54A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatsLoadNetFoundation", "StatsLoadNetFoundation\StatsLoadNetFoundation.csproj", "{0D62A799-E165-4819-8B66-E20947C33083}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stats.Tests", "Stats.Tests\Stats.Tests.csproj", "{9B5E6D48-10AA-40A8-B145-5405BFC45669}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{B933D182-EA64-41B3-8E34-E8CB7D17D54A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B933D182-EA64-41B3-8E34-E8CB7D17D54A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B933D182-EA64-41B3-8E34-E8CB7D17D54A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D62A799-E165-4819-8B66-E20947C33083}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D62A799-E165-4819-8B66-E20947C33083}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D62A799-E165-4819-8B66-E20947C33083}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D62A799-E165-4819-8B66-E20947C33083}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B5E6D48-10AA-40A8-B145-5405BFC45669}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B5E6D48-10AA-40A8-B145-5405BFC45669}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B5E6D48-10AA-40A8-B145-5405BFC45669}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B5E6D48-10AA-40A8-B145-5405BFC45669}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

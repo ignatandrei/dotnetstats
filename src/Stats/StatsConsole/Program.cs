@@ -1,10 +1,6 @@
-using Microsoft.Extensions.DependencyInjection;
-using StatsInterfaces;
-using StatsInterfaces.Data;
-using System.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.KeyToKey();
 builder.AddServiceDefaults();
 
 // Add services to the container.
@@ -18,12 +14,8 @@ builder.Services.AddTransient<IProjectsData, ProjectsData_null>();
 builder.Services.AddTransient<IStarsData, StarsData_null>();
 builder.Services.AddTransient<IStatsData, StatsData_null>();
 
-
-//builder.Services.AddTransient(sp =>
-//{
-//    return sp.GetRequiredKeyedService<IStatsData>(nullObject);
-//});
-
+builder.Services.AddKeyedScoped<IStatsData, StatsData>(DotNetFoundation);
+builder.Services.AddKeyedScoped<IStatsService, StatsServiceDotNetFoundation>(DotNetFoundation);
 var app = builder.Build();
 
 app.MapDefaultEndpoints();
@@ -32,39 +24,33 @@ app.MapDefaultEndpoints();
 //if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
-}
+    app.UseOpenAPISwaggerUI();
 
+}
+Original = app.Services;
+var s = app.Services.GetRequiredKeyedService<IStatsData>(DotNetFoundation);
+
+app.MapApis();
 var yearStars= DateTime.Now.Year;
 
-var data= app.Services.GetRequiredService<IStatsData>();
-await foreach (var item in data.GetStarsData(yearStars) )
-{
-    Console.WriteLine(item.Count);
-}
-//app.UseHttpsRedirection();
-
-//var summaries = new[]
+//var data= app.Services.GetRequiredService<IStatsData>();
+////https://okankaradag.com/en/net-6-0/streaming-json-response-with-iasyncenumerable-in-net-6-0-and-example-fetch-in-javascript
+//app.MapGet("/stars", ([FromServices] IStatsData data, [FromRoute] int yearStars) =>
 //{
-//    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-//};
+//    return TypedResults.Ok(data.GetStarsData(yearStars));
 
-//app.MapGet("/weatherforecast", () =>
+//});
+
+//app.MapGet("/starsProduction",  ([FromKeyedServices(myKey)] IStatsData data, [FromRoute] int yearStars) =>
 //{
-//    var forecast =  Enumerable.Range(1, 5).Select(index =>
-//        new WeatherForecast
-//        (
-//            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-//            Random.Shared.Next(-20, 55),
-//            summaries[Random.Shared.Next(summaries.Length)]
-//        ))
-//        .ToArray();
-//    return forecast;
-//})
-//.WithName("GetWeatherForecast");
+//    return TypedResults.Ok(data.GetStarsData(yearStars));
+
+//});
 
 app.Run();
 
-//record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-//{
-//    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-//}
+public partial class Program
+{
+    public const string DotNetFoundation = KeyedServiceProviderFactory.PrefixKey + "DotNetFoundation";
+    public static IServiceProvider? Original;
+}
