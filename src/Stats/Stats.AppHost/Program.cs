@@ -1,8 +1,18 @@
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+
 var builder = DistributedApplication.CreateBuilder(args);
+builder.Services.AddLogging(log=>
+{
+    log.ClearProviders();
+    log.AddConsole();
+    log.SetMinimumLevel(LogLevel.Information);
+});
 
 var paramPass = builder.AddParameter("password", "P@ssw0rd");
 
 var sqlserver = builder.AddSqlServer("sqlserver",paramPass,1433)
+    //.WithArgs("pwd","&","ls")
     // Mount the init scripts directory into the container.
     .WithBindMount("./sqlserverconfig", "/usr/config")
     // Mount the SQL scripts directory into the container so that the init scripts run.
@@ -10,9 +20,10 @@ var sqlserver = builder.AddSqlServer("sqlserver",paramPass,1433)
     // Run the custom entrypoint script on startup.
     .WithEntrypoint("/usr/config/entrypoint.sh")
     // Configure the container to store data in a volume so that it persists across instances.
-    .WithDataVolume("dotnetstatsvolume", false)
+    .WithDataVolume() 
     // Keep the container running between app host sessions.
     .WithLifetime(ContainerLifetime.Persistent)
+
     ;
 var db= sqlserver.AddDatabase("DotNetStats");
 

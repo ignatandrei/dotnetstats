@@ -15,21 +15,27 @@
     <TestingPlatformShowTestsFailure>true</TestingPlatformShowTestsFailure>
   </PropertyGroup>
 
-  
-  <ItemGroup>
+	<ItemGroup>
+		<Content Include="data\stargazers.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
     <Content Include="data\netfoundation.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 	<ItemGroup>
+		<PackageReference Include="Shouldly" Version="4.3.0" />
 		<PackageReference Include="System.Linq.Async" Version="6.0.1" />
 	</ItemGroup>
 
 	<ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
-    <PackageReference Include="Microsoft.Testing.Extensions.CodeCoverage" Version="17.12.6" />
-    <PackageReference Include="Microsoft.Testing.Extensions.TrxReport" Version="1.4.3" />
-    <PackageReference Include="MSTest" Version="3.6.4" />
+    <PackageReference Include="Microsoft.Testing.Extensions.CodeCoverage" Version="17.13.1" />
+    <PackageReference Include="Microsoft.Testing.Extensions.TrxReport" Version="1.5.3" />
+    <PackageReference Include="MSTest" Version="3.7.3" />
   </ItemGroup>
 
   <ItemGroup>
