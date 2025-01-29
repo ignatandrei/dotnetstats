@@ -2,15 +2,17 @@
 
 public class StatsData : IStatsData
 {
-    private readonly IStatsService statsService;
+    private readonly IProjectService statsService;
     private readonly IProjectsData crudProjects;
     private readonly IStarsData crudStars;
+    private readonly IStarsService starsService;
 
-    public StatsData(IStatsService statsService,IProjectsData crudProjects,IStarsData crudStars)
+    public StatsData(IProjectService statsService,IProjectsData crudProjects,IStarsData crudStars, IStarsService starsService)
     {
         this.statsService = statsService;
         this.crudProjects = crudProjects;
         this.crudStars = crudStars;
+        this.starsService = starsService;
     }
     public async IAsyncEnumerable<IStars> GetStarsData(int year)
     {
@@ -40,7 +42,7 @@ public class StatsData : IStatsData
             if (!foundStars)
             {
                 Console.WriteLine("No stars found for " + item.Name);
-                await foreach (var star in statsService.GetStarsAsync(item))
+                await foreach (var star in starsService.GetStarsAsync(item))
                 {
                     var saveStar = await crudStars.SaveStars([star]);
                     Debug.Assert(saveStar);

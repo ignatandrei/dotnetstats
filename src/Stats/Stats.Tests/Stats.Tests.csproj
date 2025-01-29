@@ -39,6 +39,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\StatsGetStars\StatsGetStars.csproj" />
     <ProjectReference Include="..\StatsLoadNetFoundation\StatsLoadNetFoundation.csproj" />
   </ItemGroup>
 

@@ -1,8 +1,7 @@
 ﻿namespace StatsInterfaces;
 [ToNullObject]
-public interface IStatsService
+public interface IProjectService
 {
     public IAsyncEnumerable<IProject> GetProjectsAsync();
 
-    public IAsyncEnumerable<IStars> GetStarsAsync(IProject project);
 }

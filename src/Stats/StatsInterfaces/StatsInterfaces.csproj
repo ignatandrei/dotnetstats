@@ -24,14 +24,13 @@
 		<CompilerVisibleProperty Include="I2NO_System_Collections_Generic_IAsyncEnumerable_Of_StatsInterfaces_IStars_EndOf" />
 		<CompilerVisibleProperty Include="I2NO_System_Collections_Generic_IAsyncEnumerable_Of_StatsInterfaces_IProject_EndOf" />
 		<CompilerVisibleProperty Include="I2NO_System_Threading_Tasks_Task_Of_bool_EndOf" />
-
 	</ItemGroup>
 	<PropertyGroup>
 		<I2NO_System_Collections_Generic_IAsyncEnumerable_Of_StatsInterfaces_IStars_EndOf>return AsyncEnumerable.Empty_Of_StatsInterfaces.IStars_EndOf()</I2NO_System_Collections_Generic_IAsyncEnumerable_Of_StatsInterfaces_IStars_EndOf>
 			<I2NO_System_Collections_Generic_IAsyncEnumerable_Of_StatsInterfaces_IProject_EndOf>return AsyncEnumerable.Empty_Of_StatsInterfaces.IProject_EndOf()</I2NO_System_Collections_Generic_IAsyncEnumerable_Of_StatsInterfaces_IProject_EndOf>
 		<I2NO_String>return ""</I2NO_String>
 		<I2NO_System_Threading_Tasks_Task_Of_bool_EndOf>return Task.FromResult(true)</I2NO_System_Threading_Tasks_Task_Of_bool_EndOf>
-</PropertyGroup>
+	</PropertyGroup>
 
 	
 </Project>

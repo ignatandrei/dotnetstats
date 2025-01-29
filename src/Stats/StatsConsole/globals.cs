@@ -8,5 +8,4 @@ global using OpenAPISwaggerUI;
 global using StatsLoadNetFoundation;
 global using Stats.Database;
 global using Microsoft.EntityFrameworkCore;
-
-
+global using StatsGetStars;
