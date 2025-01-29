@@ -26,6 +26,7 @@ builder.Services.AddKeyedScoped<IStatsData, StatsData>(DotNetFoundation);
 builder.Services.AddKeyedScoped<IProjectService, StatsServiceDotNetFoundation>(DotNetFoundation);
 builder.Services.AddKeyedScoped<IProjectsData, ProjectsDataDB>(DotNetFoundation);
 builder.Services.AddKeyedScoped<IStarsService, GitHubStars>(DotNetFoundation);
+builder.Services.AddKeyedScoped<IStarsData, StarsDataDB>(DotNetFoundation);
 var app = builder.Build();
 
 app.MapDefaultEndpoints();

@@ -1,9 +1,10 @@
-﻿namespace StatsGetStars;
+﻿
+namespace StatsGetStars;
 public class GitHubStars: IStarsService
 {
     private readonly HttpClient client;
 
-    public GitHubStars(HttpClient client )
+    public GitHubStars(HttpClient client)
     {
         this.client = client;
     }
@@ -11,14 +12,21 @@ public class GitHubStars: IStarsService
     public  async IAsyncEnumerable<IStars> GetStarsAsync(IProject prj)
    {
         await Task.Yield();
+        if(string.IsNullOrWhiteSpace(prj.SourceCodeUrl))
+        {
+            yield break;
+        }
         var sourceCodeUrl = prj.SourceCodeUrl;
         string owner = sourceCodeUrl.Split('/')[3]; // Replace with the repository owner
         string repo = sourceCodeUrl.Split('/')[4];   // Replace with the repository name
         string url = $"https://api.github.com/repos/{owner}/{repo}/stargazers";
-
-        client.DefaultRequestHeaders.Add("User-Agent", "C# App");
-        client.DefaultRequestHeaders.Add("Accept", "application/vnd.github.v3.star+json");
-
+        if (client.DefaultRequestHeaders.Count() == 0)
+        {
+            client.DefaultRequestHeaders.Add("User-Agent", "C# App");
+            client.DefaultRequestHeaders.Add("Accept", "application/vnd.github.v3.star+json");
+            string token = "AndreiToken";
+            client.DefaultRequestHeaders.Add("Authorization", $"token {token}");
+        }
         var response = await client.GetStringAsync(url);
         await foreach (var star in GetStarsAsyncFromString(response))
         {
@@ -57,8 +65,5 @@ public class GitHubStars: IStarsService
         }
     }
 
-    public Task<bool> SaveStars(IStars[] stars)
-    {
-        throw new NotImplementedException();
-    }
+    
 }

@@ -30,7 +30,6 @@ public partial class DotNetStatsContext : DbContext
         modelBuilder.Entity<Star>(entity =>
         {
             entity.Property(e => e.Id)
-                .ValueGeneratedNever()
                 .HasColumnName("ID");
             entity.Property(e => e.Idproject).HasColumnName("IDProject");
         });
