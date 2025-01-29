@@ -8,7 +8,7 @@ builder.AddServiceDefaults();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 //string nullObject = "null";
-builder.Services.AddTransient<IStatsService,StatsService_null>();
+builder.Services.AddTransient<IProjectService,StatsService_null>();
 builder.Services.AddTransient<IProject, Project_null>();
 builder.Services.AddTransient<IStars, Stars_null>();
 builder.Services.AddTransient<IProjectsData, ProjectsData_null>();
@@ -23,7 +23,7 @@ builder.Services
 
 
 builder.Services.AddKeyedScoped<IStatsData, StatsData>(DotNetFoundation);
-builder.Services.AddKeyedScoped<IStatsService, StatsServiceDotNetFoundation>(DotNetFoundation);
+builder.Services.AddKeyedScoped<IProjectService, StatsServiceDotNetFoundation>(DotNetFoundation);
 builder.Services.AddKeyedScoped<IProjectsData, ProjectsDataDB>(DotNetFoundation);
 
 var app = builder.Build();

@@ -2,11 +2,11 @@
 
 public class StatsData : IStatsData
 {
-    private readonly IStatsService statsService;
+    private readonly IProjectService statsService;
     private readonly IProjectsData crudProjects;
     private readonly IStarsData crudStars;
 
-    public StatsData(IStatsService statsService,IProjectsData crudProjects,IStarsData crudStars)
+    public StatsData(IProjectService statsService,IProjectsData crudProjects,IStarsData crudStars)
     {
         this.statsService = statsService;
         this.crudProjects = crudProjects;

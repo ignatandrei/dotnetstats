@@ -1,4 +1,7 @@
-﻿namespace Stats.Tests;
+﻿using StatsGetStars;
+using StatsInterfaces;
+
+namespace Stats.Tests;
 
 [TestClass]
 public sealed class TestStars
@@ -7,7 +10,7 @@ public sealed class TestStars
     public async Task TestDeserialize()
     {
         var data = await File.ReadAllTextAsync(Path.Combine("data", "stargazers.json"));
-        var s = new StatsServiceDotNetFoundation(new HttpClient());
+        var s = new GitHubStars(new HttpClient());
         var stars = await s.GetStarsAsyncFromString(data).ToArrayAsync();
         stars=stars.OrderBy(it => it.DateRecording).ToArray();
         Assert.AreEqual(stars.Length, 2);
@@ -23,7 +26,7 @@ public sealed class TestStars
     public async Task TestReal()
     {
         var data = await File.ReadAllTextAsync(Path.Combine("data", "netfoundation.json"));
-        var s = new StatsServiceDotNetFoundation(new HttpClient());
+        IStarsService s = new GitHubStars(new HttpClient());
         Project_null project = new ();
         project.SourceCodeUrl = "https://github.com/ignatandrei/rscg_examples";
         project.Name = "rscg_examples";
