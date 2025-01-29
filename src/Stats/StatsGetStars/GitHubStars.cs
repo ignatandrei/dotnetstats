@@ -1,7 +1,4 @@
-﻿using StatsInterfaces.Data;
-
-namespace StatsGetStars;
-
+﻿namespace StatsGetStars;
 public class GitHubStars: IStarsService
 {
     private readonly HttpClient client;

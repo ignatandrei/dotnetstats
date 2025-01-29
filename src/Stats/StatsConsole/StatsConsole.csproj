@@ -16,6 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Stats.Database\Stats.Database.csproj" />
     <ProjectReference Include="..\Stats.ServiceDefaults\Stats.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\StatsGetStars\StatsGetStars.csproj" />
     <ProjectReference Include="..\StatsInterfaces\StatsInterfaces.csproj" />
     <ProjectReference Include="..\StatsLoadNetFoundation\StatsLoadNetFoundation.csproj" />
     <ProjectReference Include="..\StatsObjects\StatsObjects.csproj" />
