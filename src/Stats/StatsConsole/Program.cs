@@ -2,7 +2,7 @@
 var builder = WebApplication.CreateBuilder(args);
 builder.KeyToKey();
 builder.AddServiceDefaults();
-
+builder.Services.AddProblemDetails();
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
@@ -15,7 +15,7 @@ builder.Services.AddTransient<IStarsData, StarsData_null>();
 builder.Services.AddTransient<IStatsData, StatsData_null>();
 builder.Services.AddTransient<IStarsService,StarsService_null>();
 var con = builder.Configuration.GetConnectionString("DotNetStats");
-
+con += ";MultipleActiveResultSets=True";
 builder.Services
     .AddDbContext<DotNetStatsContext>(
                 opt => opt.UseSqlServer(con)
@@ -28,7 +28,8 @@ builder.Services.AddKeyedScoped<IProjectsData, ProjectsDataDB>(DotNetFoundation)
 builder.Services.AddKeyedScoped<IStarsService, GitHubStars>(DotNetFoundation);
 builder.Services.AddKeyedScoped<IStarsData, StarsDataDB>(DotNetFoundation);
 var app = builder.Build();
-
+app.UseExceptionHandler();
+app.UseStatusCodePages();
 app.MapDefaultEndpoints();
 
 // Configure the HTTP request pipeline.

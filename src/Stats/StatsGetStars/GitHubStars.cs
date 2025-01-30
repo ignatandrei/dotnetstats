@@ -24,7 +24,9 @@ public class GitHubStars: IStarsService
         {
             client.DefaultRequestHeaders.Add("User-Agent", "C# App");
             client.DefaultRequestHeaders.Add("Accept", "application/vnd.github.v3.star+json");
-            string token = "AndreiToken";
+            //figure a way to hide the token
+            string token = "Andrei";
+
             client.DefaultRequestHeaders.Add("Authorization", $"token {token}");
         }
         var response = await client.GetStringAsync(url);
