@@ -32,6 +32,13 @@ public class StarsDataDB : IStarsData
         }
     }
 
+    public async Task<int> GetStarsCount(IProject project)
+    {
+        var prj = await context.Projects.FirstOrDefaultAsync(p => p.SourceCodeUrl == project.SourceCodeUrl);
+        ArgumentNullException.ThrowIfNull(prj);
+        return await context.Stars.Where(s => s.Idproject == prj.Id).SumAsync(s => s.Count);
+    }
+
     public async Task<bool> SaveStars(IStars[] stars)
     {
         if((stars?.Length??0) == 0) return false;
@@ -43,7 +50,7 @@ public class StarsDataDB : IStarsData
             var projects = await context.Projects.Where(p => p.SourceCodeUrl == item.Project.SourceCodeUrl).ToArrayAsync();
             if (projects.Length != 1)
             {
-                throw new InvalidOperationException($"Project not found or more : {projects.Length}");
+                throw new InvalidOperationException($"Project not found or more : {projects.Length} for {item.Project.SourceCodeUrl}");
             }
             var prj = projects[0];
             var existStar = await context.Stars.FirstOrDefaultAsync(s => s.Idproject == prj.Id && s.DateRecording == item.DateRecording);

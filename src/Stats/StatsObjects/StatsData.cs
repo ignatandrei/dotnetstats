@@ -1,4 +1,6 @@
-﻿namespace StatsObjects;
+﻿using System.Threading.Tasks;
+
+namespace StatsObjects;
 
 public class StatsData : IStatsData
 {
@@ -14,16 +16,41 @@ public class StatsData : IStatsData
         this.crudStars = crudStars;
         this.starsService = starsService;
     }
+    public async IAsyncEnumerable<IProject> RefreshProjects()
+    {
+        var projects = await statsService.GetProjectsAsync().ToArrayAsync();
+        ArgumentNullException.ThrowIfNull(projects);
+        var save = await crudProjects.SaveProjects(projects);
+        await foreach(var project in crudProjects.GetProjectsAsync())
+        {
+            yield return project;
+        }
+    }
+
+    public async IAsyncEnumerable<IStars> RefreshStarsData(IProject project)
+    {
+        var lst= new List<IStars>();
+        await foreach (var star in starsService.GetStarsAsync(project))
+        {
+            lst.Add(star);
+            yield return star;
+        }
+        if (lst.Count > 0)
+        {
+            var currentYear = DateTime.UtcNow.Year;
+            var arr = lst.Where(s => s.DateRecording.Year != currentYear).ToArray();
+            var saveStar = await crudStars.SaveStars(arr);
+        }
+    }
+
+
     public async IAsyncEnumerable<IStars> GetStarsData(int year)
     {
-        
+
         var projects = await crudProjects.GetProjectsAsync().ToArrayAsync();
         if (projects.Length == 0)
         {
-            projects = await statsService.GetProjectsAsync().ToArrayAsync();
-            ArgumentNullException.ThrowIfNull(projects);
-            var save = await crudProjects.SaveProjects(projects);
-            Debug.Assert(save);
+            projects = await RefreshProjects().ToArrayAsync();
         }
         foreach (var item in projects)
         {
@@ -34,7 +61,7 @@ public class StatsData : IStatsData
                 if (star.DateRecording.Year == year)
                 {
                     //Console.WriteLine(star.Count);
-                    yield return star;  
+                    yield return star;
                     foundStars = true;
                     break;
                 }
@@ -42,16 +69,31 @@ public class StatsData : IStatsData
             if (!foundStars)
             {
                 Console.WriteLine("No stars found for " + item.Name);
-                await foreach (var star in starsService.GetStarsAsync(item))
+                await foreach (var star in RefreshStarsData(item))
                 {
-                    var saveStar = await crudStars.SaveStars([star]);
-                    Debug.Assert(saveStar);
                     if (star.DateRecording.Year == year)
                     {
-                        //Console.WriteLine(star.Count);
                         yield return star;
                         break;
                     }
+                }
+            }
+
+        }
+    }
+
+    public async IAsyncEnumerable<IStars> RefreshStars()
+    {
+
+        await foreach (var project in crudProjects.GetProjectsAsync())
+        {
+            var nrStars = await crudStars.GetStarsCount(project);
+            Console.WriteLine("!!!!!project:" + project.Name +" stars" + nrStars);
+            if (nrStars == 0)
+            {
+                await foreach (var star in RefreshStarsData(project))
+                {
+                    yield return star;
                 }
             }
         }

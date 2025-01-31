@@ -17,50 +17,120 @@ public class GitHubStars: IStarsService
             yield break;
         }
         var sourceCodeUrl = prj.SourceCodeUrl;
-        string owner = sourceCodeUrl.Split('/')[3]; // Replace with the repository owner
-        string repo = sourceCodeUrl.Split('/')[4];   // Replace with the repository name
+        var spit = sourceCodeUrl.Split('/');
+        if(spit.Length < 5)
+        {
+            yield break;
+        }
+        string owner = spit[3]; // Replace with the repository owner
+        string repo = spit[4];   // Replace with the repository name
+        if(repo.Contains(" "))
+        {
+            repo = repo.Split(" ")[0].Trim();
+        }
         string url = $"https://api.github.com/repos/{owner}/{repo}/stargazers";
         if (client.DefaultRequestHeaders.Count() == 0)
         {
             client.DefaultRequestHeaders.Add("User-Agent", "C# App");
             client.DefaultRequestHeaders.Add("Accept", "application/vnd.github.v3.star+json");
-            string token = "AndreiToken";
+            //figure a way to hide the token
+            string token = "This is the token";
+
             client.DefaultRequestHeaders.Add("Authorization", $"token {token}");
         }
-        var response = await client.GetStringAsync(url);
-        await foreach (var star in GetStarsAsyncFromString(response))
-        {
-            star.Project = prj;
-            yield return star;
+        string response= "";
+        List<string> responses = [];
+        try {
+            //response = await client.GetStringAsync(url);
+            while (!string.IsNullOrWhiteSpace(url))
+            {
+                var httpResponse = await client.GetAsync(url);
+                response = await httpResponse.Content.ReadAsStringAsync();
+                responses.Add(response);
+
+                if (httpResponse.Headers.TryGetValues("Link", out var linkHeaders))
+                {
+                    url = ParseNextPageUrl(linkHeaders.FirstOrDefault());
+                }
+                else
+                {
+                    url = null;
+                }
+            }
         }
+        catch(Exception ex)
+        {
+            //TODO : until when ?
+            //TODO: add logging
+            Console.WriteLine($"for {url } - {ex.Message}");
+            yield break;
+        }
+        foreach(var content in responses)
+        {
+            await foreach (var star in GetStarsAsyncFromString(content))
+            {
+                star.Project = prj;
+                yield return star;
+            }
+        }
+        
     }
 
+    private string? ParseNextPageUrl(string? linkHeader)
+    {
+        if (string.IsNullOrWhiteSpace(linkHeader))
+        {
+            return null;
+        }
+
+        var links = linkHeader.Split(',');
+        foreach (var link in links)
+        {
+            var segments = link.Split(';');
+            if (segments.Length == 2 && segments[1].Contains("rel=\"next\""))
+            {
+                var url = segments[0].Trim().Trim('<', '>');
+                return url;
+            }
+        }
+
+        return null;
+    }
 
     internal async IAsyncEnumerable<Stars_null> GetStarsAsyncFromString(string data)
     {
+        
         await Task.Yield();
-        var stargazers = JsonDocument.Parse(data).RootElement;
         Dictionary<int, int> starsPerYear = new();
-        foreach (var stargazer in stargazers.EnumerateArray())
+        try
         {
-            var user = stargazer.GetProperty("user").GetProperty("login").GetString();
+            var stargazers = JsonDocument.Parse(data).RootElement;
+            foreach (var stargazer in stargazers.EnumerateArray())
+            {
+                var user = stargazer.GetProperty("user").GetProperty("login").GetString();
 
-            var date = stargazer.GetProperty("starred_at");
-            var dt = date.GetDateTime().Year;
-            if (starsPerYear.ContainsKey(dt))
-            {
-                starsPerYear[dt]++;
-            }
-            else
-            {
-                starsPerYear[dt] = 1;
+                var date = stargazer.GetProperty("starred_at");
+                var dt = date.GetDateTime().Year;
+                if (starsPerYear.ContainsKey(dt))
+                {
+                    starsPerYear[dt]++;
+                }
+                else
+                {
+                    starsPerYear[dt] = 1;
+                }
             }
         }
-        foreach (var item in starsPerYear)
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            throw;
+        }
+        foreach (var star in starsPerYear)
         {
             var stars = new Stars_null();
-            stars.Count = item.Value;
-            stars.DateRecording = new DateOnly(item.Key, 1, 1);
+            stars.Count = star.Value;
+            stars.DateRecording = new DateOnly(star.Key, 1, 1);
             yield return stars;
         }
     }
