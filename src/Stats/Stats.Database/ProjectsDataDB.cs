@@ -19,6 +19,12 @@ public class ProjectsDataDB : IProjectsData
     {
         if ((projects?.Length ?? 0) == 0) return false;
         bool exists = false;
+        ArgumentNullException.ThrowIfNull(projects);
+        projects = projects
+            .Where(p => p != null)
+            .Where(it => !string.IsNullOrWhiteSpace(it.SourceCodeUrl))
+            .DistinctBy(p=>p.SourceCodeUrl)
+            .ToArray();
         foreach (var project in projects!)
         {
             var existingProject = await context.Projects.FirstOrDefaultAsync(p => p.SourceCodeUrl == project.SourceCodeUrl);

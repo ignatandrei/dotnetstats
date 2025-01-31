@@ -18,7 +18,7 @@ var con = builder.Configuration.GetConnectionString("DotNetStats");
 con += ";MultipleActiveResultSets=True";
 builder.Services
     .AddDbContext<DotNetStatsContext>(
-                opt => opt.UseSqlServer(con)
+                opt => opt.UseSqlServer(con),contextLifetime: ServiceLifetime.Transient
     );
 
 

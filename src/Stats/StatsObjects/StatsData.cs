@@ -29,13 +29,18 @@ public class StatsData : IStatsData
 
     public async IAsyncEnumerable<IStars> RefreshStarsData(IProject project)
     {
-
+        var lst= new List<IStars>();
         await foreach (var star in starsService.GetStarsAsync(project))
         {
-            var saveStar = await crudStars.SaveStars([star]);
+            lst.Add(star);
             yield return star;
         }
-        
+        if (lst.Count > 0)
+        {
+            var currentYear = DateTime.UtcNow.Year;
+            var arr = lst.Where(s => s.DateRecording.Year != currentYear).ToArray();
+            var saveStar = await crudStars.SaveStars(arr);
+        }
     }
 
 
@@ -82,10 +87,14 @@ public class StatsData : IStatsData
 
         await foreach (var project in crudProjects.GetProjectsAsync())
         {
-            Console.WriteLine("project" + project.Name);
-            await foreach (var star in RefreshStarsData(project))
+            var nrStars = await crudStars.GetStarsCount(project);
+            Console.WriteLine("!!!!!project:" + project.Name +" stars" + nrStars);
+            if (nrStars == 0)
             {
-                yield return star;
+                await foreach (var star in RefreshStarsData(project))
+                {
+                    yield return star;
+                }
             }
         }
 

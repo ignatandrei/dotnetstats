@@ -1,7 +1,4 @@
-﻿using StatsGetStars;
-using StatsInterfaces;
-
-namespace Stats.Tests;
+﻿namespace Stats.Tests;
 
 [TestClass]
 public sealed class TestStars
@@ -39,4 +36,6 @@ public sealed class TestStars
             star.Count.ShouldBeGreaterThan(0);
         }
     }
+    
+
 }
