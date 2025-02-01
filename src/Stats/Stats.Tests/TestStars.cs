@@ -7,7 +7,7 @@ public sealed class TestStars
     public async Task TestDeserialize()
     {
         var data = await File.ReadAllTextAsync(Path.Combine("data", "stargazers.json"));
-        var s = new GitHubStars(new HttpClient());
+        var s = new GitHubStars(new HttpClient(),null);
         var stars = await s.GetStarsAsyncFromString(data).ToArrayAsync();
         stars=stars.OrderBy(it => it.DateRecording).ToArray();
         Assert.AreEqual(stars.Length, 2);
@@ -23,7 +23,7 @@ public sealed class TestStars
     public async Task TestReal()
     {
         var data = await File.ReadAllTextAsync(Path.Combine("data", "netfoundation.json"));
-        IStarsService s = new GitHubStars(new HttpClient());
+        IStarsService s = new GitHubStars(new HttpClient(),null);
         Project_null project = new ();
         project.SourceCodeUrl = "https://github.com/ignatandrei/rscg_examples";
         project.Name = "rscg_examples";

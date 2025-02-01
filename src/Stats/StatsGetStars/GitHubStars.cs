@@ -3,10 +3,12 @@ namespace StatsGetStars;
 public class GitHubStars: IStarsService
 {
     private readonly HttpClient client;
+    private readonly ISettingsData? data;
 
-    public GitHubStars(HttpClient client)
+    public GitHubStars(HttpClient client, ISettingsData? data)
     {
         this.client = client;
+        this.data = data;
     }
 
     public  async IAsyncEnumerable<IStars> GetStarsAsync(IProject prj)
@@ -31,12 +33,12 @@ public class GitHubStars: IStarsService
         string url = $"https://api.github.com/repos/{owner}/{repo}/stargazers";
         if (client.DefaultRequestHeaders.Count() == 0)
         {
-            client.DefaultRequestHeaders.Add("User-Agent", "C# App");
+            client.DefaultRequestHeaders.Add("User-Agent", "C# App for stars");
             client.DefaultRequestHeaders.Add("Accept", "application/vnd.github.v3.star+json");
             //figure a way to hide the token
-            string token = "This is the token";
-
-            client.DefaultRequestHeaders.Add("Authorization", $"token {token}");
+            var token = data?.Token;
+            if(!string.IsNullOrWhiteSpace(token))
+                client.DefaultRequestHeaders.Add("Authorization", $"token {token}");
         }
         string response= "";
         List<string> responses = [];

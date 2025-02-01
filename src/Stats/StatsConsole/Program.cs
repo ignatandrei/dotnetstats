@@ -1,4 +1,6 @@
 
+using Microsoft.Extensions.Options;
+
 var builder = WebApplication.CreateBuilder(args);
 builder.KeyToKey();
 builder.AddServiceDefaults();
@@ -14,6 +16,8 @@ builder.Services.AddTransient<IProjectsData, ProjectsData_null>();
 builder.Services.AddTransient<IStarsData, StarsData_null>();
 builder.Services.AddTransient<IStatsData, StatsData_null>();
 builder.Services.AddTransient<IStarsService,StarsService_null>();
+builder.Services.Configure<SettingsData_null>(builder.Configuration.GetSection("SettingsData"));
+builder.Services.AddTransient<ISettingsData, SettingsData_null>(sp=>sp.GetRequiredService<IOptionsMonitor<SettingsData_null>>().CurrentValue);
 var con = builder.Configuration.GetConnectionString("DotNetStats");
 con += ";MultipleActiveResultSets=True";
 builder.Services

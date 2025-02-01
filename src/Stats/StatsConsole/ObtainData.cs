@@ -1,24 +1,6 @@
-﻿
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
-using System.Threading.Tasks;
+﻿using Microsoft.Extensions.Options;
 
 namespace StatsConsole;
-public class ObtainDataProd:ObtainData, IApi
-{
-    public ObtainDataProd(): base(Program.DotNetFoundation)
-    {
-
-    }
-}
-public class ObtainDataAPI : ObtainData,IApi
-{
-    public ObtainDataAPI():base("")
-    {
-        
-    }}
-
-
 public class ObtainData
 {
     private readonly string key;
@@ -48,6 +30,7 @@ public class ObtainData
         grp.MapGet("/stars/getYear", (int yearStars) => GetAllStars(data,yearStars));
         grp.MapPost("/projects/refresh/", () => RefreshProjects(data));
         grp.MapPost("/stars/refresh", () => RefreshStars(data));
+        grp.MapGet("/test", (ISettingsData data)=> data.Token);
 
 
     }
