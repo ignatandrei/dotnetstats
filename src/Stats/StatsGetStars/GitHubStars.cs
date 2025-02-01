@@ -107,6 +107,15 @@ public class GitHubStars: IStarsService
         try
         {
             var stargazers = JsonDocument.Parse(data).RootElement;
+            try
+            {
+                var nr = stargazers.GetArrayLength();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"{ex.Message} {data}");
+                throw;
+            }
             foreach (var stargazer in stargazers.EnumerateArray())
             {
                 var user = stargazer.GetProperty("user").GetProperty("login").GetString();

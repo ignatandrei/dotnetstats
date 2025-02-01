@@ -30,7 +30,7 @@ public class ObtainData
         grp.MapGet("/stars/getYear", (int yearStars) => GetAllStars(data,yearStars));
         grp.MapPost("/projects/refresh/", () => RefreshProjects(data));
         grp.MapPost("/stars/refresh", () => RefreshStars(data));
-        grp.MapGet("/test", (ISettingsData data)=> data.Token);
+        //grp.MapGet("/test", (ISettingsData data)=> data.Token);
 
 
     }

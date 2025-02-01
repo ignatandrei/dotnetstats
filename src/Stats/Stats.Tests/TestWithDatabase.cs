@@ -23,7 +23,10 @@ public class TestWithDatabase
                 //opt => opt.UseInMemoryDatabase(dbName), contextLifetime: ServiceLifetime.Singleton
                 opt=>opt.UseSqlServer(con),contextLifetime: ServiceLifetime.Transient
                 );
+        sc.AddSingleton<ISettingsData,SettingsData_null>();
         var sp = sc.BuildServiceProvider();
+        var token =sp.GetRequiredService<ISettingsData>();
+        token.Token = "TestAndrei";
         var data = sp.GetRequiredService<IStatsData>();
         await foreach (var project in data.RefreshProjects())
         {
