@@ -99,4 +99,9 @@ public class StatsData : IStatsData
         }
 
     }
+
+    public IAsyncEnumerable<IProject> GetProjects()
+    {
+        return crudProjects.GetProjectsAsync();
+    }
 }

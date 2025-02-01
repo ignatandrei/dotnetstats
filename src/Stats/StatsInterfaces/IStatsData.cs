@@ -8,4 +8,6 @@ public interface IStatsData
     IAsyncEnumerable<IProject> RefreshProjects();
 
     IAsyncEnumerable<IStars> RefreshStars();
+
+    IAsyncEnumerable<IProject> GetProjects();
 }

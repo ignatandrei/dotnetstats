@@ -27,10 +27,14 @@ var sqlserver = builder.AddSqlServer("sqlserver",paramPass,1433)
     ;
 var db= sqlserver.AddDatabase("DotNetStats");
 
-builder
+var api = builder
     .AddProject<Projects.StatsConsole>("statsconsole")
     .WithReference(db)
     .WaitFor(db)
     ;
 
+var ui= builder.AddWebAssemblyProject<Projects.StatsBlazorUI>("blazorUI", api)
+    .WithReference(api)
+    .WaitFor(api)
+    ;
 builder.Build().Run();
