@@ -43,8 +43,17 @@ public class StarsDataDB : IStarsData
     {
         if((stars?.Length??0) == 0) return false;
         ArgumentNullException.ThrowIfNull(stars);
+        //consolidate the stars
+        var consolidate= stars.GroupBy(stars => new { stars.Project?.SourceCodeUrl, stars.DateRecording })            
+            .Select(star => new Stars_null
+            {
+                Count = star.Sum(s => s.Count),
+                DateRecording = star.Key.DateRecording,
+                Project = star.First().Project
+            }).ToArray();
+
         bool exists = false;
-        foreach (var item in stars)
+        foreach (var item in consolidate)
         {
             ArgumentNullException.ThrowIfNull(item?.Project);
             var projects = await context.Projects.Where(p => p.SourceCodeUrl == item.Project.SourceCodeUrl).ToArrayAsync();

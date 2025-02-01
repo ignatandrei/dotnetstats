@@ -35,6 +35,8 @@ public class ObtainData
 
     }
 
+    
+
     private async IAsyncEnumerable<IStars> RefreshStars(IStatsData data)
     {
         Console.WriteLine("TEWSST");
