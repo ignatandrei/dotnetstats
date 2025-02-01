@@ -27,7 +27,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Stars](
-	[ID] [bigint] NOT NULL,
+	[ID] [bigint] IDENTITY(1,1) NOT NULL,
 	[IDProject] [bigint] NOT NULL,
 	[Count] [int] NOT NULL,
 	[DateRecording] [date] NOT NULL,
