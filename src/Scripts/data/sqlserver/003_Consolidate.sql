@@ -1,5 +1,6 @@
 use DotNetStats
 go
+/*
 SELECT 
       [IDProject]
       ,Sum([Count]) As Count
@@ -23,4 +24,4 @@ INSERT INTO [dbo].[Stars]
 		   from Stars_temp
 GO
 drop table Stars_temp
-
+*/
