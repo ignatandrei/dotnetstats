@@ -9,7 +9,7 @@ public class ProjectsDataDB : IProjectsData
     }
     public async IAsyncEnumerable<IProject> GetProjectsAsync()
     {
-        await foreach(var p in context.Projects.AsAsyncEnumerable())
+        await foreach(var p in context.Projects.OrderBy(it=>it.Name).AsAsyncEnumerable())
         {
             yield return p; 
         }

@@ -6,28 +6,36 @@
 
 <PageTitle>Home</PageTitle>
 
-<h1>Hello, world @hostEnvironment?.BaseAddress </h1>
+@* <h1>Hello, world @hostEnvironment?.BaseAddress </h1>
 
 <h1>@httpApi?.BaseAddress</h1>
+ *@
+<DisplayProjects data="@projects?.ToArray()" ></DisplayProjects>
+@* <button class="btn btn-primary" @onclick="StreamProjectsJson">Stream Projects</button> *@
 
-<h1>@projects?.Count</h1>
-<button class="btn btn-primary" @onclick="StreamProjectsJson">Stream Projects</button>
-Welcome to your new app.
 
 @code{
-
+    private bool isFirstRender = true;
     [Inject(Key = "statsconsole_host")]
     public HttpClient? httpApi { get; set; }
     [Inject]
     public IWebAssemblyHostEnvironment? hostEnvironment { get; set; }
 
     public List<Project_null>? projects = null;
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (isFirstRender)
+        {
+            isFirstRender = false;
+            await StreamProjectsJson();
+        }
+    }
 
-    
-    
+
 
     private async Task StreamProjectsJson()
     {
+        ArgumentNullException.ThrowIfNull(httpApi);
         projects = new List<Project_null>();
 
         StateHasChanged();
@@ -35,14 +43,14 @@ Welcome to your new app.
         HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, "api/StandAlone_DotNetFoundation/ObtainData/projects/all");
         request.SetBrowserResponseStreamingEnabled(true);
 
-    
+
         using HttpResponseMessage response = await httpApi.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
 
         response.EnsureSuccessStatusCode();
 
         using Stream responseStream = await response.Content.ReadAsStreamAsync();
 
-        await foreach (Project_null prj in JsonSerializer.DeserializeAsyncEnumerable<Project_null>(
+        await foreach (Project_null? prj in JsonSerializer.DeserializeAsyncEnumerable<Project_null>(
             responseStream,
             new JsonSerializerOptions
                 {
@@ -50,11 +58,12 @@ Welcome to your new app.
                     DefaultBufferSize = 128
                 }))
         {
-            if (prj != null)
-                projects.Add(prj);
+            if (prj == null) continue;
+
+            projects.Add(prj);
             if (projects.Count % 10 == 0){
                 StateHasChanged();
-                await Task.Delay(5000);
+                await Task.Delay(1000);
             }
         }
         StateHasChanged();

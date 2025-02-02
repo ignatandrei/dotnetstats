@@ -8,7 +8,6 @@ builder.Services.AddLogging(log=>
     log.AddConsole();
     log.SetMinimumLevel(LogLevel.Information);
 });
-
 var paramPass = builder.AddParameter("password", "P@ssw0rd");
 
 var sqlserver = builder.AddSqlServer("sqlserver",paramPass,1433)

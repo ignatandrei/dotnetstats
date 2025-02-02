@@ -1,0 +1,27 @@
+﻿@using Microsoft.AspNetCore.Components.QuickGrid
+<h3>Projects : @data?.Length </h3>
+
+@if (data?.Length > 0)
+{
+    <QuickGrid Items="IndexProjects" Class="quick-grid">
+
+        <PropertyColumn Property="p => (p.index+1)" Sortable="false" Title="Index" />
+
+        <PropertyColumn Property="p => p.project.Name" Sortable="true" />
+        <TemplateColumn Context="prj" Title="Source Code">
+            <a target="_blank" href="@($"{prj.project.SourceCodeUrl}")">@prj.project.SourceCodeUrl</a>
+        </TemplateColumn>
+            <PropertyColumn Property="p => p.project.Description" Sortable="false" />
+    </QuickGrid>
+}
+@code {
+    [Parameter]
+    public Project_null[]? data { get; set; }
+
+    public IQueryable<(int index, Project_null project)> IndexProjects =>
+        (data ?? Enumerable.Empty<Project_null>()).Index().AsQueryable();
+}
+
+
+
+
