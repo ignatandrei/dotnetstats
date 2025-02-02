@@ -1,0 +1,72 @@
+﻿@page "/"
+@using Microsoft.AspNetCore.Components.WebAssembly.Hosting
+@using StatsInterfaces
+@using System.Text.Json
+
+
+<PageTitle>Home</PageTitle>
+
+
+<DisplayProjects data="@projects?.ToArray()" FinishStreaming="@HasFinishedStreaming" ></DisplayProjects>
+@* <button class="btn btn-primary" @onclick="StreamProjectsJson">Stream Projects</button> *@
+
+
+@code{
+    private bool isFirstRender = true;
+    private bool HasFinishedStreaming = false;
+    [Inject(Key = "statsconsole_host")]
+    public HttpClient? httpApi { get; set; }
+    [Inject]
+    public IWebAssemblyHostEnvironment? hostEnvironment { get; set; }
+
+    public List<ProjectWithStars_null>? projects = null;
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (isFirstRender)
+        {
+            isFirstRender = false;
+            await StreamProjectsJson();
+        }
+    }
+
+
+
+    private async Task StreamProjectsJson()
+    {
+        ArgumentNullException.ThrowIfNull(httpApi);
+        projects = new List<ProjectWithStars_null>();
+
+        StateHasChanged();
+        //TODO: change the url to have in both api and here , not hardcoded
+        HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, "api/StandAlone_DotNetFoundation/ObtainData/projects/withStars");
+        request.SetBrowserResponseStreamingEnabled(true);
+
+
+        using HttpResponseMessage response = await httpApi.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
+
+        response.EnsureSuccessStatusCode();
+        var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true,
+                DefaultBufferSize = 128
+            };
+        options.Converters.Add(new IProjectConverter());
+        options.Converters.Add(new IStarsConverter());
+        using Stream responseStream = await response.Content.ReadAsStreamAsync();
+
+        await foreach (ProjectWithStars_null? prj in JsonSerializer.DeserializeAsyncEnumerable<ProjectWithStars_null>(
+            responseStream,options))
+        {
+            if (prj == null) continue;
+
+            projects.Add(prj);
+            if (projects.Count % 10 == 0){
+                StateHasChanged();
+                await Task.Delay(1000);
+            }
+        }
+        HasFinishedStreaming = true;
+        StateHasChanged();
+    }
+
+}

@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\StatsBlazorUI\StatsBlazorUI.csproj" />
     <ProjectReference Include="..\StatsConsole\StatsConsole.csproj" />
   </ItemGroup>
 

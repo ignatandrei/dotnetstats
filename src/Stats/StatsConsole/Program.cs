@@ -5,6 +5,21 @@ var builder = WebApplication.CreateBuilder(args);
 builder.KeyToKey();
 builder.AddServiceDefaults();
 builder.Services.AddProblemDetails();
+string allowAllCors = "AllowAll";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: allowAllCors,
+                      policy =>
+                      {
+                          policy
+                          .AllowAnyHeader()
+                          .SetIsOriginAllowed((host) => true)
+                          .AllowAnyMethod()
+                          .AllowCredentials()                          
+                          ;
+                      });
+});
+
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
@@ -34,6 +49,7 @@ builder.Services.AddKeyedScoped<IStarsData, StarsDataDB>(DotNetFoundation);
 var app = builder.Build();
 app.UseExceptionHandler();
 app.UseStatusCodePages();
+app.UseCors(allowAllCors);
 app.MapDefaultEndpoints();
 
 // Configure the HTTP request pipeline.

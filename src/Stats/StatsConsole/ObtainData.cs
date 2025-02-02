@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Options;
+using StatsInterfaces.UI;
 
 namespace StatsConsole;
 public class ObtainData
@@ -29,13 +30,23 @@ public class ObtainData
 
         grp.MapGet("/stars/getYear", (int yearStars) => GetAllStars(data,yearStars));
         grp.MapPost("/projects/refresh/", () => RefreshProjects(data));
+        grp.MapGet("/projects/all/", () => GetProjects(data));
         grp.MapPost("/stars/refresh", () => RefreshStars(data));
+        grp.MapGet("/projects/withStars", () => GetProjectsWithStars(data));
         //grp.MapGet("/test", (ISettingsData data)=> data.Token);
 
 
     }
 
-    
+    private IAsyncEnumerable<IProjectWithStars> GetProjectsWithStars(IStatsData data)
+    {
+        return data.GetProjectsWithStars();
+    }
+
+    private IAsyncEnumerable<IProject> GetProjects(IStatsData data)
+    {
+        return data.GetProjects();
+    }
 
     private async IAsyncEnumerable<IStars> RefreshStars(IStatsData data)
     {

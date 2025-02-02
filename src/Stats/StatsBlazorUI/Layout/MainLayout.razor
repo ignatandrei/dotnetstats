@@ -1,0 +1,33 @@
+﻿@using Microsoft.AspNetCore.Components.WebAssembly.Hosting
+@inherits LayoutComponentBase
+<div class="page">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+
+    <main>
+        <div class="top-row px-4">
+            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+        </div>
+
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+    
+</div>
+<footer>
+    Data: 
+    <small>HOST:  @hostEnvironment?.BaseAddress </small>
+
+    <small>API: @httpApi?.BaseAddress</small>
+
+</footer>
+
+@code{
+    [Inject(Key = "statsconsole_host")]
+    public HttpClient? httpApi { get; set; }
+    [Inject]
+    public IWebAssemblyHostEnvironment? hostEnvironment { get; set; }
+
+}
