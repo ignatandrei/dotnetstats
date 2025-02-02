@@ -7,12 +7,13 @@
 <PageTitle>Home</PageTitle>
 
 
-<DisplayProjects data="@projects?.ToArray()" ></DisplayProjects>
+<DisplayProjects data="@projects?.ToArray()" FinishStreaming="@HasFinishedStreaming" ></DisplayProjects>
 @* <button class="btn btn-primary" @onclick="StreamProjectsJson">Stream Projects</button> *@
 
 
 @code{
     private bool isFirstRender = true;
+    private bool HasFinishedStreaming = false;
     [Inject(Key = "statsconsole_host")]
     public HttpClient? httpApi { get; set; }
     [Inject]
@@ -64,6 +65,7 @@
                 await Task.Delay(1000);
             }
         }
+        HasFinishedStreaming = true;
         StateHasChanged();
     }
 

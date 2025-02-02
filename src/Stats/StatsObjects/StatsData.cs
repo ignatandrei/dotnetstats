@@ -114,6 +114,12 @@ public class StatsData : IStatsData
             var ret = new ProjectWithStars_null();
             ret.Project = project;
             ret.Stars = stars;
+            if(stars?.Length>0)
+            {
+                ret.TotalStars = stars.Sum(s => s.Count);
+                ret.LastYear = stars.Max(s => s.DateRecording.Year);
+                ret.LastYearStars = stars.Where(s => s.DateRecording.Year == ret.LastYear).Sum(s => s.Count);
+            }
             yield return ret;
         }
     }
