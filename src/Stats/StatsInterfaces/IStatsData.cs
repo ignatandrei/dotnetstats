@@ -10,4 +10,6 @@ public interface IStatsData
     IAsyncEnumerable<IStars> RefreshStars();
 
     IAsyncEnumerable<IProject> GetProjects();
+
+    IAsyncEnumerable<IProjectWithStars> GetProjectsWithStars();
 }

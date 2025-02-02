@@ -18,7 +18,7 @@
     [Inject]
     public IWebAssemblyHostEnvironment? hostEnvironment { get; set; }
 
-    public List<Project_null>? projects = null;
+    public List<ProjectWithStars_null>? projects = null;
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (isFirstRender)
@@ -33,27 +33,28 @@
     private async Task StreamProjectsJson()
     {
         ArgumentNullException.ThrowIfNull(httpApi);
-        projects = new List<Project_null>();
+        projects = new List<ProjectWithStars_null>();
 
         StateHasChanged();
         //TODO: change the url to have in both api and here , not hardcoded
-        HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, "api/StandAlone_DotNetFoundation/ObtainData/projects/all");
+        HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, "api/StandAlone_DotNetFoundation/ObtainData/projects/withStars");
         request.SetBrowserResponseStreamingEnabled(true);
 
 
         using HttpResponseMessage response = await httpApi.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
 
         response.EnsureSuccessStatusCode();
-
+        var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true,
+                DefaultBufferSize = 128
+            };
+        options.Converters.Add(new IProjectConverter());
+        options.Converters.Add(new IStarsConverter());
         using Stream responseStream = await response.Content.ReadAsStreamAsync();
 
-        await foreach (Project_null? prj in JsonSerializer.DeserializeAsyncEnumerable<Project_null>(
-            responseStream,
-            new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true,
-                    DefaultBufferSize = 128
-                }))
+        await foreach (ProjectWithStars_null? prj in JsonSerializer.DeserializeAsyncEnumerable<ProjectWithStars_null>(
+            responseStream,options))
         {
             if (prj == null) continue;
 
