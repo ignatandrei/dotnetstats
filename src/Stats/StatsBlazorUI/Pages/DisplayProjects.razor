@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Components.QuickGrid
+@using System.Text.Json
 <h3>Projects : @data?.Length </h3>
 
 @if (data?.Length > 0)
@@ -11,15 +12,96 @@
         <TemplateColumn Context="prj" Title="Source Code">
             <a target="_blank" href="@($"{prj.project.SourceCodeUrl}")">@prj.project.SourceCodeUrl</a>
         </TemplateColumn>
-            <PropertyColumn Property="p => p.project.Description" Sortable="false" />
+        <PropertyColumn Property="p => p.project.Description" Sortable="false" />
+        <TemplateColumn Context="prj" Title="Source Code">
+            @{
+                foreach (var item in starsData(prj.project))
+                {
+                    <div>Year @item.DateRecording.Year : count @item.Count</div>
+                }
+            }
+        </TemplateColumn>
     </QuickGrid>
 }
 @code {
+    int nrSetParameters;
     [Parameter]
     public Project_null[]? data { get; set; }
+    [Inject(Key = "statsconsole_host")]
+    public HttpClient? httpApi { get; set; }
+
+    private Stars_null[] starsData(Project_null project)
+    {
+        if (starsForProjects.ContainsKey(project.SourceCodeUrl))
+        {
+            return starsForProjects[project.SourceCodeUrl].ToArray();
+        }
+        return Enumerable.Empty<Stars_null>().ToArray();
+    }
+    Dictionary<string, List<Stars_null>> starsForProjects = new();
 
     public IQueryable<(int index, Project_null project)> IndexProjects =>
         (data ?? Enumerable.Empty<Project_null>()).Index().AsQueryable();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (data == null) return;
+        if (data.Length == 0) return;
+        foreach (var item in data)
+        {
+            if (item == null) continue;
+            if (starsForProjects.ContainsKey(item.SourceCodeUrl)) continue;
+            starsForProjects.Add(item.SourceCodeUrl, []);
+        }
+    }
+    bool isFirstRender = true;  
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (isFirstRender)
+        {
+            var year= DateTime.Now.Year-1;
+            isFirstRender = false;
+            await StreamStarsYearJson(year);
+        }
+    }
+    public List<Stars_null>? stars = null;
+    private async Task StreamStarsYearJson(int year)
+    {
+        ArgumentNullException.ThrowIfNull(httpApi);
+        stars = [];
+
+        StateHasChanged();
+        //TODO: change the url to have in both api and here , not hardcoded
+        HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, "api/StandAlone_DotNetFoundation/ObtainData/stars/getYear/?yearStars=" + year);
+        request.SetBrowserResponseStreamingEnabled(true);
+
+
+        using HttpResponseMessage response = await httpApi.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
+
+        response.EnsureSuccessStatusCode();
+
+        using Stream responseStream = await response.Content.ReadAsStreamAsync();
+
+        await foreach (Stars_null? prj in JsonSerializer.DeserializeAsyncEnumerable<Stars_null>(
+            responseStream,
+            new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true,
+                    DefaultBufferSize = 128
+                }))
+        {
+            if (prj == null) continue;
+
+            stars.Add(prj);
+            if (starsForProjects.ContainsKey(prj.Project.SourceCodeUrl))
+            {
+                starsForProjects[prj.Project.SourceCodeUrl].Add(prj);                
+                StateHasChanged();        
+            }
+        
+        }
+        StateHasChanged();
+    }
 }
 
 
