@@ -1,0 +1,16 @@
+﻿@if (project == null) return;
+@{
+    var url = project.Project.SourceCodeUrl;
+    var urlId = url.Replace("https://", "").Replace("http://", "").Replace("/", "_");
+    var chartId = $"chart_{urlId}";
+}
+<h3>
+    <a href="@project.Project.SourceCodeUrl" target="_blank">  @project.Project.Name</a> 
+    Stars for @project.LastYear : @project.LastYearStars 
+</h3>
+
+
+@code {
+    [Parameter]
+    public ProjectWithStars_null? project { get; set; }
+}

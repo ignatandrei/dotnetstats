@@ -1,16 +1,33 @@
 ﻿@using Microsoft.AspNetCore.Components.QuickGrid
 @using System.Text.Json
-
+<script>
+    import * as echarts from 'echarts';
+</script>
 
 <h2>Projects : @data?.Length </h2>
 @if (FinishStreaming)
 {
+    var orderedProjectsLastYear = data!
+        .OrderByDescending(p => p.LastYearStars)
+        .ThenBy(p => p.Project.Name)
+        .Take(10)
+        .ToArray();
+
     <p>
-    <a href="#MostPopularProjects">Most Stars Projects</a>
+    <a href="#MostPopularProjects">Most Stars Projects in </a>
     </p><p>
     <a href="#MostRisingProjects">Percentage Increasing Stars Projects</a>
     </p><p><a href="#allProjects">All Projects</a>
     </p>
+
+
+    <div id="MostPopularProjects">Most Stars Projects</div>
+    
+    foreach(var prjStars in orderedProjectsLastYear ){
+
+        <DisplayProject project="@prjStars" />
+        
+    }
 }
 
 
