@@ -1,14 +1,14 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using StatsBlazorUI;
-using MudBlazor.Services;
+using Radzen;
 
 
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
-builder.Services.AddMudServices();
+builder.Services.AddRadzenComponents();
 
 var hostApi = builder.Configuration["statsconsole_host"];
 if (string.IsNullOrEmpty(hostApi))
