@@ -1,0 +1,35 @@
+﻿@using MudBlazor
+@using StatsInterfaces
+
+@if(DisplayForChart!=null){
+    <div>
+        <MudBlazor.MudChart ChartType="ChartType.Bar" ChartSeries="@Series" @bind-SelectedIndex="Index" XAxisLabels="@XAxisLabels" Width="100%" Height="350px"></MudBlazor.MudChart>
+    </div>
+
+
+}
+@code {
+
+    [Parameter]
+    public Tuple<IProject,int>[]? DisplayForChart { get; set; }
+    private int Index = -1; //default value cannot be 0 -> first selectedindex is 0.
+
+    public string[] XAxisLabels = { };
+
+    public List<ChartSeries> Series = new List<ChartSeries>();
+
+    protected override void OnParametersSet()
+    {
+        if (DisplayForChart == null)
+        {
+            return;
+        }
+        var ordered = DisplayForChart!.OrderBy(p => p.Item2).ToArray();
+        XAxisLabels = ordered.Select(p => p.Item1.Name.ToString()).ToArray();
+        var c = new ChartSeries();
+        c.Name = "Stars";
+        c.Data = ordered.Select(p => (double)p.Item2).ToArray();
+        Series = new List<ChartSeries> { c };
+        StateHasChanged();
+    }
+}

@@ -1,5 +1,15 @@
 ﻿@using Microsoft.AspNetCore.Components.WebAssembly.Hosting
 @inherits LayoutComponentBase
+@* Required *@
+<MudThemeProvider />
+<MudPopoverProvider />
+
+@* Needed for dialogs *@
+<MudDialogProvider />
+
+@* Needed for snackbars *@
+<MudSnackbarProvider />
+
 <div class="page">
     <div class="sidebar">
         <NavMenu />
@@ -11,7 +21,12 @@
         </div>
 
         <article class="content px-4">
-            @Body
+            <MudBlazor.MudLayout>
+    <MudBlazor.MudMainContent>
+        @Body
+    </MudBlazor.MudMainContent>
+</MudBlazor.MudLayout>
+            
         </article>
     </main>
     

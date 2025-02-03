@@ -1,10 +1,17 @@
 ﻿@using Microsoft.AspNetCore.Components.QuickGrid
 @using System.Text.Json
+@using StatsInterfaces
 <script>
     import * as echarts from 'echarts';
 </script>
 
-<h2>Projects : @data?.Length </h2>
+<h2>Projects : @data?.Length 
+    @if (!FinishStreaming)
+    {
+        <MudBlazor.MudProgressCircular Color="MudBlazor.Color.Default" Indeterminate="true" />
+    }
+</h2>
+
 @if (FinishStreaming)
 {
     var orderedProjectsLastYear = data!
@@ -12,54 +19,42 @@
         .ThenBy(p => p.Project.Name)
         .Take(10)
         .ToArray();
-
+    Tuple<IProject, int>[]? dataDisplay = orderedProjectsLastYear.Select(it => new Tuple<IProject, int>(it.Project, it.LastYearStars)).ToArray(); ;
     <p>
-    <a href="#MostPopularProjects">Most Stars Projects in </a>
+        <a href="#MostPopularProjects">Most Stars Projects in last year </a>
     </p><p>
-    <a href="#MostRisingProjects">Percentage Increasing Stars Projects</a>
+        <a href="#MostRisingProjects">Percentage Increasing Stars Projects</a>
+    </p><p><a href="#MostStarsProjectAllTime">Most stars Projects all time</a>
     </p><p><a href="#allProjects">All Projects</a>
     </p>
 
 
-    <div id="MostPopularProjects">Most Stars Projects</div>
-    
-    foreach(var prjStars in orderedProjectsLastYear ){
-
-        <DisplayProject project="@prjStars" />
-        
+    <div id="MostPopularProjects">Most Stars Projects in last year</div>
+   
+    <DisplayProjectsChart DisplayForChart="@dataDisplay" />
+ 
+    <MudBlazor.MudExpansionPanels>
+    @foreach(var prjStars in orderedProjectsLastYear ){
+            string text = $"Project {prjStars.Project.Name}, Stars {prjStars.LastYearStars} ( click to expand) ";
+            <MudBlazor.MudExpansionPanel Text="@text" >
+            <DisplayProject project="@prjStars" />     
+        </MudBlazor.MudExpansionPanel>
     }
+    </MudBlazor.MudExpansionPanels>
 }
-
 
 @if (data?.Length > 0)
 {
     <div id="allProjects"><h3> All projects </h3></div>
-    <QuickGrid Items="IndexProjects" Class="quick-grid">
-
-        <PropertyColumn Property="p => (p.index+1)" Sortable="false" Title="Index" />
-
-        <TemplateColumn Context="prj" Title="Source Code" >
-            <p>
-            <a target="_blank" href="@($"{prj.project.Project.SourceCodeUrl}")">@prj.project.Project.Name</a>
-            </p>
-            <p>
-            <a target="_blank" href="@($"{prj.project.Project.SourceCodeUrl}")">@prj.project.Project.SourceCodeUrl</a>
-            </p>
-            @prj.project.Project.Description
-        </TemplateColumn>
-        <TemplateColumn Context="prj" Title="Stars">
-            <br />
-            @if(prj.project.LastYear>0)
-            {
-                <text>
-                Total : @prj.project.TotalStars
-                <br />
-                    For @prj.project.LastYear nr stars = @prj.project.LastYearStars
-                </text>
-            }
-            
-        </TemplateColumn>
-    </QuickGrid>
+    <MudBlazor.MudExpansionPanels>
+    @foreach (var prjStars in data)
+    {
+        string text = $"Project {prjStars.Project.Name}, Stars {prjStars.LastYearStars} ( click to expand) ";
+        <MudBlazor.MudExpansionPanel Text="@text">
+            <DisplayProject project="@prjStars" />
+        </MudBlazor.MudExpansionPanel>
+    }
+    </MudBlazor.MudExpansionPanels>
 }
 @code {
 
