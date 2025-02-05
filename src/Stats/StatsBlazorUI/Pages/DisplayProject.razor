@@ -7,18 +7,23 @@
 }
 <h3>
     <a href="@project.Project.SourceCodeUrl" target="_blank">  @project.Project.Name</a>
-
-    Stars for @project.LastYear : @project.LastYearStars 
 </h3>
-@if(project != null){
-
-    <RadzenChart  style="height: 400px">
-        <RadzenBarSeries Data="@Series" CategoryProperty="Quarter" Title="2024" LineType="LineType.Dashed" ValueProperty="Revenue">
-            <RadzenSeriesDataLabels Visible="@false" />
-        </RadzenBarSeries>
-        <RadzenBarOptions Radius="5" />
-    </RadzenChart>
-
+@if (project.LastYear > 0)
+{
+    <text>
+        Stars @project.TotalStars (in @project.LastYear : @project.LastYearStars )
+    </text>
+}
+@if (project != null)
+{
+        <a href="@project.Project.SourceCodeUrl" target="_blank">@project.Project.SourceCodeUrl</a>
+        @project.Project.Description
+        <br />
+        <RadzenChart  style="height: 400px">
+            <RadzenLineSeries Data="@Series" CategoryProperty="Quarter" Title="Stars" LineType="LineType.Solid" ValueProperty="Revenue">
+                <RadzenSeriesDataLabels Visible="@false" />
+        </RadzenLineSeries>
+        </RadzenChart>
 }
 @code {
     class DataItem{
@@ -37,7 +42,7 @@
 
     protected override void OnParametersSet()
     {
-        var ordered = project!.Stars.OrderByDescending(p => p.DateRecording).ToArray();        
+        var ordered = project!.Stars.OrderBy(p => p.DateRecording).ToArray();        
         Series = ordered.Select(p => new DataItem(){ Quarter= p.DateRecording.Year.ToString(),Revenue =p.Count}) .ToArray();
         StateHasChanged();
     }

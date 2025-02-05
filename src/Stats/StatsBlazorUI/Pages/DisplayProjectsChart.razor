@@ -3,7 +3,7 @@
 @if(DisplayForChart!=null){
     <RadzenChart style="height: 400px">
         <RadzenBarSeries Data="@Series" CategoryProperty="Quarter"  LineType="LineType.Dashed" ValueProperty="Revenue">
-            <RadzenSeriesDataLabels Visible="@false" />
+            <RadzenSeriesDataLabels Visible="@true" />
         </RadzenBarSeries>
         <RadzenBarOptions Radius="5" />
     </RadzenChart>

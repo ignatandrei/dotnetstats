@@ -5,8 +5,9 @@
     import * as echarts from 'echarts';
 </script>
 
-<h2>Projects : @data?.Length 
-    @if (!FinishStreaming)
+<h2>
+    Projects : @data?.Length
+    @if(!FinishStreaming)
     {
         <RadzenProgressBarCircular ProgressBarStyle="ProgressBarStyle.Primary" Value="100" ShowValue="false" Mode="ProgressBarMode.Indeterminate" />
     }
@@ -14,49 +15,157 @@
 
 @if (FinishStreaming)
 {
+    var lastYear = data!.Max(it => it.LastYear);
+    var oneYearAgo = lastYear - 1;
+
     var orderedProjectsLastYear = data!
+        .Where(it => it.LastYear == lastYear)
         .OrderByDescending(p => p.LastYearStars)
         .ThenBy(p => p.Project.Name)
         .Take(10)
         .ToArray();
-    Tuple<IProject, int>[]? dataDisplay = orderedProjectsLastYear.Select(it => new Tuple<IProject, int>(it.Project, it.LastYearStars)).ToArray(); ;
+    var dataDisplayLastyear = orderedProjectsLastYear.Select(it => new Tuple<IProject, int>(it.Project, it.LastYearStars)).ToArray();
+
+    var orderedProjectsAll = data!
+        .OrderByDescending(p => p.TotalStars)
+        .ThenBy(p => p.Project.Name)
+        .Take(10)
+        .ToArray();
+    var dataDisplayAll = orderedProjectsAll.Select(it => new Tuple<IProject, int>(it.Project, it.TotalStars)).ToArray();
+
+    var orderedPercentage = data
+        .Where(it => it.LastYear == lastYear)
+        .Where(it=>it.Stars.Any(s=>s.DateRecording.Year==oneYearAgo))
+        .Select(it => 
+            new { it, 
+                LastYearStars = it.Stars.First(s => s.DateRecording.Year == lastYear), 
+                OneYearAgoStars = it.Stars.First(s => s.DateRecording.Year == oneYearAgo) 
+            })
+        .Select(it => new { it, Percentage = ((double)(it.LastYearStars.Count - it.OneYearAgoStars.Count) * 100) / (double)it.OneYearAgoStars.Count })
+        .OrderByDescending(it => it.Percentage)
+        .Take(10)
+        .ToArray();
+
+    var dataDisplayPercentage = orderedPercentage.Select(it => new Tuple<IProject, int>(it.it.it.Project, Convert.ToInt32( it.Percentage))).ToArray();
+
     <p>
         <a href="#MostPopularProjects">Most Stars Projects in last year </a>
-    </p><p>
+    </p>
+
+    <p>
         <a href="#MostRisingProjects">Percentage Increasing Stars Projects</a>
-    </p><p><a href="#MostStarsProjectAllTime">Most stars Projects all time</a>
-    </p><p><a href="#allProjects">All Projects</a>
+    </p>
+
+    <p>
+        <a href="#MostStarsProjectAllTime">Most stars Projects all time</a>
+    </p>
+
+    <p>
+        <a href="#allProjects">All Projects</a>
     </p>
 
 
-    <div id="MostPopularProjects">Most Stars Projects in last year</div>
-   
-    <DisplayProjectsChart DisplayForChart="@dataDisplay" />
- 
-    <RadzenAccordion>
-        <Items>
-    @foreach(var prjStars in orderedProjectsLastYear ){
-            string text = $"Project {prjStars.Project.Name}, Stars {prjStars.LastYearStars} ( click to expand) ";
-            <RadzenAccordionItem Text="@text" >
-            <DisplayProject project="@prjStars" />     
-            </RadzenAccordionItem>
-    }
-        </Items>
-    </RadzenAccordion>
+    <div id="MostPopularProjects"></div>
+
+    <RadzenTabs RenderMode="TabRenderMode.Client">
+        <Tabs>
+            <RadzenTabsItem Text="Most Stars Projects in last year">
+
+                <DisplayProjectsChart DisplayForChart="@dataDisplayLastyear" />
+            </RadzenTabsItem>
+            <RadzenTabsItem Text="Details">
+                <RadzenAccordion>
+                    <Items>
+                        @foreach (var prjStars in orderedProjectsLastYear)
+                        {
+                            string text = $"Project {prjStars.Project.Name} ( click to expand) ";
+                            <RadzenAccordionItem Text="@text">
+                                <DisplayProject project="@prjStars" />
+                            </RadzenAccordionItem>
+                        }
+                    </Items>
+                </RadzenAccordion>
+            </RadzenTabsItem>
+        </Tabs>
+    </RadzenTabs>
+
+    <div id="MostRisingProjects"></div>
+
+    <RadzenTabs RenderMode="TabRenderMode.Client">
+        <Tabs>
+            <RadzenTabsItem Text="Percentage Increasing Stars Projects">
+
+                <DisplayProjectsChart DisplayForChart="@dataDisplayPercentage" />
+            </RadzenTabsItem>
+            <RadzenTabsItem Text="Details">
+                <RadzenAccordion>
+                    <Items>
+                        @foreach (var prjStars in orderedPercentage)
+                        {
+                            string text = $"Project {prjStars.it.it.Project.Name}  ( click to expand) ";
+                            <RadzenAccordionItem Text="@text">
+                                <DisplayProject project="@prjStars.it.it" />
+                            </RadzenAccordionItem>
+                        }
+                    </Items>
+                </RadzenAccordion>
+            </RadzenTabsItem>
+        </Tabs>
+    </RadzenTabs>
+
+    <div id="MostStarsProjectAllTime"></div>
+
+    <RadzenTabs RenderMode="TabRenderMode.Client">
+        <Tabs>
+            <RadzenTabsItem Text="Most Stars Projects All time">
+
+                <DisplayProjectsChart DisplayForChart="@dataDisplayAll" />
+            </RadzenTabsItem>
+            <RadzenTabsItem Text="Details">
+
+                <RadzenAccordion>
+                    <Items>
+                        @foreach (var prjStars in orderedProjectsAll)
+                        {
+                            string text = $"Project {prjStars.Project.Name}  ( click to expand) ";
+                            <RadzenAccordionItem Text="@text">
+                                <DisplayProject project="@prjStars" />
+                            </RadzenAccordionItem>
+                        }
+                    </Items>
+                </RadzenAccordion>
+            </RadzenTabsItem>
+        </Tabs>
+    </RadzenTabs>
+
 }
 
 @if (data?.Length > 0)
 {
     <div id="allProjects"><h3> All projects </h3></div>
-    <RadzenAccordion><Items>
-    @foreach (var prjStars in data)
-    {
-        string text = $"Project {prjStars.Project.Name}, Stars {prjStars.LastYearStars} ( click to expand) ";
-        <RadzenAccordionItem  Text="@text">
-            <DisplayProject project="@prjStars" />
-        </RadzenAccordionItem>
-    }
-    </Items>
+    <QuickGrid Items="IndexProjects" >
+        <TemplateColumn Sortable="false" Title="Index">
+            @(context.index+1)
+        </TemplateColumn>
+        <PropertyColumn Property="@(p => p.project.Project.Name)" Sortable="true" Title="Name" IsDefaultSortColumn="true" />
+        <PropertyColumn Property="@(p => p.project.TotalStars)" Sortable="true" title="Total Stars" />
+        <PropertyColumn Property="@(p => p.project.LastYearStars)" Title="Last Year Stars" Sortable="true" />
+        <TemplateColumn Title="Details">
+            <DisplayProject project="@context.project" />            
+        </TemplateColumn>
+    </QuickGrid>
+
+
+    <RadzenAccordion>
+        <Items>
+            @foreach (var prjStars in data)
+            {
+                string text = $"Project {prjStars.Project.Name}  ( click to expand) ";
+                <RadzenAccordionItem Text="@text">
+                    <DisplayProject project="@prjStars" />
+                </RadzenAccordionItem>
+            }
+        </Items>
     </RadzenAccordion>
 }
 @code {
@@ -69,10 +178,11 @@
     [Inject(Key = "statsconsole_host")]
     public HttpClient? httpApi { get; set; }
 
-    
     public IQueryable<(int index, ProjectWithStars_null project)> IndexProjects =>
         (data ?? Enumerable.Empty<ProjectWithStars_null>()).Index().AsQueryable();
 
+
+    
 
 }
 
