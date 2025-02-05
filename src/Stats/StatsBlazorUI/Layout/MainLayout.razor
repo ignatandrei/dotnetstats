@@ -1,5 +1,10 @@
 ﻿@using Microsoft.AspNetCore.Components.WebAssembly.Hosting
 @inherits LayoutComponentBase
+@* Required *@
+<HeadContent>
+    <RadzenTheme Theme="material" />
+</HeadContent>
+<RadzenComponents />
 <div class="page">
     <div class="sidebar">
         <NavMenu />
@@ -11,7 +16,8 @@
         </div>
 
         <article class="content px-4">
-            @Body
+        @Body
+            
         </article>
     </main>
     

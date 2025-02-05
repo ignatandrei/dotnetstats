@@ -1,0 +1,42 @@
+﻿@using StatsInterfaces
+
+@if(DisplayForChart!=null){
+    <RadzenChart style="height: 400px">
+        <RadzenBarSeries Data="@Series" CategoryProperty="Quarter"  LineType="LineType.Dashed" ValueProperty="Revenue">
+            <RadzenSeriesDataLabels Visible="@true" />
+        </RadzenBarSeries>
+        <RadzenBarOptions Radius="5" />
+    </RadzenChart>
+
+
+}
+@code {
+
+    [Parameter]
+    public Tuple<IProject,int>[]? DisplayForChart { get; set; }
+    class DataItem
+    {
+        public string Quarter { get; set; }
+        public double Revenue { get; set; }
+    }
+    
+    DataItem[] Series = [];
+
+    protected override void OnParametersSet()
+    {
+        if (DisplayForChart == null)
+        {
+            return;
+        }
+        // var ordered = DisplayForChart!.OrderBy(p => p.Item2).ToArray();
+        // XAxisLabels = ordered.Select(p => p.Item1.Name.ToString()).ToArray();
+        // var c = new ChartSeries();
+        // c.Name = "Stars";
+        // c.Data = ordered.Select(p => (double)p.Item2).ToArray();
+        // Series = new List<ChartSeries> { c };
+
+        Series = DisplayForChart.Select(p => new DataItem() { Quarter = p.Item1.Name, Revenue = p.Item2 }).ToArray();
+
+        StateHasChanged();
+    }
+}

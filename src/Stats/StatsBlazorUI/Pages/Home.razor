@@ -60,7 +60,7 @@
             if (prj == null) continue;
 
             projects.Add(prj);
-            if (projects.Count % 10 == 0){
+            if (projects.Count % 50 == 0){
                 StateHasChanged();
                 await Task.Delay(1000);
             }
