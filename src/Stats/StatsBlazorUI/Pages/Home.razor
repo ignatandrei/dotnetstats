@@ -2,6 +2,8 @@
 @using Microsoft.AspNetCore.Components.WebAssembly.Hosting
 @using StatsInterfaces
 @using System.Text.Json
+@using StatsInterfaces.UI
+@using StatsObjectsFromAPI
 
 
 <PageTitle>Home</PageTitle>
@@ -19,7 +21,10 @@
     [Inject]
     public IWebAssemblyHostEnvironment? hostEnvironment { get; set; }
 
-    public List<ProjectWithStars_null>? projects = null;
+    [Inject]
+    public StatsDataFromAPI? dataFromAPI { get; set; }
+
+    public List<IProjectWithStars>? projects = null;
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (isFirstRender)
@@ -30,37 +35,19 @@
     }
 
 
-
+    int[] ints = [10, 50,80];
     private async Task StreamProjectsJson()
     {
         ArgumentNullException.ThrowIfNull(httpApi);
-        projects = new List<ProjectWithStars_null>();
+        projects = new List<IProjectWithStars>();
 
         StateHasChanged();
-        //TODO: change the url to have in both api and here , not hardcoded
-        HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, "api/StandAlone_DotNetFoundation/ObtainData/projects/withStars");
-        request.SetBrowserResponseStreamingEnabled(true);
-
-
-        using HttpResponseMessage response = await httpApi.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
-
-        response.EnsureSuccessStatusCode();
-        var options = new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true,
-                DefaultBufferSize = 128
-            };
-        options.Converters.Add(new IProjectConverter());
-        options.Converters.Add(new IStarsConverter());
-        using Stream responseStream = await response.Content.ReadAsStreamAsync();
-
-        await foreach (ProjectWithStars_null? prj in JsonSerializer.DeserializeAsyncEnumerable<ProjectWithStars_null>(
-            responseStream,options))
+        await foreach (IProjectWithStars? prj in dataFromAPI!.GetProjectsWithStars())
         {
             if (prj == null) continue;
 
             projects.Add(prj);
-            if (projects.Count % 50 == 0){
+            if (ints.Contains(projects.Count) || (projects.Count %100 == 0) ){
                 StateHasChanged();
                 await Task.Delay(1000);
             }

@@ -1,9 +1,8 @@
 ﻿@using Microsoft.AspNetCore.Components.QuickGrid
 @using System.Text.Json
 @using StatsInterfaces
-<script>
-    import * as echarts from 'echarts';
-</script>
+@using StatsInterfaces.UI
+
 
 <h2>
     Projects : @data?.Length
@@ -174,12 +173,12 @@
     [Parameter]
     public bool FinishStreaming { get; set; }
     [Parameter]
-    public ProjectWithStars_null[]? data { get; set; }
+    public IProjectWithStars[]? data { get; set; }
     [Inject(Key = "statsconsole_host")]
     public HttpClient? httpApi { get; set; }
 
-    public IQueryable<(int index, ProjectWithStars_null project)> IndexProjects =>
-        (data ?? Enumerable.Empty<ProjectWithStars_null>()).Index().AsQueryable();
+    public IQueryable<(int index, IProjectWithStars project)> IndexProjects =>
+        (data ?? Enumerable.Empty<IProjectWithStars>()).Index().AsQueryable();
 
 
     
