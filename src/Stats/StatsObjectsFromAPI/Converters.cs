@@ -1,9 +1,4 @@
-﻿namespace StatsBlazorUI.Pages;
-
-using System;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using StatsInterfaces;
+﻿namespace StatsObjectsFromAPI;
 
 public class IProjectConverter : JsonConverter<IProject>
 {
@@ -33,5 +28,21 @@ public class IStarsConverter : JsonConverter<IStars>
         // Serialize the concrete type Project
         JsonSerializer.Serialize(writer, (Stars_null)value, options);
     }
+}
+
+public class IProjectWithStarsConverter : JsonConverter<IProjectWithStars>
+{
+    public override IProjectWithStars Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    {
+        // Deserialize the JSON to the concrete type Project
+        return JsonSerializer.Deserialize<ProjectWithStars_null>(ref reader, options);
+    }
+
+    public override void Write(Utf8JsonWriter writer, IProjectWithStars value, JsonSerializerOptions options)
+    {
+        // Serialize the concrete type Project
+        JsonSerializer.Serialize(writer, (ProjectWithStars_null)value, options);
+    }
+
 }
 

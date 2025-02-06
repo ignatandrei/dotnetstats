@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using StatsBlazorUI;
 using Radzen;
+using StatsObjectsFromAPI;
 
 
 
@@ -24,6 +25,6 @@ if (string.IsNullOrEmpty(hostApi))
 
 builder.Services.AddKeyedScoped("statsconsole_host", (sp, _) => new HttpClient { BaseAddress = new Uri(hostApi) });
 
-builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-
+builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(hostApi) });
+builder.Services.AddScoped<StatsDataFromAPI>();
 await builder.Build().RunAsync();

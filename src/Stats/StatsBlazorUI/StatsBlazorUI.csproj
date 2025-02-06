@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\StatsInterfaces\StatsInterfaces.csproj" />
+    <ProjectReference Include="..\StatsObjectsFromAPI\StatsObjectsFromAPI.csproj" />
   </ItemGroup>
 
   <ItemGroup>

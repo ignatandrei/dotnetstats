@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatsGetStars", "StatsGetSt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatsBlazorUI", "StatsBlazorUI\StatsBlazorUI.csproj", "{7FEE5A37-03AC-84A6-1D6C-6AD2282DB3F7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatsObjectsFromAPI", "StatsObjectsFromAPI\StatsObjectsFromAPI.csproj", "{D6A5AD9D-33BF-4838-8AB3-B2B1F4692615}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{7FEE5A37-03AC-84A6-1D6C-6AD2282DB3F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FEE5A37-03AC-84A6-1D6C-6AD2282DB3F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7FEE5A37-03AC-84A6-1D6C-6AD2282DB3F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6A5AD9D-33BF-4838-8AB3-B2B1F4692615}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6A5AD9D-33BF-4838-8AB3-B2B1F4692615}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6A5AD9D-33BF-4838-8AB3-B2B1F4692615}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6A5AD9D-33BF-4838-8AB3-B2B1F4692615}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
