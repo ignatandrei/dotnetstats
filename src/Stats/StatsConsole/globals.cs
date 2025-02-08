@@ -10,3 +10,5 @@ global using Stats.Database;
 global using Microsoft.EntityFrameworkCore;
 global using StatsGetStars;
 global using Microsoft.AspNetCore.Http.HttpResults;
+global using Microsoft.Extensions.Options;
+global using StatsLoadquozd;

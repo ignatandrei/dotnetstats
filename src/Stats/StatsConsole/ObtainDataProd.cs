@@ -1,8 +1,16 @@
 ﻿namespace StatsConsole;
 
-public class ObtainDataProd:ObtainData, IApi
+public class ObtainDataProdDonetFoundation : ObtainData, IApi
 {
-    public ObtainDataProd(): base(Program.DotNetFoundation)
+    public ObtainDataProdDonetFoundation(): base(Program.DotNetFoundation)
+    {
+
+    }
+}
+
+public class ObtainDataProdQuozd: ObtainData, IApi
+{
+    public ObtainDataProdQuozd() : base(Program.Quozd)
     {
 
     }
