@@ -1,7 +1,4 @@
-﻿using StatsInterfaces.UI;
-using System.Threading.Tasks;
-
-namespace StatsObjects;
+﻿namespace StatsObjects;
 
 public class StatsData : IStatsData
 {

@@ -5,6 +5,7 @@ namespace StatsConsole;
 public class ObtainData
 {
     private readonly string key;
+    private IStatsData data;
 
     public ObtainData(string key)
     {
@@ -16,8 +17,7 @@ public class ObtainData
         if (string.IsNullOrWhiteSpace(key))
         {
             route = "nullObject";
-        }
-        IStatsData data;
+        }        
         if (string.IsNullOrEmpty(key))
         {
             data = Program.Original!.GetRequiredService<IStatsData>();

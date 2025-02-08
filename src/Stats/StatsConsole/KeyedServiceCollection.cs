@@ -53,13 +53,23 @@ public class KeyedServiceProviderFactory :  IServiceProviderFactory<IServiceColl
                 {
                     acc.Add(it);
                     return acc;
-                });
+                })
+            .ToArray();
         ;
         List<ServiceProviderForKey> keyedServicesList = new();
         foreach (var keyedService in keyedServices)
         {
+            
             var sc = new ServiceCollection();
-            var keyed = keyedService.Value;
+            var key = keyedService.Key;
+            var keyed = keyedService.Value
+                .Where(it=> it != null)
+                .Where(it=>it.IsKeyedService)
+                .Where(it => it.ServiceKey != null)
+                .Where(it => it.ServiceKey!.ToString() ==key)
+                .Select(it => it!)
+                .ToArray();
+            
             var missing = noKeys.Where(it => !keyed.Any(kt => kt.ServiceType == it.ServiceType)).ToArray();
             foreach (var sK in keyed)
             {
@@ -105,8 +115,8 @@ public class KeyedServiceProviderFactory :  IServiceProviderFactory<IServiceColl
             var keySp = new ServiceProviderForKey(keyedService.Key, sp);
             keyedServicesList.Add(keySp);
         }
-        return new ServiceProviderAll(defaultSP, keyedServicesList.ToDictionary(it => it.Key, it => (IServiceProvider)it));
-
+        var data=new ServiceProviderAll(defaultSP, keyedServicesList.ToDictionary(it => it.Key, it => (IServiceProvider)it));
+        return data;
 
     }
 
