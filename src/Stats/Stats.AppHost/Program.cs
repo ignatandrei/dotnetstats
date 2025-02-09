@@ -1,6 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-
+//docker network prune
 var builder = DistributedApplication.CreateBuilder(args);
 builder.Services.AddLogging(log=>
 {
