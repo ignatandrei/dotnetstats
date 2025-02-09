@@ -20,6 +20,7 @@ public class ProjectsDataDB : IProjectsData
         if ((projects?.Length ?? 0) == 0) return false;
         bool exists = false;
         ArgumentNullException.ThrowIfNull(projects);
+        
         projects = projects
             .Where(p => p != null)
             .Where(it => !string.IsNullOrWhiteSpace(it.SourceCodeUrl))
@@ -27,14 +28,16 @@ public class ProjectsDataDB : IProjectsData
             .ToArray();
         foreach (var project in projects!)
         {
-            var existingProject = await context.Projects.FirstOrDefaultAsync(p => p.SourceCodeUrl == project.SourceCodeUrl);
+            var url = project.SourceCodeUrl;
+            if(url.EndsWith("/"))url= url.Substring(0, url.Length - 1);
+            var existingProject = await context.Projects.FirstOrDefaultAsync(p => p.SourceCodeUrl == url);
             if (existingProject != null) continue;
             exists = true;
             var p = new Project
             {
                 Name = project.Name,
                 Description = project.Description,
-                SourceCodeUrl = project.SourceCodeUrl
+                SourceCodeUrl = url
             };
             context.Projects.Add(p.MaxDimension());
         }

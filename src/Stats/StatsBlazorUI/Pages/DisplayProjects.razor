@@ -2,6 +2,9 @@
 @using System.Text.Json
 @using StatsInterfaces
 @using StatsInterfaces.UI
+@{
+    int nrProjects = 15;
+}
 
 
 <h2>
@@ -21,14 +24,14 @@
         .Where(it => it.LastYear == lastYear)
         .OrderByDescending(p => p.LastYearStars)
         .ThenBy(p => p.Project.Name)
-        .Take(10)
+        .Take(nrProjects)
         .ToArray();
     var dataDisplayLastyear = orderedProjectsLastYear.Select(it => new Tuple<IProject, int>(it.Project, it.LastYearStars)).ToArray();
 
     var orderedProjectsAll = data!
         .OrderByDescending(p => p.TotalStars)
         .ThenBy(p => p.Project.Name)
-        .Take(10)
+        .Take(nrProjects)
         .ToArray();
     var dataDisplayAll = orderedProjectsAll.Select(it => new Tuple<IProject, int>(it.Project, it.TotalStars)).ToArray();
 
@@ -42,7 +45,7 @@
             })
         .Select(it => new { it, Percentage = ((double)(it.LastYearStars.Count - it.OneYearAgoStars.Count) * 100) / (double)it.OneYearAgoStars.Count })
         .OrderByDescending(it => it.Percentage)
-        .Take(10)
+        .Take(nrProjects)
         .ToArray();
 
     var dataDisplayPercentage = orderedPercentage.Select(it => new Tuple<IProject, int>(it.it.it.Project, Convert.ToInt32( it.Percentage))).ToArray();
