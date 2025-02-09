@@ -52,6 +52,12 @@ builder.Services.AddKeyedScoped<IStarsService, GitHubStars>(Quozd);
 builder.Services.AddKeyedScoped<IStarsData, StarsDataDB>(Quozd);
 
 
+builder.Services.AddKeyedScoped<IStatsData, StatsData>(Thangchung);
+builder.Services.AddKeyedScoped<IProjectService, StatsServicethangchung>(Thangchung);
+builder.Services.AddKeyedScoped<IProjectsData, ProjectsDataDB>(Thangchung);
+builder.Services.AddKeyedScoped<IStarsService, GitHubStars>(Thangchung);
+builder.Services.AddKeyedScoped<IStarsData, StarsDataDB>(Thangchung);
+
 var app = builder.Build();
 app.UseExceptionHandler();
 app.UseStatusCodePages();
@@ -91,5 +97,6 @@ public partial class Program
 {
     public const string DotNetFoundation = KeyedServiceProviderFactory.PrefixKey + "DotNetFoundation";
     public const string Quozd = KeyedServiceProviderFactory.PrefixKey + "Quozd";
+    public const string Thangchung = KeyedServiceProviderFactory.PrefixKey + "Thangchung";
     public static IServiceProvider? Original;
 }
