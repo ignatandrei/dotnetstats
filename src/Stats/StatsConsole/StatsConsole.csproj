@@ -19,6 +19,7 @@
     <ProjectReference Include="..\StatsGetStars\StatsGetStars.csproj" />
     <ProjectReference Include="..\StatsInterfaces\StatsInterfaces.csproj" />
     <ProjectReference Include="..\StatsLoadNetFoundation\StatsLoadNetFoundation.csproj" />
+    <ProjectReference Include="..\StatsLoadquozd\StatsLoadquozd.csproj" />
     <ProjectReference Include="..\StatsObjects\StatsObjects.csproj" />
   </ItemGroup>
 

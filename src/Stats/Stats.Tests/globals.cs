@@ -7,5 +7,6 @@ global using Stats.Database;
 global using StatsInterfaces.Data;
 global using StatsObjects;
 global using Microsoft.EntityFrameworkCore;
+global using StatsLoadquozd;
 
 [assembly: Parallelize(Scope = ExecutionScope.MethodLevel)]

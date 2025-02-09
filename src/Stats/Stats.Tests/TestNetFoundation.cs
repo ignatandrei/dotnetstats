@@ -1,6 +1,4 @@
-﻿using StatsLoadNetFoundation;
-
-namespace Stats.Tests;
+﻿namespace Stats.Tests;
 
 [TestClass]
 public sealed class TestNetFoundation

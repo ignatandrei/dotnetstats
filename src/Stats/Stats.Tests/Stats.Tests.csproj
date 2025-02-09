@@ -25,7 +25,10 @@
     <Content Include="data\netfoundation.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
+		<Content Include="data\quozd.md">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.1" />
 		<PackageReference Include="Shouldly" Version="4.3.0" />
@@ -42,6 +45,7 @@
   <ItemGroup>
     <ProjectReference Include="..\StatsGetStars\StatsGetStars.csproj" />
     <ProjectReference Include="..\StatsLoadNetFoundation\StatsLoadNetFoundation.csproj" />
+    <ProjectReference Include="..\StatsLoadquozd\StatsLoadquozd.csproj" />
     <ProjectReference Include="..\StatsObjects\StatsObjects.csproj" />
   </ItemGroup>
 

@@ -1,6 +1,4 @@
 
-using Microsoft.Extensions.Options;
-
 var builder = WebApplication.CreateBuilder(args);
 builder.KeyToKey();
 builder.AddServiceDefaults();
@@ -46,6 +44,14 @@ builder.Services.AddKeyedScoped<IProjectService, StatsServiceDotNetFoundation>(D
 builder.Services.AddKeyedScoped<IProjectsData, ProjectsDataDB>(DotNetFoundation);
 builder.Services.AddKeyedScoped<IStarsService, GitHubStars>(DotNetFoundation);
 builder.Services.AddKeyedScoped<IStarsData, StarsDataDB>(DotNetFoundation);
+
+builder.Services.AddKeyedScoped<IStatsData, StatsData>(Quozd);
+builder.Services.AddKeyedScoped<IProjectService, StatsServiceQuozd>(Quozd);
+builder.Services.AddKeyedScoped<IProjectsData, ProjectsDataDB>(Quozd);
+builder.Services.AddKeyedScoped<IStarsService, GitHubStars>(Quozd);
+builder.Services.AddKeyedScoped<IStarsData, StarsDataDB>(Quozd);
+
+
 var app = builder.Build();
 app.UseExceptionHandler();
 app.UseStatusCodePages();
@@ -84,5 +90,6 @@ app.Run();
 public partial class Program
 {
     public const string DotNetFoundation = KeyedServiceProviderFactory.PrefixKey + "DotNetFoundation";
+    public const string Quozd = KeyedServiceProviderFactory.PrefixKey + "Quozd";
     public static IServiceProvider? Original;
 }
