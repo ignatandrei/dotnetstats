@@ -16,3 +16,12 @@ public class ObtainDataProdQuozd: ObtainData, IApi
     }
 }
 
+
+public class ObtainDataProdThangchung : ObtainData, IApi
+{
+    public ObtainDataProdThangchung() : base(Program.Thangchung)
+    {
+
+    }
+}
+
