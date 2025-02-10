@@ -1,5 +1,35 @@
-﻿<h3>MainDisplayYear</h3>
+﻿@page "/projects/year/{year:int}"
+@using StatsInterfaces.UI
+<h1>Data for @year</h1>
+<LoadProjects AfterFinish="AfterFinish" ProjectsLoaded="ProjectsLoaded"></LoadProjects>
+
+<DisplayProjects lastYear="@year" data="@projects" FinishStreaming="@HasFinishedStreaming"></DisplayProjects>
 
 @code {
+    [Parameter]
+    public int year { get; set; }
+    private bool isFirstRender = true;
+    private bool HasFinishedStreaming = false;
+    // [Inject(Key = "statsconsole_host")]
+    // public HttpClient? httpApi { get; set; }
+    // [Inject]
+    // public IWebAssemblyHostEnvironment? hostEnvironment { get; set; }
 
+    [Inject]
+    public AllDataProjectsWithStars? data { get; set; }
+
+    public IProjectWithStars[]? projects = null;
+
+
+    private void AfterFinish(bool args)
+    {
+        HasFinishedStreaming = args;
+        projects = data!.projectWithStars();
+        StateHasChanged();
+    }
+    private void ProjectsLoaded(int args)
+    {
+        projects = data!.projectWithStars();
+        StateHasChanged();
+    }
 }

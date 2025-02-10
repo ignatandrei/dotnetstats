@@ -5,9 +5,14 @@
     var url = project.Project.SourceCodeUrl;
     var urlId = url.Replace("https://", "").Replace("http://", "").Replace("/", "_");
     var chartId = $"chart_{urlId}";
+    var indexSlash = project.Project.SourceCodeUrl.LastIndexOf("/") ;
+    var authorImage = project.Project.SourceCodeUrl.Substring(0,indexSlash)+".png";
+
+
 }
 <h3>
     <a href="@project.Project.SourceCodeUrl" target="_blank">  @project.Project.Name</a>
+    <img src="@authorImage" width="30" height="30" />
 </h3>
 @if (project.LastYear > 0)
 {

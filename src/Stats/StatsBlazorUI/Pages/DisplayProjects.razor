@@ -20,22 +20,28 @@
     var oneYearAgo = lastYear - 1;
 
     var orderedProjectsLastYear = data!
-        .Where(it => it.LastYear == lastYear)
+        .Where(it => it.Stars.Any(s=>s.DateRecording.Year == lastYear))
+        .Select(it => new { it,it.Project, LastYearStars = it.Stars.FirstOrDefault(s => s.DateRecording.Year == lastYear)?.Count??0 })
         .OrderByDescending(p => p.LastYearStars)
         .ThenBy(p => p.Project.Name)
         .Take(nrProjects)
         .ToArray();
-    var dataDisplayLastyear = orderedProjectsLastYear.Select(it => new Tuple<IProject, int>(it.Project, it.LastYearStars)).ToArray();
+
+
+    var dataDisplayLastyear = orderedProjectsLastYear
+        .Select(it => new Tuple<IProject, int>(it.it.Project, it.LastYearStars)).ToArray();
 
     var orderedProjectsAll = data!
         .OrderByDescending(p => p.TotalStars)
         .ThenBy(p => p.Project.Name)
         .Take(nrProjects)
         .ToArray();
+
+
     var dataDisplayAll = orderedProjectsAll.Select(it => new Tuple<IProject, int>(it.Project, it.TotalStars)).ToArray();
 
     var orderedPercentage = data
-        .Where(it => it.LastYear == lastYear)
+        .Where(it => it.Stars.Any(s => s.DateRecording.Year == lastYear))
         .Where(it=>it.Stars.Any(s=>s.DateRecording.Year==oneYearAgo))
         .Select(it => 
             new { it, 
@@ -70,7 +76,7 @@
 
     <RadzenTabs RenderMode="TabRenderMode.Client">
         <Tabs>
-            <RadzenTabsItem Text="Most Stars Projects in last year">
+            <RadzenTabsItem Text="@("Most Stars Projects in "+lastYear)">
 
                 <DisplayProjectsChart DisplayForChart="@dataDisplayLastyear" />
             </RadzenTabsItem>
@@ -81,7 +87,7 @@
                         {
                             string text = $"Project {prjStars.Project.Name} ( click to expand) ";
                             <RadzenAccordionItem Text="@text">
-                                <DisplayProject project="@prjStars" />
+                                <DisplayProject project="@prjStars.it" />
                             </RadzenAccordionItem>
                         }
                     </Items>

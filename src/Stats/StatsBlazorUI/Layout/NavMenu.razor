@@ -14,6 +14,15 @@
                 <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
             </NavLink>
         </div>
+        @for (int i = 1; i < 4; i++)
+        {
+            int local = i;
+            <div class="nav-item px-3">
+                <NavLink class="nav-link" href="@("projects/year/"+(DateTime.Now.Year -local))">
+                    Year @(DateTime.Now.Year - local)
+                </NavLink>
+        </div>
+        }
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="allProjects">
                 <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> All
