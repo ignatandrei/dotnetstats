@@ -1,26 +1,19 @@
-﻿@page "/"
-@using Microsoft.AspNetCore.Components.WebAssembly.Hosting
-@using StatsInterfaces
-@using System.Text.Json
+﻿@page "/projects/year/{year:int}"
 @using StatsInterfaces.UI
-@using StatsObjectsFromAPI
-
-
-<PageTitle>Home</PageTitle>
+<h1>Data for @year</h1>
 <LoadProjects AfterFinish="AfterFinish" ProjectsLoaded="ProjectsLoaded"></LoadProjects>
 
-<DisplayProjects lastYear="@lastYear" data="@projects" FinishStreaming="@HasFinishedStreaming"></DisplayProjects>
-@* <button class="btn btn-primary" @onclick="StreamProjectsJson">Stream Projects</button> *@
+<DisplayProjects lastYear="@year" data="@projects" FinishStreaming="@HasFinishedStreaming"></DisplayProjects>
 
-
-@code{
-    int lastYear = DateTime.Now.Year-1;
+@code {
+    [Parameter]
+    public int year { get; set; }
     private bool isFirstRender = true;
     private bool HasFinishedStreaming = false;
     // [Inject(Key = "statsconsole_host")]
     // public HttpClient? httpApi { get; set; }
-    [Inject]
-    public IWebAssemblyHostEnvironment? hostEnvironment { get; set; }
+    // [Inject]
+    // public IWebAssemblyHostEnvironment? hostEnvironment { get; set; }
 
     [Inject]
     public AllDataProjectsWithStars? data { get; set; }

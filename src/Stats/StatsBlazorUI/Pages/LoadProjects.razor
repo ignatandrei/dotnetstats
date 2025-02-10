@@ -1,0 +1,87 @@
+﻿@using StatsInterfaces.UI
+@using StatsObjectsFromAPI
+<h2>
+
+    @if (!HasFinishedStreaming)
+    {
+        <text> 
+            Projects: @data?.Length
+
+            <RadzenProgressBarCircular ProgressBarStyle="ProgressBarStyle.Primary" Value="100" ShowValue="false" Mode="ProgressBarMode.Indeterminate" />
+
+        </text>
+    }
+</h2>
+
+@code {
+
+    [Parameter] public EventCallback<int> ProjectsLoaded { get; set; }
+    [Parameter] public EventCallback<bool> AfterFinish { get; set; }
+
+    [Inject]
+    public StatsDataFromAPI? dataFromAPI { get; set; }
+
+    [Inject]
+    public AllDataProjectsWithStars? data { get; set; }
+
+    private bool HasFinishedStreaming = false;
+    private bool isFirstRender = true;
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+
+        if (isFirstRender)
+        {
+            isFirstRender = false;
+            if (data?.FinishStreaming == true)
+            {
+                HasFinishedStreaming = true;
+
+                if (AfterFinish.HasDelegate)
+                {
+                    await AfterFinish.InvokeAsync(true);
+                }
+                return;
+            }
+            await StreamProjectsJson();
+            data!.FinishStreaming = true;
+            if (AfterFinish.HasDelegate)
+            {
+                await AfterFinish.InvokeAsync(true);
+            }
+        }
+    }
+    List<int> ints = [10, 50, 80];
+
+    public List<IProjectWithStars>? projects = null;
+    private async Task StreamProjectsJson()
+    {
+
+        ArgumentNullException.ThrowIfNull(dataFromAPI);
+        ArgumentNullException.ThrowIfNull(data);
+        StateHasChanged();
+        await foreach (IProjectWithStars? prj in dataFromAPI!.GetProjectsWithStars())
+        {
+            if (prj == null) continue;
+
+            data.AddProjectWithStars(prj);
+            int divide = 100;
+
+            if (data.Length > 100) divide = 200;
+            if (data.Length > 1000) divide = 10000;
+
+
+            if (ints.Contains(data.Length) || (data.Length % divide == 0))
+            {
+                StateHasChanged();
+                if (ProjectsLoaded.HasDelegate)
+                {
+                    await ProjectsLoaded.InvokeAsync(data.Length);
+                }
+                await Task.Delay(1000);
+            }
+        }
+        HasFinishedStreaming = true;
+        StateHasChanged();
+    }
+
+}

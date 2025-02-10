@@ -10,6 +10,7 @@ var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Services.AddRadzenComponents();
+builder.Services.AddSingleton<AllDataProjectsWithStars>();
 
 var hostApi = builder.Configuration["statsconsole_host"];
 if (string.IsNullOrEmpty(hostApi))
@@ -27,4 +28,5 @@ builder.Services.AddKeyedScoped("statsconsole_host", (sp, _) => new HttpClient {
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(hostApi) });
 builder.Services.AddScoped<StatsDataFromAPI>();
+builder.Services.AddSingleton<AllDataProjectsWithStars>();
 await builder.Build().RunAsync();
