@@ -7,53 +7,36 @@
 
 
 <PageTitle>Home</PageTitle>
+<LoadProjects AfterFinish="AfterFinish" ProjectsLoaded="ProjectsLoaded"></LoadProjects>
 
-
-<DisplayProjects data="@projects?.ToArray()" FinishStreaming="@HasFinishedStreaming" ></DisplayProjects>
+<DisplayProjects lastYear="@lastYear" data="@projects" FinishStreaming="@HasFinishedStreaming"></DisplayProjects>
 @* <button class="btn btn-primary" @onclick="StreamProjectsJson">Stream Projects</button> *@
 
 
 @code{
+    int lastYear = DateTime.Now.Year-1;
     private bool isFirstRender = true;
     private bool HasFinishedStreaming = false;
-    [Inject(Key = "statsconsole_host")]
-    public HttpClient? httpApi { get; set; }
+    // [Inject(Key = "statsconsole_host")]
+    // public HttpClient? httpApi { get; set; }
     [Inject]
     public IWebAssemblyHostEnvironment? hostEnvironment { get; set; }
 
     [Inject]
-    public StatsDataFromAPI? dataFromAPI { get; set; }
+    public AllDataProjectsWithStars? data { get; set; }
 
-    public List<IProjectWithStars>? projects = null;
-    protected override async Task OnAfterRenderAsync(bool firstRender)
+    public IProjectWithStars[]? projects = null;
+
+
+    private void AfterFinish(bool args)
     {
-        if (isFirstRender)
-        {
-            isFirstRender = false;
-            await StreamProjectsJson();
-        }
-    }
-
-
-    int[] ints = [10, 50,80];
-    private async Task StreamProjectsJson()
-    {
-        ArgumentNullException.ThrowIfNull(httpApi);
-        projects = new List<IProjectWithStars>();
-
-        StateHasChanged();
-        await foreach (IProjectWithStars? prj in dataFromAPI!.GetProjectsWithStars())
-        {
-            if (prj == null) continue;
-
-            projects.Add(prj);
-            if (ints.Contains(projects.Count) || (projects.Count %100 == 0) ){
-                StateHasChanged();
-                await Task.Delay(1000);
-            }
-        }
-        HasFinishedStreaming = true;
+        HasFinishedStreaming = args;
+        projects = data!.projectWithStars();
         StateHasChanged();
     }
-
+    private void ProjectsLoaded(int args)
+    {
+        projects = data!.projectWithStars();
+        StateHasChanged();
+    }
 }
