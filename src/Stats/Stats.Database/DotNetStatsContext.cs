@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
+﻿using RSCG_TemplatingCommon;
 
 namespace Stats.Database;
-
+[IGenerateDataFromClass("ClassPropByName")]
 public partial class DotNetStatsContext : DbContext
 {
+    internal DotNetStatsContext() : base() { }
     public DotNetStatsContext(DbContextOptions<DotNetStatsContext> options)
         : base(options)
     {

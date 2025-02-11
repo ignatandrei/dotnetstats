@@ -18,7 +18,7 @@
     [Parameter] public EventCallback<int> ProjectsLoaded { get; set; }
     [Parameter] public EventCallback<bool> AfterFinish { get; set; }
 
-    [Inject]
+    [Inject(Key ="statsconsole_host")]
     public StatsDataFromAPI? dataFromAPI { get; set; }
 
     [Inject]

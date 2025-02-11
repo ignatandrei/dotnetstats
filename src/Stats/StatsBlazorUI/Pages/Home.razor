@@ -1,9 +1,11 @@
 ﻿@page "/"
 @using Microsoft.AspNetCore.Components.WebAssembly.Hosting
+@using StatsHttpFileContext
 @using StatsInterfaces
 @using System.Text.Json
 @using StatsInterfaces.UI
 @using StatsObjectsFromAPI
+@using System.IO.Abstractions
 
 
 <PageTitle>Home</PageTitle>
@@ -14,6 +16,18 @@
 
 
 @code{
+    [Inject]
+    DotnetStatsContextFromHttpJsonFiles dataDbStatic{ get; set; }
+    [Inject]
+    DataToTransmit dataToTransmit { get; set; }
+    [Inject(Key =  "local_host")]
+    HttpClient client{ get; set; }
+
+    public Home(DotnetStatsContextFromHttpJsonFiles dataDbStatic)
+    {
+        this.dataDbStatic = dataDbStatic;
+    }
+
     int lastYear = DateTime.Now.Year-1;
     private bool isFirstRender = true;
     private bool HasFinishedStreaming = false;
@@ -27,6 +41,43 @@
 
     public IProjectWithStars[]? projects = null;
 
+
+    protected override async Task OnInitializedAsync()
+    {
+        Dictionary<string, HttpFileStream> files = new();
+        foreach (var item in Stats.Database.DotNetStatsContext_Properties.PropNames)
+        {
+            string url = item;
+            if (url.EndsWith("s")) url= url.Substring(0, item.Length - 1);
+            url += ".json";
+            var bytes = await client.GetByteArrayAsync(url);
+            var memoryStream = new MemoryStream(bytes);
+            memoryStream.Position = 0;
+            var stream = new HttpFileStream(memoryStream, item + ".json", false);
+            files.Add(url, stream);
+        }
+        dataToTransmit.func = (url) =>
+        {
+            var key = files.Keys.ToArray().FirstOrDefault(it => url.EndsWith(it));
+            if (key == null)
+            {
+                throw new Exception($"Key not found for {url}");
+            };
+            return files[key];  
+            
+        };
+        var x = dataDbStatic.Projects.ToArray();
+        base.OnInitialized();
+    }
+    private FileSystemStream FromString(string url)
+    {
+        var bytes = System.Text.Encoding.UTF8.GetBytes(url);
+        var memoryStream = new MemoryStream(bytes);
+        memoryStream.Position = 0;
+        var stream = new HttpFileStream(memoryStream, url, false);
+
+        return stream;
+    }
 
     private void AfterFinish(bool args)
     {

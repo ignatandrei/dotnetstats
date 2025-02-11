@@ -11,6 +11,7 @@
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.1" />
 	  <PackageReference Include="MinimalApis.Discovery" Version="1.0.7" />
 	  <PackageReference Include="OpenAPISwaggerUI" Version="9.2024.1215.2209" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,6 +22,7 @@
     <ProjectReference Include="..\StatsLoadNetFoundation\StatsLoadNetFoundation.csproj" />
     <ProjectReference Include="..\StatsLoadquozd\StatsLoadquozd.csproj" />
     <ProjectReference Include="..\StatsObjects\StatsObjects.csproj" />
+	  
   </ItemGroup>
 
 </Project>
