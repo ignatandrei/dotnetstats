@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatsLoadquozd", "StatsLoad
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatsHttpFileContext", "StatsHttpFileContext\StatsHttpFileContext.csproj", "{C60C9188-5314-4B98-B867-9F81587A353B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatsExport", "StatsExport\StatsExport.csproj", "{48380544-86FC-486B-9C62-E2C4C426C773}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,10 @@ Global
 		{C60C9188-5314-4B98-B867-9F81587A353B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C60C9188-5314-4B98-B867-9F81587A353B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C60C9188-5314-4B98-B867-9F81587A353B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48380544-86FC-486B-9C62-E2C4C426C773}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48380544-86FC-486B-9C62-E2C4C426C773}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48380544-86FC-486B-9C62-E2C4C426C773}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48380544-86FC-486B-9C62-E2C4C426C773}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

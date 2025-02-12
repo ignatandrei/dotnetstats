@@ -21,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\StatsBlazorUI\StatsBlazorUI.csproj" />
     <ProjectReference Include="..\StatsConsole\StatsConsole.csproj" />
+    <ProjectReference Include="..\StatsExport\StatsExport.csproj" />
   </ItemGroup>
 
   <ItemGroup>
