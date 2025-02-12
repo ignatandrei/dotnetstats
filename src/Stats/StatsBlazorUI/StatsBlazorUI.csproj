@@ -15,8 +15,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\StatsHttpFileContext\StatsHttpFileContext.csproj" />
     <ProjectReference Include="..\StatsInterfaces\StatsInterfaces.csproj" />
     <ProjectReference Include="..\StatsObjectsFromAPI\StatsObjectsFromAPI.csproj" />
+    <ProjectReference Include="..\StatsObjects\StatsObjects.csproj" />
+	<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.1" />
+
   </ItemGroup>
 
   <ItemGroup>

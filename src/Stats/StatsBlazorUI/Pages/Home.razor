@@ -1,9 +1,12 @@
 ﻿@page "/"
 @using Microsoft.AspNetCore.Components.WebAssembly.Hosting
+@using Stats.Database
+@using StatsHttpFileContext
 @using StatsInterfaces
 @using System.Text.Json
 @using StatsInterfaces.UI
 @using StatsObjectsFromAPI
+@using System.IO.Abstractions
 
 
 <PageTitle>Home</PageTitle>
@@ -11,9 +14,22 @@
 
 <DisplayProjects lastYear="@lastYear" data="@projects" FinishStreaming="@HasFinishedStreaming"></DisplayProjects>
 @* <button class="btn btn-primary" @onclick="StreamProjectsJson">Stream Projects</button> *@
+<DisplayProjects lastYear="@(lastYear-1)" data="@projects" FinishStreaming="@HasFinishedStreaming"></DisplayProjects>
 
 
 @code{
+    [Inject]
+    DotNetStatsContext dataDbStatic { get; set; }
+    [Inject]
+    DataToTransmit dataToTransmit { get; set; }
+    [Inject(Key =  "local_host")]
+    HttpClient client{ get; set; }
+
+    public Home(DotNetStatsContext dataDbStatic)
+    {
+        this.dataDbStatic = dataDbStatic;
+    }
+
     int lastYear = DateTime.Now.Year-1;
     private bool isFirstRender = true;
     private bool HasFinishedStreaming = false;
@@ -27,6 +43,20 @@
 
     public IProjectWithStars[]? projects = null;
 
+
+    protected override async Task OnInitializedAsync()
+    {
+        base.OnInitialized();
+    }
+    private FileSystemStream FromString(string url)
+    {
+        var bytes = System.Text.Encoding.UTF8.GetBytes(url);
+        var memoryStream = new MemoryStream(bytes);
+        memoryStream.Position = 0;
+        var stream = new HttpFileStream(memoryStream, url, false);
+
+        return stream;
+    }
 
     private void AfterFinish(bool args)
     {

@@ -3,6 +3,27 @@
 namespace Aspire.Hosting;
 public static class BlazorWebAssemblyProjectExtensions
 {
+    
+
+    public static IResourceBuilder<TRes> AddPathToEnvironmment<TProject,TRes>(
+            this IResourceBuilder<TRes> builder, TProject p, string name)
+            where TProject : IProjectMetadata, new()
+            where TRes : IResourceWithEnvironment            
+    {
+        //var p = new TProject();        
+        string pathPrj = p.ProjectPath;
+        var fi = new FileInfo(pathPrj);
+        string dirName = fi?.DirectoryName ?? "";
+        var projectBuilder = builder
+            .WithEnvironment(ctx=>
+            {
+                ctx.EnvironmentVariables[name] =dirName;
+                ctx.EnvironmentVariables[$"{name}csproj"] = pathPrj;
+            });
+
+        return projectBuilder;
+    }
+
     public static IResourceBuilder<ProjectResource> AddWebAssemblyProject<TProject>(
         this IDistributedApplicationBuilder builder, string name,
         IResourceBuilder<ProjectResource> api)

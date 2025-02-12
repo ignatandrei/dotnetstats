@@ -1,6 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-//docker network prune
+//docker network prune -f
 var builder = DistributedApplication.CreateBuilder(args);
 builder.Services.AddLogging(log=>
 {
@@ -36,4 +36,13 @@ var ui= builder.AddWebAssemblyProject<Projects.StatsBlazorUI>("blazorUI", api)
     .WithReference(api)
     .WaitFor(api)
     ;
+
+var exportToJson = builder.AddProject<Projects.StatsExport>("statsExport")
+    .WithReference(ui)    
+    .WithReference(db)
+    .WaitFor(db)
+    .AddPathToEnvironmment(new Projects.StatsBlazorUI(),"pathToWrite")
+    ;
+
+ui=ui.WaitFor(exportToJson);
 builder.Build().Run();
