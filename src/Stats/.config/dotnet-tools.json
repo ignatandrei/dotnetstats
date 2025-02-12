@@ -10,14 +10,14 @@
       "rollForward": false
     },
     "dotnet-ef": {
-      "version": "9.0.1",
+      "version": "9.0.2",
       "commands": [
         "dotnet-ef"
       ],
       "rollForward": false
     },
     "dotnet-outdated-tool": {
-      "version": "4.6.4",
+      "version": "4.6.7",
       "commands": [
         "dotnet-outdated"
       ],
@@ -38,7 +38,7 @@
       "rollForward": false
     },
     "dotnet-repl": {
-      "version": "0.3.227",
+      "version": "0.3.230",
       "commands": [
         "dotnet-repl"
       ],

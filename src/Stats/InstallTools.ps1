@@ -1,3 +1,4 @@
+cls
 dotnet new tool-manifest
 #dotnet tool install --local coverlet.console
 #dotnet tool install --local csharpier
@@ -28,7 +29,7 @@ dotnet tool install --local watch2
 #dotnet tool install --local xunit-cli
 # add global json for run script
 $file = "global.json"
-
+if (-not (Test-Path -Path $file)) {
 $multiLineText = @"
 {
   `"scripts`": {
@@ -41,3 +42,40 @@ $multiLineText = @"
 
 
 New-Item $file -ItemType File -Value $multiLineText
+
+}
+
+foreach ($path in Get-ChildItem -Recurse "**/*.csproj") {
+	$folder= Split-Path -parent $path
+	$xml = [xml]::new()
+	$xml.PreserveWhitespace = $true
+	$xml.Load($path)
+	$propertyGroups = $xml.SelectSingleNode("//Project/PropertyGroup/TreatWarningsAsErrors")
+	if ($node) {
+		# Write-Output "Project already has TreatWarningsAsErrors set to $($node.InnerText)"
+		$node.InnerText="true"		
+	}
+	else{
+		# Construct a new node and fill in its value
+		$newNode = $xml.CreateDocumentFragment()
+		$newNode.InnerXml = "<TreatWarningsAsErrors>true</TreatWarningsAsErrors>`r`n"
+
+		# Append child and save the results to a variable
+		# If you forget, PowerShell prints the return value to console!
+		$_ = $xml.Project.PropertyGroup.AppendChild($newNode)
+	}
+	$xml.Save($path)
+
+# add nuget package
+	Push-Location $folder
+	$addPack = & dotnet add package RSCG_TimeBombComment 
+
+
+	if ($?) {
+		Write-Output "Successfully add package ${path}"
+	} else {
+		Write-Output "Unable to add package ${path} with the updated property setting."
+	}
+	Pop-Location
+		
+}
