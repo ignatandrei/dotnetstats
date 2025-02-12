@@ -88,7 +88,6 @@ context.Database.EnsureCreated();
 foreach (var item in Stats.Database.DotNetStatsContext_Properties.PropNames)
 {
     string url = item;
-    if (url.EndsWith("s")) url = url.Substring(0, item.Length - 1);
     url += ".json";
     var bytes = await client.GetByteArrayAsync(url);
     var memoryStream = new MemoryStream(bytes);
