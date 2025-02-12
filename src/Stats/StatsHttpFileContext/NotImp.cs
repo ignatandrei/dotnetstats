@@ -709,14 +709,15 @@ class HttpDirectory : IDirectory
 class HttpFile : IFile
 {
     private DataToTransmit data;
+    private readonly IFileSystem fileSystem;
 
-
-    public HttpFile(DataToTransmit data)
+    public HttpFile(DataToTransmit data, IFileSystem fileSystem)
     {
         this.data = data;
+        this.fileSystem = fileSystem;
     }
 
-    public IFileSystem FileSystem => throw new NotImp();
+    public IFileSystem FileSystem => fileSystem;
 
     public void AppendAllLines(string path, IEnumerable<string> contents)
     {
@@ -1190,7 +1191,7 @@ class HttpFileSystem : IFileSystem
         this.data = data;
         this.path = new HttpPath();
         this.dir = new HttpDirectory();
-        this.file = new HttpFile(data);
+        this.file = new HttpFile(data, this);
     }
 
     public IDirectory Directory => dir;

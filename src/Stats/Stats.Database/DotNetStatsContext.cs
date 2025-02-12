@@ -8,8 +8,9 @@ public partial class DotNetStatsContext : DbContext
     public DotNetStatsContext(DbContextOptions<DotNetStatsContext> options)
         : base(options)
     {
+        
     }
-
+    
     public virtual DbSet<Project> Projects { get; set; }
 
     public virtual DbSet<Star> Stars { get; set; }

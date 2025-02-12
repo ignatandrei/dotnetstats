@@ -39,10 +39,10 @@ var ui= builder.AddWebAssemblyProject<Projects.StatsBlazorUI>("blazorUI", api)
 
 var exportToJson = builder.AddProject<Projects.StatsExport>("statsExport")
     .WithReference(ui)    
-    .WaitFor(ui)
     .WithReference(db)
     .WaitFor(db)
     .AddPathToEnvironmment(new Projects.StatsBlazorUI(),"pathToWrite")
     ;
 
+ui=ui.WaitFor(exportToJson);
 builder.Build().Run();

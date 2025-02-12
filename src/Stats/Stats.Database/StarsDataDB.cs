@@ -1,4 +1,6 @@
-﻿namespace Stats.Database;
+﻿using Microsoft.CodeAnalysis;
+
+namespace Stats.Database;
 
 public class StarsDataDB : IStarsData
 {
@@ -7,6 +9,20 @@ public class StarsDataDB : IStarsData
     public StarsDataDB(DotNetStatsContext context)
     {
         this.context = context;
+    }
+
+    public async IAsyncEnumerable<IStars> GetAllStarsAsync()
+    {
+        await foreach(var star in  context.Stars.ToAsyncEnumerable())
+        {
+            Stars_null starRet = new()
+            {
+                Count = star.Count,
+                DateRecording = star.DateRecording,
+                //Project = project
+            };
+            yield return starRet;
+        }
     }
 
     public async IAsyncEnumerable<IStars> GetStarsAsync(IProject project)

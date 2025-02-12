@@ -5,6 +5,14 @@ using Radzen;
 using StatsObjectsFromAPI;
 using StatsHttpFileContext;
 using System.IO.Abstractions;
+using StatsInterfaces;
+using StatsObjects;
+using StatsInterfaces.Data;
+using Stats.Database;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using System.Runtime.Intrinsics.X86;
+using Microsoft.EntityFrameworkCore.Scaffolding.Internal;
 
 
 
@@ -25,16 +33,38 @@ if (string.IsNullOrEmpty(hostApi))
     var dict = new Dictionary<string, string?> { { "statsconsole_host", hostApi } };
     builder.Configuration.AddInMemoryCollection(dict.ToArray());
 }
+//builder.Services.AddSingleton<DotNetStatsContext>(sp =>
+//{
+//    return new DotnetStatsContextFromHttpJsonFiles(sp.GetRequiredService<DataToTransmit>());
+//});
 
 builder.Services.AddKeyedScoped("statsconsole_host", (sp, _) => new HttpClient { BaseAddress = new Uri(hostApi) });
 builder.Services.AddKeyedScoped("local_host", (sp, _) => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(hostApi) });
-builder.Services.AddKeyedScoped<StatsDataFromAPI>("statsconsole_host", (sp, obj) =>
+//builder.Services.AddKeyedScoped<IStatsData>("statsconsole_host", (sp, obj) =>
+//{
+//    var http = sp.GetRequiredKeyedService<HttpClient>("statsconsole_host");
+//    return new StatsDataFromAPI(http);
+//}); 
+builder.Services.AddKeyedScoped<IStatsData>("statsconsole_host", (sp, obj) =>
 {
-    var http = sp.GetRequiredKeyedService<HttpClient>("statsconsole_host");
-    return new StatsDataFromAPI(http);
-}); 
+    IProjectService projectService = new ProjectService_null();
+    IStarsService starsService = new StarsService_null();
+    IProjectsData projectData = new ProjectsDataDB(sp.GetRequiredService<DotNetStatsContext>());
+    IStarsData starsData = new StarsDataDB(sp.GetRequiredService<DotNetStatsContext>());
+    StatsData st = new(projectService, projectData, starsData, starsService);
+    return st;
+});
+
+builder.Services.AddSingleton<DotNetStatsContext>(sp =>
+{
+    DbContextOptionsBuilder<DotNetStatsContext> optionsBuilder = new();
+    optionsBuilder.UseInMemoryDatabase("StatsDatabase");
+    var cnt = new DotNetStatsContext(optionsBuilder.Options);
+    return cnt;
+});
+
 builder.Services.AddSingleton<AllDataProjectsWithStars>();
 
 
@@ -49,11 +79,39 @@ builder.Services.AddSingleton<DataToTransmit>(it =>
     return data;
 });
 
-builder.Services.AddSingleton<DotnetStatsContextFromHttpJsonFiles>(sp =>
-{
-    //var http = new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) };
-    
-    return new DotnetStatsContextFromHttpJsonFiles(sp.GetRequiredService<DataToTransmit>());
-});
 
-await builder.Build().RunAsync();
+var wah= builder.Build();
+//var dataToTransmit = wah.Services.GetRequiredService<DataToTransmit>();
+HttpClient client = wah.Services.GetRequiredKeyedService<HttpClient>("local_host");
+var context =wah.Services.GetRequiredService<DotNetStatsContext>();
+context.Database.EnsureCreated();
+foreach (var item in Stats.Database.DotNetStatsContext_Properties.PropNames)
+{
+    string url = item;
+    if (url.EndsWith("s")) url = url.Substring(0, item.Length - 1);
+    url += ".json";
+    var bytes = await client.GetByteArrayAsync(url);
+    var memoryStream = new MemoryStream(bytes);
+    memoryStream.Position = 0;
+    context.Deserialize(item, memoryStream);
+    context.SaveChanges();
+
+    //var stream = new HttpFileStream(memoryStream, item + ".json", false);
+    //files.Add(url, stream);
+}
+Console.WriteLine(context.Projects.OrderDescending().First().Id);
+
+Console.WriteLine(context.Stars.OrderDescending().First().Id);
+//dataToTransmit.func = (url) =>
+//{
+//    var key = files.Keys.ToArray().FirstOrDefault(it => url.EndsWith(it));
+//    if (key == null)
+//    {
+//        throw new Exception($"Key not found for {url}");
+//    }
+//    ;
+//    return files[key];
+
+//};
+
+await wah.RunAsync();

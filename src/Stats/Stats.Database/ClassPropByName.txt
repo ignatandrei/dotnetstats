@@ -16,4 +16,33 @@ namespace {{data.nameSpace}} {
             {{ end }}
         };
     }
+    public partial class {{data.className}} {
+        
+        public System.Collections.Generic.Dictionary<string,object[]> Data(){
+            System.Collections.Generic.Dictionary<string,object[]> ret=new();
+            {{ for prop in data.properties }}
+            //{{prop.PropertyType  | string.replace "Microsoft.EntityFrameworkCore.DbSet<" "" | string.replace ">" ""}} 
+            ret.Add("{{prop.PropertyName}}",{{prop.PropertyName}}.ToArray());
+            {{ end }}
+            return ret;
+        } 
+        public void Deserialize(string name,System.IO.MemoryStream stream){
+            switch(name){
+                {{ for prop in data.properties }}
+                case "{{prop.PropertyName}}":
+                    {
+                    {{
+                    obj = prop.PropertyType  | string.replace "Microsoft.EntityFrameworkCore.DbSet<" "" | string.replace ">" ""
+                    }}
+
+                    {{obj}}[] arr =System.Text.Json.JsonSerializer.Deserialize<{{obj}}[]>(stream);
+                    {{prop.PropertyName}}.AddRange(arr);
+                    }
+                    break;
+                {{ end }}
+                default:
+                    throw new System.Exception("Unknown property name: "+name);
+            }
+        }
+    }
 }

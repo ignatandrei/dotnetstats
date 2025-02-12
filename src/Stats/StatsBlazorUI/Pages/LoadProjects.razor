@@ -1,4 +1,5 @@
-﻿@using StatsInterfaces.UI
+﻿@using StatsInterfaces
+@using StatsInterfaces.UI
 @using StatsObjectsFromAPI
 <h2>
 
@@ -19,7 +20,7 @@
     [Parameter] public EventCallback<bool> AfterFinish { get; set; }
 
     [Inject(Key ="statsconsole_host")]
-    public StatsDataFromAPI? dataFromAPI { get; set; }
+    public IStatsData? dataFromAPI { get; set; }
 
     [Inject]
     public AllDataProjectsWithStars? data { get; set; }

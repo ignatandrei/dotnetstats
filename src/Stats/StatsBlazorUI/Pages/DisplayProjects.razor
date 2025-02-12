@@ -10,13 +10,13 @@
 <h2>
     @if(!FinishStreaming)
     {
-        <text>Please wait</text>
+        <text>Please wait loading @lastYear</text>
     }
 </h2>
 
 @if (FinishStreaming)
 {
-    
+
     var oneYearAgo = lastYear - 1;
 
     var orderedProjectsLastYear = data!
@@ -100,7 +100,7 @@
 
     <RadzenTabs RenderMode="TabRenderMode.Client">
         <Tabs>
-            <RadzenTabsItem Text="Percentage Increasing Stars Projects">
+            <RadzenTabsItem Text="@("Percentage Increasing Stars Projects in " + lastYear)">
 
                 <DisplayProjectsChart DisplayForChart="@dataDisplayPercentage" />
             </RadzenTabsItem>
@@ -161,8 +161,13 @@
     public HttpClient? httpApi { get; set; }
 
 
+    protected override void OnParametersSet()
+    {
+        
+        StateHasChanged();
+        base.OnParametersSet();
+    }
 
-    
 
 }
 

@@ -32,10 +32,20 @@ DotNetStatsContext context = new(opt.Options);
 Console.WriteLine("number projects:"+context.Projects.Count());
 IProjectsData projectsData = new ProjectsDataDB(context);
 
-IExportFromDatabase exportFromDatabase = new ExportFromDatabase(projectsData);
+IExportFromDatabase exportFromDatabase = new ExportFromDatabase(context);
+
 var stream = await exportFromDatabase.ExportProjectsJson();
 ArgumentNullException.ThrowIfNull(stream);
-string fileName = "project.json";
+string fileName = Path.Combine(pathToWrite, "projects.json");
 var bytes = stream.ToArray();
 await File.WriteAllBytesAsync(fileName, bytes);
 Console.WriteLine("exported to " + fileName);
+
+
+stream = await exportFromDatabase.ExportStarsJson( );
+ArgumentNullException.ThrowIfNull(stream);
+fileName = Path.Combine(pathToWrite, "stars.json");
+bytes = stream.ToArray();
+await File.WriteAllBytesAsync(fileName, bytes);
+Console.WriteLine("exported to " + fileName);
+
