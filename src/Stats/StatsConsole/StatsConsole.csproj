@@ -12,6 +12,7 @@
 	  <PackageReference Include="MinimalApis.Discovery" Version="1.0.7" />
 	  <PackageReference Include="OpenAPISwaggerUI" Version="9.2024.1215.2209" />
 	  <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.1" />
+	  <PackageReference Include="RSCG_WebAPIExports" Version="2023.8.16.1958" />
   </ItemGroup>
 
   <ItemGroup>

@@ -57,8 +57,9 @@ builder.Services.AddKeyedScoped<IProjectService, StatsServicethangchung>(Thangch
 builder.Services.AddKeyedScoped<IProjectsData, ProjectsDataDB>(Thangchung);
 builder.Services.AddKeyedScoped<IStarsService, GitHubStars>(Thangchung);
 builder.Services.AddKeyedScoped<IStarsData, StarsDataDB>(Thangchung);
-
+builder.Services.AddExport();
 var app = builder.Build();
+app.UseExport();
 app.UseExceptionHandler();
 app.UseStatusCodePages();
 app.UseCors(allowAllCors);

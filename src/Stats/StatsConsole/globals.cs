@@ -12,3 +12,4 @@ global using StatsGetStars;
 global using Microsoft.AspNetCore.Http.HttpResults;
 global using Microsoft.Extensions.Options;
 global using StatsLoadquozd;
+global using WebApiExportToFile;
