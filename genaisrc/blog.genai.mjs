@@ -12,4 +12,11 @@ script({
     system: ["system"],
 })
 
-$`Given the text in FILE, write a blog post that makes the paper sound exciting and encourages readers to look at it. Keep the links.`
+$`
+
+Given the text in FILE, write a blog post that makes the paper sound exciting and encourages readers to look at it. 
+
+Keep the links.
+Do NOT use markdown , but just html tags.
+
+`

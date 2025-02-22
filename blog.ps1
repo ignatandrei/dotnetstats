@@ -9,7 +9,7 @@ foreach ( $modelName in $modelNames )
     $a = npx genaiscript run blog blog.txt --model $modelName   | Out-String
     $index= $a.IndexOf($modelName)
     Write-Host "found " $index "for "   $modelName 
-    $text += " `r`n"+ $modelName + " `r`n" +$a.Substring($index+ $modelName.Length)
+    $text += " `r`n <h1>Model Name "+ $modelName + "</h1> `r`n" +$a.Substring($index+ $modelName.Length)
     remove-item blogAI.txt
     $text | Out-File blogAI.txt
     #    Write-Host $a.Substring($index+ $modelName.Length)

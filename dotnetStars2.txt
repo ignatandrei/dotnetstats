@@ -1,0 +1,40 @@
+What I have learned by building .NET Stars -part 2-  interfaces
+
+
+I have started the project with interfaces . 
+
+Those are useful because one can see 
+
+- data 
+- how to obtain and exchange data
+- the application flow 
+
+Thinking in interfaces its hard first, but pays a lot later 
+
+And it pays also fast- with the help of NullObjectPattern from interface ( https://www.nuget.org/packages/rscg_Interface_to_null_object ) , I was capable of seeing the flow of the application - even if does nothing
+
+Another quick win was that we can have many implementations for 
+
+[code lang='csharp']
+[ToNullObject]
+public interface IStatsData
+{
+    //other code
+IAsyncEnumerable<IProject> RefreshProjects();
+}
+
+[ToNullObject]
+public interface IProjectsData
+{
+    IAsyncEnumerable<IProject> GetProjectsAsync();
+    Task<bool> SaveProjects(IProject[] projects);
+
+}
+
+[/code]
+
+So I can grab projects from multiple sources ( https://dotnetfoundation.org/ ,  https://github.com/quozd/awesome-dotnet/  , https://github.com/thangchung/awesome-dotnet-core)
+implementing IStatsData  and then saving the data by having just one implementation with IProjectsData
+
+
+You can see the project  at https://ignatandrei.github.io/dotnetstats/ and the source code at http://github.com/ignatandrei/dotnetstats/
