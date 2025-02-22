@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "befCommit": "powershell ./befcommit.ps1",
-    "blog":"genaiscript run blog --model \"ollama:llama3.2\""
+    "blog":"powershell ./blog.ps1"
   },
   "author": "",
   "license": "ISC",

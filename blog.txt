@@ -1,0 +1,12 @@
+The .NET Stats project wants to show the stars for .NET github projects.
+
+The projects are taken from .NET Foundation , https://dotnetfoundation.org/ ,
+ Vitali Fokin https://github.com/quozd/awesome-dotnet/ 
+and Thang Chung https://github.com/thangchung/awesome-dotnet-core
+
+You can see at https://ignatandrei.github.io/dotnetstats/ and the source code at http://github.com/ignatandrei/dotnetstats/
+
+There are more than 1000 repositories investigated.  And it show the most stars for 2024 and 2023 , for all time . 
+It also list the most increased stars as percentage.
+
+

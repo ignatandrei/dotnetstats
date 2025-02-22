@@ -8,3 +8,4 @@ npx genaiscript run befCommit --model "ollama:llama3.2"
 npx genaiscript run befCommit     --model "ollama:phi4" 
 npx genaiscript run befCommit     --model "ollama:gemma2:27b"
 npx genaiscript run befCommit     --model "deepseek-r1"
+
