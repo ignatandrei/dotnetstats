@@ -1,0 +1,56 @@
+What I have learned by building .NET Stars -part 3-  Aspire
+
+I have that same idea to build a project : is what is called today a Modular Monolith - and it is very old in .NET world as can be implemented as a .sln solution.
+
+So we have the interfaces for data/ data flow / , we have a database to store data , an WebAPI to transfer data and  an UI ( Blazor for me) to see the data.
+
+Aspire make it easy to coordinate all this  -by starting the App Host that have all the projects. 
+
+More, Aspire let me coordinate another project to save the data on Blazor - but this will be discussed later . 
+
+I have had just 2  modifications to make it work flawlessly  :
+
+1.   Blazor 
+
+To know the address of the WebAPI to obtain the data  ( once published, Blazor will be near the WebAPI in the wwwroot, but until then it needs the adress )
+
+Blazor can have the configuration stored in a appsettings.json in the wwwroot - but how to write ? I developed an extension for ASPIRE in order to write the data
+
+
+2. Database
+
+In order to have the database with data , I need to write scripts for create table / insert the data. 
+
+This code shows how
+[code lang='csharp']
+var paramPass = builder.AddParameter("password", "P@ssw0rd");
+
+var sqlserver = builder.AddSqlServer("sqlserver",paramPass,1433)
+    //.WithArgs("pwd","&","ls")
+    // Mount the init scripts directory into the container.
+    .WithBindMount("./sqlserverconfig", "/usr/config")
+    // Mount the SQL scripts directory into the container so that the init scripts run.
+    .WithBindMount("../../Scripts/data/sqlserver", "/docker-entrypoint-initdb.d")
+    // Run the custom entrypoint script on startup.
+    .WithEntrypoint("/usr/config/entrypoint.sh")
+    // Configure the container to store data in a volume so that it persists across instances.
+    .WithDataVolume() 
+    // Keep the container running between app host sessions.
+    .WithLifetime(ContainerLifetime.Persistent)
+
+    ;
+var db= sqlserver.AddDatabase("DotNetStats");
+
+[/code]
+
+Also , I have an .gitattributes that contains
+[code]
+* text=auto
+*.sh text eol=lf
+*.mod text eol=lf
+*.sum text eol=lf
+[/code]
+
+in order for the .sh files to maintain linux ending.
+
+
