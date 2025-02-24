@@ -4,15 +4,19 @@ cls
 # npx genaiscript run befCommit --model "gpt-4" 
 $text = "";
 $modelNames =  @('ollama:llama3.2','ollama:deepseek-r1',"ollama:phi4","ollama:gemma2:27b","ollama:smallthinker","ollama:falcon3:10b","ollama:dolphin3")
+$modelNames =  @('ollama:llama3.2','ollama:deepseek-r1:32b',"ollama:phi4","ollama:gemma2:27b")
 foreach ( $modelName in $modelNames )
 {
+    $sw = [Diagnostics.Stopwatch]::StartNew()
     $a = npx genaiscript run blog blog.txt --model $modelName   | Out-String
     $index= $a.IndexOf($modelName)
     Write-Host "found " $index "for "   $modelName 
     $text += " `r`n <h1>Model Name "+ $modelName + "</h1> `r`n" +$a.Substring($index+ $modelName.Length)
     remove-item blogAI.txt
     $text | Out-File blogAI.txt
-    #    Write-Host $a.Substring($index+ $modelName.Length)
+    $sw.Stop()
+    Write-Host $modelName " took " $sw.Elapsed.TotalSeconds
+        #    Write-Host $a.Substring($index+ $modelName.Length)
 }
 remove-item blogAI.txt
 $text | Out-File blogAI.txt

@@ -1,6 +1,8 @@
 ﻿
+
 namespace StatsInterfaces;
 [ToNullObject]
+[CompositeProvider]
 public interface IStatsData
 {
     IAsyncEnumerable<IStars> GetStarsData(int year);

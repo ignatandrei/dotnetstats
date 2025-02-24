@@ -42,12 +42,12 @@ builder.Services.AddKeyedScoped("statsconsole_host", (sp, _) => new HttpClient {
 builder.Services.AddKeyedScoped("local_host", (sp, _) => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(hostApi) });
-//builder.Services.AddKeyedScoped<IStatsData>("statsconsole_host", (sp, obj) =>
-//{
-//    var http = sp.GetRequiredKeyedService<HttpClient>("statsconsole_host");
-//    return new StatsDataFromAPI(http);
-//}); 
 builder.Services.AddKeyedScoped<IStatsData>("statsconsole_host", (sp, obj) =>
+{
+    var http = sp.GetRequiredKeyedService<HttpClient>("statsconsole_host");
+    return new StatsDataFromAPI(http);
+});
+builder.Services.AddKeyedScoped<IStatsData>("local_host", (sp, obj) =>
 {
     IProjectService projectService = new ProjectService_null();
     IStarsService starsService = new StarsService_null();
@@ -55,6 +55,15 @@ builder.Services.AddKeyedScoped<IStatsData>("statsconsole_host", (sp, obj) =>
     IStarsData starsData = new StarsDataDB(sp.GetRequiredService<DotNetStatsContext>());
     StatsData st = new(projectService, projectData, starsData, starsService);
     return st;
+});
+
+builder.Services.AddKeyedScoped<IStatsData>("both", (sp, obj) =>
+{
+    var statsDataLocal = sp.GetRequiredKeyedService<IStatsData>("local_host");
+    var statsDataAPI = sp.GetRequiredKeyedService<IStatsData>("statsconsole_host");
+    StatsData_CP composite = new(statsDataAPI, statsDataLocal);
+    composite.UseFirstTheLastOneThatWorks = true;
+    return composite;
 });
 
 builder.Services.AddSingleton<DotNetStatsContext>(sp =>

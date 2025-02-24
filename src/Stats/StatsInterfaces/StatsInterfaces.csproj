@@ -6,8 +6,11 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="rscg_Interface_to_null_object" Version="2025.209.1000" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+  <ItemGroup>	  
+	<PackageReference Include="RSCG_CompositeProvider" Version="2025.221.439" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+	<PackageReference Include="RSCG_CompositeProvider_Common" Version="2025.221.439" />
+	
+	  <PackageReference Include="rscg_Interface_to_null_object" Version="2025.209.1000" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
     <PackageReference Include="rscg_Interface_to_null_object_common" Version="2025.209.1000" />
   </ItemGroup>
 	<ItemGroup>
