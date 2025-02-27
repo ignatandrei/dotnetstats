@@ -1,0 +1,64 @@
+﻿@using StatsInterfaces
+@using StatsInterfaces.UI
+@{
+    int nrProjects = 15;
+}
+
+<h3>AllTimeProjects : @data?.Length</h3>
+
+    @if (!FinishStreaming)
+    {
+        <text>Please wait loading </text>
+    }
+    else
+    {
+        var orderedProjectsAll = data!
+        .OrderByDescending(p => p.TotalStars)
+        .ThenBy(p => p.Project.Name)
+        .Take(nrProjects)
+        .ToArray();
+
+
+        var dataDisplayAll = orderedProjectsAll.Select(it => new Tuple<IProject, int>(it.Project, it.TotalStars)).ToArray();
+
+        <div id="MostStarsProjectAllTime"></div>
+
+        <RadzenTabs RenderMode="TabRenderMode.Client">
+            <Tabs>
+                <RadzenTabsItem Text="Most Stars Projects All time">
+
+                    <DisplayProjectsChart DisplayForChart="@dataDisplayAll" />
+                </RadzenTabsItem>
+                <RadzenTabsItem Text="Details">
+
+                    <RadzenAccordion>
+                        <Items>
+                            @foreach (var prjStars in orderedProjectsAll)
+                            {
+                                string text = $"Project {prjStars.Project.Name}  ( click to expand) ";
+                                <RadzenAccordionItem Text="@text">
+                                    <DisplayProject project="@prjStars" />
+                                </RadzenAccordionItem>
+                            }
+                        </Items>
+                    </RadzenAccordion>
+                </RadzenTabsItem>
+            </Tabs>
+        </RadzenTabs>
+
+    }
+
+
+@code {
+    [Parameter]
+    public bool FinishStreaming { get; set; }
+    [Parameter]
+    public IProjectWithStars[]? data { get; set; }
+    protected override void OnParametersSet()
+    {
+
+        StateHasChanged();
+        base.OnParametersSet();
+    }
+
+}

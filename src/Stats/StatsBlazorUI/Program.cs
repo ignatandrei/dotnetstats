@@ -62,7 +62,7 @@ builder.Services.AddKeyedScoped<IStatsData>("both", (sp, obj) =>
     var statsDataLocal = sp.GetRequiredKeyedService<IStatsData>("local_host");
     var statsDataAPI = sp.GetRequiredKeyedService<IStatsData>("statsconsole_host");
     StatsData_CP composite = new(statsDataAPI, statsDataLocal);
-    composite.UseFirstTheLastOneThatWorks = true;
+    composite.UseFirstTheLastOneThatWorks = false;
     return composite;
 });
 

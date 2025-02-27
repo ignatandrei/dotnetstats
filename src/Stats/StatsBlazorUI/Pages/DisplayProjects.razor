@@ -63,14 +63,6 @@
         <a href="#MostRisingProjects">Percentage Increasing Stars Projects in @lastYear</a>
     </p>
 
-    <p>
-        <a href="#MostStarsProjectAllTime">Most stars Projects all time</a>
-    </p>
-
-    <p>
-        <a href="#allProjects">All Projects</a>
-    </p>
-
 
     <div id="MostPopularProjects"></div>
 
@@ -120,30 +112,6 @@
         </Tabs>
     </RadzenTabs>
 
-    <div id="MostStarsProjectAllTime"></div>
-
-    <RadzenTabs RenderMode="TabRenderMode.Client">
-        <Tabs>
-            <RadzenTabsItem Text="Most Stars Projects All time">
-
-                <DisplayProjectsChart DisplayForChart="@dataDisplayAll" />
-            </RadzenTabsItem>
-            <RadzenTabsItem Text="Details">
-
-                <RadzenAccordion>
-                    <Items>
-                        @foreach (var prjStars in orderedProjectsAll)
-                        {
-                            string text = $"Project {prjStars.Project.Name}  ( click to expand) ";
-                            <RadzenAccordionItem Text="@text">
-                                <DisplayProject project="@prjStars" />
-                            </RadzenAccordionItem>
-                        }
-                    </Items>
-                </RadzenAccordion>
-            </RadzenTabsItem>
-        </Tabs>
-    </RadzenTabs>
 
 }
 

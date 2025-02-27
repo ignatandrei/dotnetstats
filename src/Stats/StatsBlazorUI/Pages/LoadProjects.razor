@@ -63,7 +63,7 @@
         await foreach (IProjectWithStars? prj in dataFromAPI!.GetProjectsWithStars())
         {
             if (prj == null) continue;
-
+            if (prj.Project.Name.Contains("awesome",StringComparison.CurrentCultureIgnoreCase)) continue;
             data.AddProjectWithStars(prj);
             int divide = 100;
 

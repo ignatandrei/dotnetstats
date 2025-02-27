@@ -4,7 +4,6 @@ cls
 # npx genaiscript run befCommit --model "gpt-4" 
 $text = "";
 $modelNames =  @('ollama:llama3.2','ollama:deepseek-r1',"ollama:phi4","ollama:gemma2:27b","ollama:smallthinker","ollama:falcon3:10b","ollama:dolphin3")
-$modelNames =  @('ollama:llama3.2','ollama:deepseek-r1:32b',"ollama:phi4","ollama:gemma2:27b")
 foreach ( $modelName in $modelNames )
 {
     $sw = [Diagnostics.Stopwatch]::StartNew()

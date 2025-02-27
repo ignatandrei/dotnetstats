@@ -76,6 +76,17 @@ Original = app.Services;
 var s = app.Services.GetRequiredKeyedService<IStatsData>(DotNetFoundation);
 
 app.MapApis();
+
+app.UseAMS();
+
+app.MapGet("/name/", () =>
+{
+    return new
+    {
+        Generated.StatsConsole.TheAssemblyInfo.GeneratedName,
+        Generated.StatsConsole.TheAssemblyInfo.AssemblyName
+    };
+});
 var yearStars= DateTime.Now.Year;
 
 //var data= app.Services.GetRequiredService<IStatsData>();
