@@ -1,0 +1,435 @@
+ 
+ <br /><h1>Model Name ollama:llama3.2</h1> <br />
+
+<h1>Poor Man Display Errors - part 3: Unleashing the Power of Blazor</h1>
+
+Are you tired of displaying error messages in a manual, cluttered interface? Look no further! In our previous installment, we bravely exposed errors to the world via an API. But now, it's time to take it to the next level.
+
+We've chosen to create a dynamic table that adapts to the changing array of error data. This means you can effortlessly view and display data without having to resort to custom grids or tedious coding. 
+
+Join us as we dive into the world of Blazor/Razor pages, where the lines between code and design blur. In this article:
+
+<h2>Discover How to Show Error Messages to UI with Blazor</h2>
+<p style="text-align: center;"></p>
+
+You'll be guided through the process of creating a stunning table that showcases error data in an intuitive and user-friendly interface.
+
+Check [blog.txt](https://.../blog.txt) for the full code snippets, insights, and step-by-step instructions to get started with your own Blazor project.
+
+In this article, we will explore:
+
+*   Creating dynamic tables using JavaScript
+*   Displaying error data in a Blazor/Razor page
+*   Leveraging API endpoints for error reporting
+
+Don't miss out on this hands-on journey! Dive into the world of Poor Man Display Errors and unlock the secrets to building stunning user interfaces with ease.
+
+<h2><a href="https://file...</file></a>
+ 
+ <br /><h1>Model Name ollama:phi4</h1> <br />
+
+<h1>Welcome to Part 3: Displaying Errors in your Blazor Application!</h1>
+
+Are you ready for an exciting journey through Blazor? In this thrilling third installment, we are elevating the game by transforming how errors appear in your GUI. Following the groundwork laid out in part two, where we exposed API errors for all to see, we now dive into the dynamic world of error display using Blazor's powerful capabilities!
+
+Imagine a dashboard that intuitively adapts to any change ΓÇö no static grids or rigidity! With our approach described here, you can harness the magic of creating a table on-the-fly based entirely on the data received from an ever-changing API. Say goodbye to rigid layouts and hello to innovation!
+
+Prepare your browsers console; it's time to let some JavaScript work its magic:
+
+[code language="lang-\"javascript\""]
+var table=  null;
+    function displayData(a){
+        console.log(a);
+        arrayToTable(JSON.parse(a));
+    };
+
+function removeTableCreated(){
+        var parent =document.getElementById("myTable");
+        while (parent.lastChild) {
+            parent.removeChild(parent.lastChild);
+        }
+    }
+
+    function arrayToTable(data) {
+        removeTableCreated();
+        if((!Array.isArray(data)) || data.length == 0){
+            window.alert(' no data ');
+            return;
+        }
+
+    // Create table element
+    table = document.createElement('table');
+    table.border = '1';
+
+    // Create table header row
+    const headerRow = document.createElement('tr');
+    Object.keys(data[0]).forEach(key => {
+    const th = document.createElement('th');
+    th.textContent = key;
+    headerRow.appendChild(th);
+    });
+    table.appendChild(headerRow);
+
+    // Create table rows
+    data.forEach(item => {
+    const row = document.createElement('tr');
+    Object.values(item).forEach(value => {
+    const td = document.createElement('td');
+    td.textContent = value;
+    row.appendChild(td);
+    });
+    table.appendChild(row);
+    });
+
+    // Append table to the body (or any other container)
+    //document.body.appendChild(table);
+    document.getElementById("myTable").appendChild(table);
+    }
+[/code]
+
+On the Blazor side, simplicity reigns supreme with buttons that do more than just click. Embrace fluid interactivity with our intuitive controls:
+
+[code lang="html"]
+<h3>PoorManErrors</h3>
+<FluentButton Appearance="Appearance.Accent" @onclick="async()=> await GenerateError()">Generate Error</FluentButton>
+
+<FluentButton Appearance="Appearance.Accent" @onclick="async()=> await SeeErrors()">Refresh</FluentButton>
+
+<FluentButton Appearance="Appearance.Accent" @onclick="async()=> await ClearErrors()">Clear</FluentButton>
+<div id="myTable"></div>
+[/code]
+
+But what about the brains behind the operation? Our code for retrieving takes advantage of NetCoreUsefulEndpoints ΓÇö a package that not only logs errors but also ensures they are elegantly presented in your application.
+
+[code]
+    [Inject(Key = Program.apiNameConfig)]
+    private HttpClient? httpClient { get; set; }
+    [Inject]
+    private IJSRuntime? JSRuntimeData { get; set; }
+
+    private async Task GenerateError()
+    {
+        ArgumentNullException.ThrowIfNull(httpClient);
+        var r = new ReadFromAPI(httpClient);
+
+        var res = await r.ReadDataGet("api/usefull/error/WithILogger");
+
+        await SeeErrors();
+        StateHasChanged();
+
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        await SeeErrors();
+    }
+    private async Task ClearErrors()
+    {
+        ArgumentNullException.ThrowIfNull(httpClient);
+        var r = new ReadFromAPI(httpClient);
+        var res = await r.ReadDataGet("nlog/Memory/stringData/clear");
+        await SeeErrors();
+    }
+    private async Task SeeErrors()
+    {
+        ArgumentNullException.ThrowIfNull(httpClient);
+        var r = new ReadFromAPI(httpClient);
+
+
+        var res = await r.ReadDataGet("nlog/Memory/stringData/list");
+        if (string.IsNullOrEmpty(res))
+        {
+            return;
+        };
+        if (res != null)
+        {
+            ArgumentNullException.ThrowIfNull(JSRuntimeData);
+            await JSRuntimeData.InvokeVoidAsync("displayData", res);
+
+        }
+    }
+[/code]
+
+It's not just a guide ΓÇö it's an adventure! This journey of integration and user interface enhancement is only the beginning. Take this knowledge, apply it to your projects, and watch how your Blazor applications transform with a touch of JavaScript flair!
+
+Join us in bringing dynamic error handling to new heights and create visually engaging applications that are as functional as they are beautiful.
+
+<em>Disclaimer: Make sure to follow along on our platform for future developments, tips, tricks, and the next installment of this exhilarating saga! The excitement is just beginning!</em>
+
+<end|>
+ 
+ <br /><h1>Model Name ollama:smallthinker</h1> <br />
+
+To answer this:
+
+<h1>Poor Man Display Errors - part 3: Showing the GUI and Blazor Interchange</h1>
+
+<p>Welcome back, folks! In this final installment of our series on displaying poor man display errors, we're going to dive right in. Let me check the instruction again to ensure I cover all the necessary steps.</p>
+
+<h2>The API Conundrum</h2>
+<p>
+	Previously, I exposed these errors via an API for the world to see. Now, it's time to take it up a notch and display them on a Blazor/ Razor page. This means I need to make use of HTTP calls to fetch data and then display it dynamically.
+	
+	Let me think about this carefully. The API that provides these error can change, but it will still be an array of objects. I don't want to overcomplicate things by using a custom grid; after all, the goal is simplicity.</p>
+
+<h2>A Table for All Seasons</h2>
+<p>
+	I've decided to create a display table with dynamic columns based on the array received from the API. This approach will allow it to adapt to any changes in the data structure. Now, let me break this down into smaller steps.</p>
+
+<h3>The JavaScript Code: A Step-by-Step Approach</h3>
+<p>
+			<script type="text/javascript">
+				var table = null;
+		
+				function displayData(a) {
+					console.log(a);
+					arrayToTable(JSON.parse(a));
+				};
+		
+				function removeTableCreated() {
+					var parent = document.getElementById("myTable");
+					while (parent.lastChild) {
+						parent.removeChild(parent.lastChild);
+					}
+				}
+		
+				function arrayToTable(data) {
+					removeTableCreated();
+					if (!(Array.isArray(data)) || data.length == 0) {
+						window.alert('no data ');
+						return;
+					}
+		
+					// Create table element
+					table = document.createElement('table');
+					table.border = '1';
+		
+					// Create table header row
+					var headerRow = document.createElement('tr');
+					Object.keys(data[0]).forEach(key => {
+						var th = document.createElement('th');
+						th.textContent = key;
+						headerRow.appendChild(th);
+					});
+					table.appendChild(headerRow);
+		
+					// Create table rows
+					data.forEach(item => {
+						var row = document.createElement('tr');
+						Object.values(item).forEach(value => {
+							var td = document.createElement('td');
+							td.textContent = value;
+							row.appendChild(td);
+						});
+						table.appendChild(row);
+					});
+		
+					// Append table to the body (or any other container)
+					//document.body.appendChild(table);
+					document.getElementById("myTable").appendChild(table);
+				}
+			</script>
+	
+	<p>As you can see, this JavaScript code is quite straightforward. It assumes that there's a div with id "myTable" in the HTML where it will append the table.</p>
+
+<h2>The Blazor Razor Page: A Simple Yet Effective Solution</h2>
+<p>
+	Now, let me think about how to integrate this into our Blazor Razor page. The button GenerateErrors takes advantage of the NetCoreUsefullEndpoints package, which registers an endpoint that logs an error.
+	
+	Here's a simple Blazor Razor page to display these errors:</p>
+
+```html
+<h3>PoorManErrors</h3>
+<FluentButton Appearance="Appearance.Accent" @onclick="async () => await GenerateError()">Generate Error</FluentButton>
+<FluentButton Appearance="Appearance.Accent" @onclick="async () => await SeeErrors()">Refresh</FluentButton>
+<FluentButton Appearance="Appearance.Accent" @onclick="async () => await ClearErrors()">Clear</FluentButton>
+<div id="myTable"></div>
+```
+
+<p>And here's the code to retrieve the errors:</p>
+
+```csharp
+[Inject(Key = Program.apiNameConfig)]
+private HttpClient? httpClient { get; set; }
+[Inject]
+private IJSRuntime? JSRuntimeData { get; set; }
+
+private async Task GenerateError()
+{
+    ArgumentNullException.ThrowIfNull(httpClient);
+    var r = new ReadFromAPI(httpClient);
+
+    var res = await r.ReadDataGet("api/usefull/error/WithILogger");
+
+    await SeeErrors();
+    StateHasChanged();
+}
+
+protected override async Task OnInitializedAsync()
+{
+    await SeeErrors();
+}
+
+private async Task ClearErrors()
+{
+    ArgumentNullException.ThrowIfNull(httpClient);
+    var r = new ReadFromAPI(httpClient);
+
+    var res = await r.ReadDataGet("nlog/Memory/stringData/clear");
+    await SeeErrors();
+}
+
+private async Task SeeErrors()
+{
+   ArgumentNullException.ThrowIfNull(httpClient);
+    var r = new ReadFromAPI(httpClient);
+
+    var res = await r.ReadDataGet("nlog/Memory/stringData/list");
+
+    if (string.IsNullOrEmpty(res))
+    {
+        return;
+    }
+
+    if (res != null)
+    {
+        ArgumentNullException.ThrowIfNull(JSRuntimeData);
+        await JSRuntimeData.InvokeVoidAsync("displayData", res);
+    }
+}
+```
+
+<h2>Conclusion</h2>
+<p>
+	And that's it! We've successfully integrated poor man display errors into our Blazor/ Razor page. The table displays all the error data received from the API, and we can refresh or clear the table as needed.
+	
+	Check out the full source code on GitHub: [link to repository](https://github.com/<yourusername>/<reponame>)
+</p>
+ 
+ <br /><h1>Model Name ollama:dolphin3</h1> <br />
+
+<h1>Poor Man Display Errors - part 3- Show It to GUI / Blazor</h1>
+<p>In this thrilling installment, we've already conquered Part 2 by exposing errors via the API. Now it's time to bring these errors to life within a mesmerizing Blazor/Razor page.</p>
+
+<p>Say goodbye to mere readings and embrace data with an exhilarating HTTP call that unveils data on your screen.</p>
+
+<p>The API might change, but fear not - we have your back! Since the API guarantees to return an array of objects, you don't need a custom grid anymore. We've got something even better planned.</p>
+<p>Prepare yourself for a display extravaganza ΓÇô our solution uses dynamic columns based on the data array itself!</p>
+
+<p>Welcome to the power of JavaScript with Blazor/Razor integration at its finest:</p>
+
+<pre><code class="language-javascript">
+ &lt;script&gt;
+     var table = null;
+     
+     function displayData(a) {
+         console.log(a);
+         arrayToTable(JSON.parse(a));
+     }
+ 
+     function removeTableCreated() {
+         var parent = document.getElementById("mytable");
+         while (parent.lastChild) {
+             parent.removeChild(parent.lastChild);
+         }
+     }
+    
+     function arrayToTable(data) {
+         removeTableCreated();
+         if((!Array.isArray(data)) || data.length == 0){
+                 window.alert('no data ');
+                 return;
+             }
+     
+         // Create table element
+         table = document.createElement('table');
+         table.border = '1';
+ 
+         // Create table header row
+         const headerRow = document.createElement('tr');
+         Object.keys(data[0]).forEach(key => {
+             const th = document.createElement('th');
+             th.textContent = key;
+             headerRow.appendChild(th);
+         });
+         table.appendChild(headerRow);
+         
+         // Create table rows
+         data.forEach(item => {
+             const row = document.createElement('tr');
+             Object.values(item).forEach(value => {
+                 const td = document.createElement('td');
+                 td.textContent = value;
+                 row.appendChild(td);
+             });
+             table.appendChild(row);
+         });
+ 
+         document.getElementById("myTable").appendChild(table);
+     }
+ 
+&lt;/script&gt; </pre>
+
+<p>Get ready to dive in as we unveil the Blazor/Razor page:</p>
+<pre><code class="language-html">
+   &lt;h3&gt;PoorManErrors&lt;/h3&gt;
+   &lt;button @onclick=&quot;<a href="javascript:__execute(%7B%7D, %7B%7D, %7B%7D, 0)&quot; class="fluent-button accent">Generate Error</button>
+   &lt;button @onclick=&quot;<a href="javascript:__execute(%7B%7D, %7B%7D, %7B%7D, 1)&quot; class="fluent-button accent">Refresh</button>
+   &lt;button @onclick=&quot;<a href="javascript:__execute(%7B%7D, %7B%7D, %7B%7D, 2)&quot; class="fluent-button accent">Clear Errors</button>
+   
+   &lt;div id="myTable"&gt;&lt;/div&gt;
+&lt;/code&gt; 
+</pre>
+
+<p>Feel the power of retrieving data:</p>
+<pre><code class="language-csharp">
+    [Inject(Key = Program.apiNameConfig)]
+    private HttpClient? httpClient { get; set; }
+    [Inject]
+    private IJSRuntime? JSRuntimeData { get; set; }
+
+    private async Task GenerateError()
+    {
+        ArgumentNullException.ThrowIfNull(httpClient);
+        var r = new ReadFromAPI(httpClient);
+
+        var res = await r.ReadDataGet("api/usefull/error/WithILogger");
+
+        await SeeErrors();
+        StateHasChanged();
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        await SeeErrors();
+    }
+    private async Task ClearErrors()
+    {
+        ArgumentNullException.ThrowIfNull(httpClient);
+        var r = new ReadFromAPI(httpClient);
+        var res = await r.ReadDataGet("nlog/Memory/stringData/clear");
+        await SeeErrors();
+    }
+    private async Task SeeErrors()
+    {
+        ArgumentNullException.ThrowIfNull(httpClient);
+        var r = new ReadFromAPI(httpClient);
+
+        var res = await r.ReadDataGet("nlog/Memory/stringData/list");
+        if (string.IsNullOrEmpty(res))
+        {
+            return;
+        }
+
+        if (res != null)
+        {
+            ArgumentNullException.ThrowIfNull(JSRuntimeData);
+            await JSRuntimeData.InvokeVoidAsync("displayData", res);
+        }
+    }
+
+</code>
+</pre>
+
+<p>Witness the revolution in error displaying and data visualization. This ain't your grandpa's grid ΓÇô we've got something far more enthralling for you.</p>
+
+<p>The adventure awaits, folks! Dive into this cutting-edge solution that elevates your UI game to new heights.</p>
+

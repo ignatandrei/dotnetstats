@@ -14,9 +14,13 @@ script({
 
 $`
 
-Given the text in FILE, write a blog post that makes the paper sound exciting and encourages readers to look at it. 
+Given the blog post  in FILE, re-write to  make the paper sound exciting and encourages readers to look at it. 
 
 Keep the links.
-Do NOT use markdown , but just html tags.
+
+Do NOT modify the code between [code] and [/code] . Let them as it is.
+
+Do NOT use Markdown , but use just HTML tags. 
+Example : instead of  # put <h1> and close with </h1> 
 
 `

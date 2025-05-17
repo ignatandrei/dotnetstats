@@ -1,1 +1,130 @@
-here is the blog
+<h1>Poor Man Display Errors - part 3-  show to GUI / Blazor <h1>
+
+In part 2 I have exposed the errors via the API to the world. Now I should show in a Blazor/ Razor page . It is enough to read with an HTTP call and display data. 
+Because 
+- the API that gives error can change , however it will be an array of objects 
+- I do not want to use a custom grid
+
+I took the decision to create the display of errors as a table that has dynamic columns based on the array .
+
+This is the code for javascript to create a table from an array ( it assumes that a div with id =  mytable exists)
+
+[code language="lang-&quot;javascript&quot;"]
+var table=  null;
+    function displayData(a){
+        console.log(a);
+        arrayToTable(JSON.parse(a));
+    };
+
+function removeTableCreated(){
+        var parent =document.getElementById("myTable");
+        while (parent.lastChild) {
+            parent.removeChild(parent.lastChild);
+        }
+    }
+    
+    function arrayToTable(data) {
+        removeTableCreated();
+        if((!Array.isArray(data)) || data.length == 0){
+            window.alert(' no data ');
+            return;
+        }
+    
+    // Create table element
+    table = document.createElement('table');
+    table.border = '1';
+
+    // Create table header row
+    const headerRow = document.createElement('tr');
+    Object.keys(data[0]).forEach(key => {
+    const th = document.createElement('th');
+    th.textContent = key;
+    headerRow.appendChild(th);
+    });
+    table.appendChild(headerRow);
+
+    // Create table rows
+    data.forEach(item => {
+    const row = document.createElement('tr');
+    Object.values(item).forEach(value => {
+    const td = document.createElement('td');
+    td.textContent = value;
+    row.appendChild(td);
+    });
+    table.appendChild(row);
+    });
+
+    // Append table to the body (or any other container)
+    //document.body.appendChild(table);
+    document.getElementById("myTable").appendChild(table);
+    }
+[/code] 
+
+
+Now the blazor razor page is simple
+[code lang="html"]
+<h3>PoorManErrors</h3>
+<FluentButton Appearance="Appearance.Accent" @onclick="async()=> await GenerateError()">Generate Error</FluentButton>
+
+<FluentButton Appearance="Appearance.Accent" @onclick="async()=> await SeeErrors()">Refresh</FluentButton>
+
+<FluentButton Appearance="Appearance.Accent" @onclick="async()=> await ClearErrors()">Clear</FluentButton>
+<div id="myTable"></div>
+
+[/code]
+
+And the code for retrieving
+[code]
+    [Inject(Key = Program.apiNameConfig)]
+    private HttpClient? httpClient { get; set; }
+    [Inject]
+    private IJSRuntime? JSRuntimeData { get; set; }
+
+    private async Task GenerateError()
+    {
+
+        ArgumentNullException.ThrowIfNull(httpClient);
+        var r = new ReadFromAPI(httpClient);
+
+        var res = await r.ReadDataGet("api/usefull/error/WithILogger");
+
+        await SeeErrors();
+        StateHasChanged();
+
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        await SeeErrors();
+    }
+    private async Task ClearErrors()
+    {
+        ArgumentNullException.ThrowIfNull(httpClient);
+        var r = new ReadFromAPI(httpClient);
+        var res = await r.ReadDataGet("nlog/Memory/stringData/clear");
+        await SeeErrors();
+    }
+    private async Task SeeErrors()
+    {
+        ArgumentNullException.ThrowIfNull(httpClient);
+        var r = new ReadFromAPI(httpClient);
+
+
+        var res = await r.ReadDataGet("nlog/Memory/stringData/list");
+        if (string.IsNullOrEmpty(res))
+        {
+            return;
+        }
+        ;
+        if (res != null)
+        {
+            ArgumentNullException.ThrowIfNull(JSRuntimeData);
+            await JSRuntimeData.InvokeVoidAsync("displayData", res);
+
+        }
+    }
+[/code]
+
+Side note: the button GenerateErrors take advantage of package NetCoreUsefullEndpoints that registers an endpoint that logs an error.
+
+That's all, folks!
+
